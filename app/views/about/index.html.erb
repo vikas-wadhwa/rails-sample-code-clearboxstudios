@@ -1,0 +1,152 @@
+<% @content_frame = "thin" %>
+<% @menu_hide = true %>
+
+
+
+<% content_for :title do %>
+    <title>About Clearbox Studios</title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "about", :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+
+<% @breadcrumbs = {current: 'About'} %>
+<%= render 'layouts/breadcrumb' %>
+
+
+<div class="hero-container">
+  <div class="hero-image ninth"></div>
+  <div class="hero-image eh"></div>
+  <div class="hero-image panasonic"></div>
+
+</div>
+
+
+
+<div class="row data-equalizer" data-equalizer data-equalize-on="medium" >
+  <div class="columns medium-6 large-5 callout-container">
+
+    <div class="columns small-centered callout-details" data-equalizer-watch>
+
+      <h2 class="text-center space-above-2x">WHO WE ARE</h2>
+
+      <div class="row space-above">
+
+        <div class="columns callout-number">
+          <h3>Chicago</h3>
+        </div>
+
+        <div class="columns callout-description">
+          born and raised, work and play
+        </div>
+
+      </div>
+
+      <div class="row space-above-2x">
+
+        <div class="columns callout-number">
+          <h3>2006</h3>
+        </div>
+
+        <div class="columns callout-description">
+          the year we started
+        </div>
+
+      </div>
+
+      <div class="row space-above-2x">
+
+        <div class="columns callout-number large">
+          <h3>the color of bruises</h3>
+        </div>
+
+        <div class="columns callout-description">
+          our first feature length film
+        </div>
+
+      </div>
+
+      <div class="row space-above-2x">
+
+        <div class="columns callout-number">
+          <h3>36,045</h3>
+        </div>
+
+        <div class="columns callout-description">
+          total number of photos taken
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="columns medium-6 large-7 study-description" data-equalizer-watch>
+
+
+    <h2 class="orange space-above-2x">Our Style</h2>
+    <p>
+      We specialize in cogent, collaborative, and creative content across all media.
+      In other words, we work clearly, we work as a team, and we work to be unique.
+      We aren't looking to deliver the same content you can get elsewhere;
+      our clients look to our expertise, our creative eyes, and our passion to get the job done well.
+    </p>
+
+
+    <h2 class="orange space-above">Our Process</h2>
+    <p>
+      Our process targets written and audiovisual production that delivers content.
+      We thrive on providing a unique service that cannot be found elsewhere.
+      We are addicted to creating, building, producing content that always hits its mark.
+      Head over to our <%= link_to 'Portfolio', portfolio_url, class:'orange underlined-links' %>
+      to see a very small sample of our favorite wins.
+    </p>
+
+
+    <h2 class="orange space-above">Our Promise</h2>
+    <p>
+      Client satisfaction and over-delivery are part of our daily work.
+      We have something to prove, and we want you to be a part of that ride.
+      It doesn't matter if your project needs to be entertaining, educational, informational, promotional,
+      or something else entirely... we've got you covered.
+    </p>
+    <p>
+      Take a look at our
+      <%= link_to 'Case Studies', case_studies_url, class:'orange underlined-links' %>
+      to get an idea of what new projects we can help lift off the ground for you.
+    </p>
+
+  </div>
+
+</div>
+
+
+
+
+<div class="row column space-above-4x">
+
+  <h2 class="orange">Some Of Our Team</h2>
+
+
+  <div class="row medium-up-2 large-up-3">
+
+    <% @staff_users.each do |staff_member| %>
+
+        <div class="column">
+          <%= render 'layouts/social_thumbnail', profile: staff_member.profile %>
+        </div>
+    <% end %>
+
+  </div>
+
+</div>
+
+
+
+

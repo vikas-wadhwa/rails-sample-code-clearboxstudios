@@ -1,0 +1,48 @@
+
+
+<div class="social-thumbnail profile-image liftable-container <%= 'float-right' if defined?(right_sided) %>">
+
+  <%= link_to image_tag(profile.image_url(:medium), alt: profile.full_name , class:''), profile_url(profile),  :class => 'material-card liftable' %>
+
+  <div class="column small-11 social-bar">
+        <%= profile_social_links(profile) unless profile.contact_links.empty? %>
+  </div>
+
+  <% if defined?(staff_toggle) %>
+      <% if @user_is_staff %>
+
+          <%= form_for @profile, :url => profile_admin_update_url, html: {:method => :put, class: ''} do |f| %>
+              <%= checkbox 'staff_member', {class: 'hidden'}, 'true', 'false', 'Staff Member', form: f %>
+          <% end %>
+
+      <% elsif @profile.staff_member? %>
+
+          <div class="">
+            <%= checkbox 'staff_member', {class: 'hidden'}, 'true', 'false', 'Staff Member', object: @profile %>
+          </div>
+
+      <% end %>
+  <% end %>
+
+</div>
+
+<% unless defined?(no_description) %>
+    <div class="<%= 'liftable-container' unless defined?(right_sided) %> ">
+      <h5><b><%= profile.full_name %></b></h5>
+      <div><i><%= profile.job_title_screened %></i></div>
+
+      <div class="space-above">
+
+        <% unless (defined? character_limit).nil? %>
+
+            <%= simple_format(profile.profile_description.limitation(character_limit)) %>
+
+        <% else %>
+
+            <%= simple_format(profile.profile_description) %>
+
+        <% end %>
+
+      </div>
+    </div>
+<% end %>

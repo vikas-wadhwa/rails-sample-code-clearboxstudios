@@ -1,0 +1,70 @@
+<% content_for :title do %>
+    <title><%= @profile.full_name %>'s Profile</title>
+<% end %>
+
+<% content_for :head do %>
+    <link href="/plugins/magnific-popup-1.0.0/mp-lightbox.css" media="all" rel="stylesheet">
+    <%= stylesheet_link_tag "custom-magnific" , :media => 'all' %>
+    <%= stylesheet_link_tag "profiles" , :media => 'all' %>
+<% end %>
+
+
+<% content_for :foot do %>
+    <script src="/plugins/multi-download/jquery.multiDownload.js"></script>
+    <script src="/plugins/magnific-popup-1.0.0/mp-lightbox.js"></script>
+    <%= javascript_include_tag "profiles" %>
+<% end %>
+
+
+
+<% @breadcrumbs = {history: [{text: 'Profiles', url: profiles_url}], current: @profile.full_name} %>
+<%= render 'layouts/breadcrumb' %>
+
+
+
+<div class="row column">
+
+  <div class='profile-image float-right'>
+    <%= render 'layouts/social_thumbnail', profile: @profile, no_description: true, staff_toggle: true %>
+  </div>
+
+  <h1 class="orange inline"><%= @profile.full_name %></h1>
+
+    <span class="toolbar">
+      <% if @user_is_profile %>
+          <%= link_to raw('<i class="icon-edit"></i>EDIT'), edit_profile_url(@profile), class: 'button tiny clear', title:  'edit profile' %>
+      <% end %>
+    </span>
+
+  <h3>
+    <%= @profile.job_title_screened %>
+    <%= ' at ' + @profile.company_name_screened if @profile.company_name_screened.present? %>
+  </h3>
+
+  <p class="section-details">
+    <%= simple_format(@profile.profile_description) %>
+  </p>
+
+
+
+</div>
+
+
+  <% if @profile.user.photos.any? %>
+
+      <h1 class='orange'>Photos</h1>
+      <div class="image-gallery-grid small-up-2 medium-up-4 large-up-5 clearfix">
+        <%= render '/layouts/image_gallery', gallery_model: 'users',  images: @profile.user.photos, type: 'playable' %>
+      </div>
+
+  <% end %>
+
+
+  <% if @profile.user.videos.any? %>
+      <h1 class='orange space-above'>Videos</h1>
+
+      <div class="video-gallery small-up-2 medium-up-4 clearfix">
+        <%= render '/layouts/video_gallery', profile: @profile, videos: @profile.user.videos, type: 'playable' %>
+      </div>
+
+  <% end %>

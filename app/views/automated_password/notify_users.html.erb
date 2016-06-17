@@ -1,0 +1,20 @@
+<% @content_frame = 'email' %>
+
+<%= email_heading("Hello " +  @user.profile.name_first + ",") %>
+
+<% if @password %>
+
+    <%= email_subheading("Please use the login information below to access your projects.") %>
+    <%= email_text("<b>username: </b> <email>" + @user.email + "</email>") %>
+    <%= email_text("<b>password: </b> <span>" + @password + "</span>") %>
+
+<% else %>
+
+    <%= email_subheading("You have new, or updated, projects. Please click below to access your projects.") %>
+
+<% end %>
+
+<%= email_button("View Projects", projects_url) %>
+
+
+<%= render "layouts/email_footer_accounts"%>

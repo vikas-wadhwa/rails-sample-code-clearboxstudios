@@ -1,0 +1,54 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "global/variables";
+
+
+.hero-container {
+    height: 10em;
+}
+
+.hero-image {
+    width: 33%;
+    height: 14em;
+    background-repeat-x: no-repeat !important;
+    background-repeat-y: no-repeat !important;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+    float: left;
+}
+
+.hero-image.eh {
+    background-image: url('<%= PORTFOLIO_PHOTOS[:eh_01][:src] %>');
+    background-position-x: 0% !important;
+    background-position-y: 50% !important;
+}
+
+.hero-image.ninth {
+    background-image: url('<%= PORTFOLIO_PHOTOS[:ninth_floor][:src] %>');
+    background-position-x: 0% !important;
+    background-position-y: 10% !important;
+}
+
+
+.hero-image.panasonic {
+    background-image:  url('<%= PORTFOLIO_PHOTOS[:panasonic][:src] %>');
+    background-position-x: 0% !important;
+    background-position-y: 10% !important;
+}
+
+
+
+.case-study-container {
+    padding: 0 2em !important;
+}
+
+.case-study-container.right {
+    padding: 0;
+}
+
+.study-description {
+    padding-right: 2em;
+}

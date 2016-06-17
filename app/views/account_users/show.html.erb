@@ -1,0 +1,20 @@
+
+
+<p>
+  <b>Account:</b>
+  <%= @account_user.account %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @account_user.user %>
+</p>
+
+<p>
+  <b>Permissions:</b>
+  <%= @account_user.permissions %>
+</p>
+
+
+<%= link_to 'Edit', edit_account_user_path(@account_user) %> |
+<%= link_to 'Back', account_users_path %>

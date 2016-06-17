@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html lang="en-us" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html lang="en-us" class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html lang="en-us" class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-us" > <!--<![endif]-->
+
+<head>
+
+  <%= yield :title %>
+
+  <%= csrf_meta_tags %>
+
+  <meta HTTP-EQUIV="Cache-Control" content="no-cache, no-store">
+  <meta HTTP-EQUIV="Pragma" content="no-cache">
+  <meta HTTP-EQUIV="Expires" content="Sat, 01-Jan-2000 00:00:00 GMT">
+
+  <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8" />
+  <link rel="canonical" href="http://www.clearboxstudios.com/" />
+  <meta name="description" content="ClearBox Studios specializes in cogent, collaborative, and creative content across all media. In other words, we work clearly, we work as a team, and we work to be unique." />
+  <meta name="keywords" content="Chicago, filmmakers, filmmaking, video production, movies, television, creative, content, media, director, actor, photography, film equipment rental, filmmaker bootcamp, ClearBox, ClearBox Studios,  " />
+
+  <!-- Facebook OpenGraph  -->
+  <meta property="og:url" content="http://www.clearboxstudios.com" />
+  <meta property="og:title" content="Clearbox Studios" />
+  <meta property="og:description" content="ClearBox Studios specializes in cogent, collaborative, and creative content across all media. In other words, we work clearly, we work as a team, and we work to be unique." />
+  <meta property="og:image" content="http://cdn-public.clearboxstudios.com/opengraph_fb.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="857" />
+  <meta property="og:image:height" content="857" />
+
+
+  <!-- Application CSS  -->
+  <!-------------------------------------------------------------------------------------------->
+  <%= stylesheet_link_tag "application", :media => "all" %>
+
+
+
+  <!-- Place fontello here so it doesn't change locations when compiling to asset pipeline
+  -------------------------------------------------------------------------------------------->
+  <link href="/plugins/fontello/fontello.css" media="all" rel="stylesheet">
+  <link href="/plugins/fontello/fontello-codes.css" media="all" rel="stylesheet">
+  <link href="/plugins/fontello/fontello-embedded.css" media="all" rel="stylesheet">
+  <link href="/plugins/fontello/animation.css" media="all" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
+  <!--<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>-->
+
+  <!-- Enable media queries for old IE -->
+  <!--[if lt IE 9]>
+  <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+  <![endif]-->
+
+
+  <!--  Page Specific Head tags  -->
+  <!-------------------------------------------------------------------------------------------->
+  <%= yield :head %>
+
+</head>
+
+<body>
+
+<!--  Banner layout  -->
+<!-------------------------------------------------------------------------------------------->
+<%= render '/layouts/banner' %>
+
+<%= link_to image_tag(AWS_CDN_PUBLIC_URL + "/branding/logo_full.png", :alt => "ClearBox Studios"), root_url, :class => "banner-logo" %>
+
+
+
+<div class="off-canvas-wrapper" <% if user_signed_in? %> data-logged-in <% end %> >
+  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+
+    <%= render '/layouts/sidebar' %>
+
+
+    <div class="<%= 'row column' unless @content_frame == 'full' %> <%= 'menu-hide' if @menu_hide %> off-canvas-content main-section <%= @page_theme %>"  data-off-canvas-content>
+
+      <!--  Super content frame  -->
+      <!-------------------------------------------------------------------------------------------->
+
+
+      <% if @content_frame.nil? %>
+          <div class="small-11 content-frame">
+            <%= render '/layouts/flash_frames' %>
+            <%= yield %>
+          </div>
+
+      <% elsif @content_frame == 'thin' %>
+          <div class="small-centered small-11 medium-9 content-frame">
+            <%= render '/layouts/flash_frames' %>
+            <%= yield %>
+          </div>
+
+
+      <% elsif @content_frame == 'wide' %>
+          <div class="content-frame wide">
+            <%= render '/layouts/flash_frames' %>
+            <%= yield %>
+          </div>
+
+      <% elsif @content_frame == 'email' %>
+          <div id="super_content_frame" class="content-frame email">
+            <%= yield %>
+          </div>
+
+
+      <% elsif @content_frame == 'full' %>
+          <%= render '/layouts/flash_frames' %>
+          <div class="content-frame full">
+            <%= yield %>
+          </div>
+
+
+      <% else %>
+          <div class="<%= @content_frame %>" >
+            <%= render '/layouts/flash_frames' %>
+            <%= yield %>
+          </div>
+      <% end %>
+
+
+
+
+
+    </div>
+
+    <!--  Footer layout  -->
+    <!-------------------------------------------------------------------------------------------->
+    <%= render '/layouts/footer' %>
+
+  </div>
+</div>
+
+
+
+<%= yield :modal %>
+
+
+
+
+<!--  Page Specific ending tags  -->
+<!-------------------------------------------------------------------------------------------->
+<!--  Application javascript  -->
+<!-------------------------------------------------------------------------------------------->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.2.js"></script>
+<!--For debugging, using local assets-->
+<!--<script type="text/javascript" src="plugins/foundation/foundation.6.0/js/foundation.js"></script>-->
+<%= javascript_include_tag "application" %>
+
+
+
+<script type="text/javascript">
+
+    ///////////////////////////////////////////
+    // segment.io analytics
+    ///////////////////////////////////////////
+
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+        analytics.load('<%= SEGMENT_IO_KEY %>');
+        analytics.page()
+    }}();
+
+    <% if current_user %>
+    analytics.identify('<%= current_user.id %>', {
+        name: '<%= current_user.profile.name_first + ' ' + current_user.profile.name_last %>',
+        email: '<%= current_user.email %>'
+    });
+    <% end %>
+
+
+</script>
+
+<%= yield :foot %>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+
+///////////////////////////////////////////
+// Global clickers
+///////////////////////////////////////////
+
+$(".clicker-print").click(function() {
+  window.print()
+});
+
+
+///////////////////////////////////////////
+// Setup general jQuery actions
+///////////////////////////////////////////
+$('.hover-blur' ).hover(
+    function() {
+      $( this ).addClass( "blur" );
+    }, function() {
+      $( this ).removeClass( "blur" );
+    }
+);
+
+$('ul.selectable li').click(function(){
+  $(this).toggleClass('selected');
+});
+
+
+///////////////////////////////////////////
+// Cache important pictures on all pages
+///////////////////////////////////////////
+
+var portfolioArray = <%= WISTIA_THUMBNAILS_ARRAY + PORTFOLIO_PHOTOS_ARRAY %>
+
+    function preCachePortfolio(){
+      $.each(portfolioArray, function(){
+        var img = new Image();
+        img.src = this;
+      });
+    };
+
+$(window).load(function(){
+  preCachePortfolio();
+});
+
+
+
+
+///////////////////////////////////////////
+// Remove flash frames with a fade
+///////////////////////////////////////////
+/*
+ ************************************************************************
+* Still undecided as to whether we want this functionality,
+* keeping it until decision is made.
+ ************************************************************************
+$(function () {
+
+ if (typeof flashFrameAlways === 'undefined') {
+ setTimeout(function () {
+ $('.flash-frame').addClass('animated fadeOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+
+ function () {
+ $('.flash-frame').remove();
+ }
+ );
+ }, 4000);
+ }
+
+ });
+ */
+
+
+///////////////////////////////////////////
+// Customize the confirm action on Rails links
+///////////////////////////////////////////
+
+(function () {
+
+  $.rails.allowAction = function (link) {
+    if (!link.attr('data-confirm')) {
+      return true;
+    }
+    $.rails.showConfirmDialog(link);
+    return false;
+  };
+
+  $.rails.confirmed = function (link) {
+    link.removeAttr('data-confirm');
+    return link.trigger('click.rails');
+  };
+
+
+  $.rails.showConfirmDialog = function (link) {
+    var html, message;
+    message = link.attr('data-confirm');
+    html = "<div id='dialog-confirm' title='" + modal_title + "'>\n  <p>" + message + "</p>\n</div>";
+    return $(html).dialog({
+      width: 400,
+      modal: true,
+      buttons: {
+        OK: function () {
+          $.rails.confirmed(link);
+          return $(this).dialog("close");
+        },
+        Cancel: function () {
+          return $(this).dialog("close");
+        }
+      }
+    });
+  };
+
+}).call(this);
+
+
+var modal_title = 'Confirm Deletion';
+
+
+///////////////////////////////////////////
+// Bind radiobox and checkbox buttons
+///////////////////////////////////////////
+$(function () {
+
+    checkbox_checked_css = 'success';
+    radiobox_checked_css = 'success disabled';
+
+  $('[id$="_checkbox"]').click(function () {
+
+    checkbox =  $('#' + this.id.substring(0, this.id.length - '_checkbox'.length));
+    // toggle the box and click the hidden checkbox
+    $(this).parent().siblings().find('.icon-check.disabled').toggleClass(checkbox_checked_css);
+    $(this).toggleClass(checkbox_checked_css);
+    checkbox.click();
+
+  });
+
+
+  $('[id$="_radiobox"]').click(function () {
+
+    field_id = this.id.substring(0, this.id.length - '_radiobox'.length);
+    if ($('#' + field_id).prop( "checked") == false) {
+      $('#' + field_id).prop("checked", true);
+      //field_value == "true" ? $('#' + field_id).prop( "checked", false ) : $('#' + field_id).prop( "checked", true );
+      $(this).parent().siblings().find('.icon-check.disabled').toggleClass(radiobox_checked_css);
+      $(this).toggleClass(radiobox_checked_css);
+    }
+
+  });
+
+});

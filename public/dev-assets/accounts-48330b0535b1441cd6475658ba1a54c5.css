@@ -1,0 +1,55 @@
+/******************************************************
+** Import variables
+******************************************************/
+/******************************************************
+** Variables
+******************************************************/
+/******************************************************
+** General styles
+******************************************************/
+/* line 11, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/accounts.css.scss */
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="url"], select, textarea {
+  width: 30em;
+}
+
+/* line 15, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/accounts.css.scss */
+.floating-container {
+  min-height: 0;
+}
+
+/* line 19, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/accounts.css.scss */
+.multi-column {
+  padding-top: 0;
+  margin-right: 1em;
+}
+
+/* line 24, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/accounts.css.scss */
+.multi-column .section-details {
+  color: #323232;
+}
+
+/* line 28, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/accounts.css.scss */
+.section-details label {
+  vertical-align: inherit;
+}
+
+/* line 32, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/accounts.css.scss */
+.multi-column label {
+  display: inline-block;
+  width: 7.5em;
+}
+
+/* line 37, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/accounts.css.scss */
+.multi-column label.column-1 {
+  line-height: 150%;
+}
+
+/* line 47, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/accounts.css.scss */
+.dropdown-menu-container {
+  float: none;
+}
+
+/* line 51, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/accounts.css.scss */
+#file-upload-form {
+  clear: both;
+}

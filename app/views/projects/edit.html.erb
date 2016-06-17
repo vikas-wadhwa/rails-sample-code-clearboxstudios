@@ -1,0 +1,35 @@
+
+
+<% content_for :title do %>
+    <title><%= @project.title %></title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "projects" , :media => 'all' %>
+    <link media="all" rel="stylesheet" type="text/css" href="/plugins/foundation-datepicker-master/stylesheets/foundation-datepicker.css" />
+<% end %>
+
+
+<% content_for :foot do %>
+    <%= javascript_include_tag "/plugins/foundation-datepicker-master/js/foundation-datepicker.js" %>
+    <script type="text/javascript" >
+        $(document).ready(function () {
+            $('.fdatepicker').fdatepicker();
+        });
+    </script>
+<% end %>
+
+
+<% @breadcrumbs = {history: [{text: 'Projects', url: projects_url}, {text: @project.title, url: project_url(@project)}], current: 'Edit'} %>
+<%= render 'layouts/breadcrumb' %>
+
+
+
+<h1 class='orange space-below-2x'>Edit Project</h1>
+
+
+
+
+<!--  Editing Form  -->
+<!--------------------------------------------->
+<%= render 'form', original_project_id: @original_project_id %>

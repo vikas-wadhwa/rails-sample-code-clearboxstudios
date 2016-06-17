@@ -1,0 +1,88 @@
+<% content_for :title do %>
+    <title>Search Profiles</title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "profiles" , :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+
+
+<% if @searching %>
+    <% @breadcrumbs = {history: [{text: 'Profiles', url: profiles_url}], current: 'SEARCH'} %>
+<% else %>
+    <% @breadcrumbs = {current: 'profiles'} %>
+<% end %>
+<%= render 'layouts/breadcrumb' %>
+
+
+<h1 class='orange'>Find a member</h1>
+<div class='section-details'>
+  <h5 class="subheader">Click a profile below to view member details.</h5>
+</div>
+
+
+<%= render 'layouts/searchbox', search_url: '/profiles/search', placeholder: 'Search for members' %>
+<%= render 'layouts/paginate', pagination_object: @profiles %>
+
+
+<div class="search-results">
+
+  <% @profiles.each do |profile|%>
+
+
+      <div class="row column results-item">
+
+        <div class="search-thumbnail">
+          <%= link_to profile_url(profile) do %>
+              <%= image_tag(profile.image_url(:medium), class: '' ) %>
+          <% end %>
+        </div>
+
+        <div class="results-content">
+
+          <%= link_to profile_url(profile) do %>
+              <h4 class="orange"><%= profile.full_name %></h4>
+          <% end %>
+
+          <p><%= profile.profile_description.first(350) %></p>
+
+
+        </div>
+
+        <div class="results-stats">
+
+
+          <span class="results-stat"><%= profile.address_city_screened %></span>
+          <span class="results-stat">Member since: <b><%= profile.created_at.strftime('%B %Y') %></b></span>
+
+          <span class="results-stat float-right end">
+          <% unless profile.contact_links.empty?  %>
+              <%= profile_social_links(profile) %>
+          <% end %>
+          </span>
+
+        </div>
+
+      </div>
+
+
+  <% end %>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

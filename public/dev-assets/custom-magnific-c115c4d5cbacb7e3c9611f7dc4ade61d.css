@@ -1,0 +1,135 @@
+/******************************************************
+** Import variables
+******************************************************/
+/******************************************************
+** Variables
+******************************************************/
+/******************************************************
+** Magnific Popup
+******************************************************/
+/* line 15, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.mfp-bottom-bar {
+  margin-top: -2em;
+}
+
+/* line 19, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+img.mfp-img {
+  padding: 40px 0 0 0;
+}
+
+/* line 23, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.mfp-title {
+  position: absolute;
+  background: black;
+  padding: 0 10px;
+  margin-top: -28px;
+}
+
+/* line 30, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.mfp-counter {
+  right: 10px;
+  background: black;
+  padding: 5px;
+}
+
+/* line 37, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.download {
+  font-size: 2em;
+  color: #f8981d;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* line 44, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.mfp-arrow:after, .mfp-arrow .mfp-a {
+  border-top-width: 25px;
+  border-bottom-width: 25px;
+}
+
+/* line 49, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.mfp-arrow-right:after, .mfp-arrow-right .mfp-a {
+  border-left: 35px solid #f8981d;
+}
+
+/* line 53, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.mfp-arrow-left:after, .mfp-arrow-left .mfp-a {
+  border-right: 35px solid #f8981d;
+}
+
+/* line 57, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.mfp-arrow-right:before, .mfp-arrow-right .mfp-b {
+  border-left: none;
+}
+
+/* line 61, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.mfp-arrow-left:before, .mfp-arrow-left .mfp-b {
+  border-right: none;
+}
+
+/* line 65, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+.mfp-arrow-left:hover,
+.mfp-arrow-right:hover,
+.mfp-arrow-left:focus,
+.mfp-arrow-right:focus {
+  background: none;
+}
+
+/******************************************************
+** Breakpoint differences
+******************************************************/
+/******************************************************
+** max-width 640px, mobile-only styles, use when QAing mobile issues
+******************************************************/
+@media only screen and (max-width: 40em) {
+  /* line 85, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+  .mfp-image-holder .mfp-content {
+    max-width: 80%;
+  }
+
+  /* line 90, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+  .mfp-arrow-right {
+    right: 0em;
+  }
+
+  /* line 94, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+  .mfp-arrow-left {
+    left: -1em;
+  }
+}
+/******************************************************
+** min-width 641px, medium screens
+******************************************************/
+@media only screen and (min-width: 40.063em) {
+  /* line 109, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+  .mfp-image-holder .mfp-content {
+    max-width: 80%;
+  }
+
+  /* line 114, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+  .mfp-arrow-right {
+    right: -1em;
+  }
+
+  /* line 118, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+  .mfp-arrow-left {
+    left: 0em;
+  }
+}
+/******************************************************
+** min-width 641px, medium screens
+******************************************************/
+@media only screen and (min-width: 64.063em) {
+  /* line 132, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+  .mfp-image-holder .mfp-content {
+    max-width: 100%;
+  }
+
+  /* line 137, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+  .mfp-arrow-right {
+    right: 4em;
+  }
+
+  /* line 141, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/custom-magnific.scss */
+  .mfp-arrow-left {
+    left: 4em;
+  }
+}

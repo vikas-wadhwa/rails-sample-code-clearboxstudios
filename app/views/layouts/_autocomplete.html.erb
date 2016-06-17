@@ -1,0 +1,147 @@
+<% if searching == 'users' %>
+
+    <% content_for :foot do %>
+        <script>
+            $(function() {
+
+                $( '.screencredits-box' ).delegate('input.autocomplete-users', 'keydown', function( event ) {
+
+                    //////////////////////////////////////////////////////////////////////
+                    // don't navigate away from the field on tab when selecting an item
+                    //////////////////////////////////////////////////////////////////////
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                            $( this ).data( 'ui-autocomplete' ).menu.active ) {
+                        event.preventDefault();
+                    };
+
+
+                    //////////////////////////////////////////////////////////////////////
+                    // setup autocomplete for the field
+                    //////////////////////////////////////////////////////////////////////
+                    $(this).autocomplete({
+                        delay: 0,
+                        minLength: 1,
+                        source: function (request, response) {
+                            $.ajax({
+                                url: '<%= search_object.users_search_url %>',
+                                data: {
+                                    filter: request.term.split( /,\s*/ ).pop(),
+                                    limit: 10
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    response($.map(data, function(item, index) {
+                                        return {
+                                            id: item.id,
+                                            full_name: item.full_name,
+                                            photo_url: item.photo_url
+                                        };
+                                    }));
+                                }
+                            });
+                        },
+
+                        focus: function() {
+                            //////////////////////////////
+                            // prevent value inserted on focus
+                            //////////////////////////////
+                            return false;
+                        },
+
+                        select: function( event, ui ) {
+                            this.value = ui.item.full_name;
+                            this.name = ui.item.id;
+                            return false;
+                        }
+                    })
+
+                            .data( 'ui-autocomplete' )._renderItem = function( ul, item ) {
+                        return $('<li />')
+                                .data( 'ui-autocomplete-item', item )
+                                .append('<a><img src="' + item.photo_url + '" class="autocomplete-image"><span class="autocomplete-text">' + item.full_name + '</span></a>')
+                                .appendTo(ul);
+                    };
+                });
+            });
+        </script>
+
+    <% end %>
+
+    <input autocomplete="none" type="text" class="autocomplete-users" name="<%= data[:name] %>" value="<%= defaults[:value] %>" placeholder="Find a member" />
+
+<% end %>
+
+
+
+<% if searching == 'credits' %>
+
+    <% content_for :foot do %>
+        <script>
+            $(function() {
+
+                $( '.screencredits-box' ).delegate('input.autocomplete-credits', 'keydown', function( event ) {
+
+                    //////////////////////////////////////////////////////////////////////
+                    // don't navigate away from the field on tab when selecting an item
+                    //////////////////////////////////////////////////////////////////////
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                            $( this ).data( 'ui-autocomplete' ).menu.active ) {
+                        event.preventDefault();
+                    };
+
+
+                    //////////////////////////////////////////////////////////////////////
+                    // setup autocomplete for the field
+                    //////////////////////////////////////////////////////////////////////
+                    $(this).autocomplete({
+                        delay: 0,
+                        minLength: 1,
+                        source: function (request, response) {
+                            $.ajax({
+                                url: '<%= search_object.credits_search_url %>',
+                                data: {
+                                    filter: request.term.split( /,\s*/ ).pop(),
+                                    limit: 10
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    response($.map(data, function(item, index) {
+                                        return {
+                                            id: item.id,
+                                            value: item.credit
+                                            //,avatar: item.email_hash
+                                        };
+                                    }));
+                                }
+                            });
+                        },
+
+                        focus: function() {
+                            //////////////////////////////
+                            // prevent value inserted on focus
+                            //////////////////////////////
+                            return false;
+                        },
+
+                        select: function( event, ui ) {
+                            this.value = ui.item.value;
+                            this.name = ui.item.id;
+                            return false;
+                        }
+                    })
+
+                            .data( 'ui-autocomplete' )._renderItem = function( ul, item ) {
+                        return $('<li />')
+                                .data( 'ui-autocomplete-item', item )
+                                .append('<a>' + item.value + '</a>')
+                                .appendTo(ul);
+                    };
+                });
+            });
+        </script>
+    <% end %>
+
+    <input autocomplete="none" type="text" class="autocomplete-credits" name="<%= data[:name_id] %>" value="<%= data[:value_id] %>" style="display: none;" />
+    <input autocomplete="none" type="text" class="autocomplete-credits" name="<%= data[:name] %>" value="<%= data[:value] %>" placeholder="Start typing for a list of credits" />
+
+<% end %>

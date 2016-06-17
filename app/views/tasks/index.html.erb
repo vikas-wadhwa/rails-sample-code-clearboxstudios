@@ -1,0 +1,106 @@
+<% content_for :title do %>
+    <title>Your tasks</title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "tasks" , :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+<nav class="breadcrumbs hide-for-small-only space-below-3x">
+  <%= link_to('Dashboard', dashboard_url, class: '') %>
+  <% if @project %>
+      <%= link_to(@project.title, project_url(@project), class: '') %>
+  <% end %>
+  <%= link_to('Tasks', '#', class: 'unavailable' ) %>
+</nav>
+
+
+<h1 class='orange'>
+  <% if @project %>
+      Project tasks
+  <% else %>
+      Your Tasks
+  <% end %>
+</h1>
+
+<div class='section-details'>
+  <h5 class="subheader">Click a task below to view details.</h5>
+</div>
+
+
+
+
+<!--  Searchbar  -->
+<!-------------------->
+<div class="row no-child-padding">
+  <%= form_tag '/tasks/search', method: :post, data: {abide: ''} do %>
+
+      <div class="columns no-padding small-9 medium-4">
+        <%= text_field_tag 'search-string', nil, class: 'button-size', placeholder: 'Search for tasks', required: '' %>
+      </div>
+
+      <div class="columns no-padding small-3 medium-8 left">
+        <%= submit_tag 'search', class: 'button tiny info', id: 'search-submit' %>
+      </div>
+
+  <% end %>
+</div>
+
+
+<div class='row no-child-padding space-above'>
+  <%= paginate @tasks, theme: 'clearbox' %>
+</div>
+
+
+
+<div class="row no-child-padding space-above">
+
+  <ul class="index small-up-2 medium-up-3 large-up-4">
+
+    <% @tasks.each do |task|%>
+
+        <li>
+
+          <% if @project %>
+
+              <%= image_button( '1x1',
+                                project_task_url(@project, task),
+                                task.staff_image_url(:medium),
+                                task.title,
+                                task.description,
+                                'Assigned to ' + task.staff.profile.full_name,
+                                ''
+                  ) %>
+
+          <% else %>
+
+              <%= image_button( '1x1',
+                                project_url(task.project),
+                                task.project_image_url(:medium),
+                                task.title,
+                                task.description,
+                                task.project.title,
+                                ''
+                  ) %>
+          <% end %>
+
+
+
+        </li>
+    <% end %>
+
+  </ul>
+
+</div>
+
+
+
+
+
+
+
+
+

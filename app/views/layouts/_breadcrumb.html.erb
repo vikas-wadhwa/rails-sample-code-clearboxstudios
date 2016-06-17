@@ -1,0 +1,27 @@
+<div class="medium-collapse">
+  <nav aria-label="You are here:" role="navigation" class="column hide-for-small space-below-2x">
+    <ul class="breadcrumbs">
+      <li>
+        <% if user_signed_in? %>
+            <%= link_to('Dashboard', dashboard_url, class: '') %>
+        <% else %>
+            <%= link_to('Home', home_url, class: '') %>
+        <% end %>
+      </li>
+
+      <!--------------------------------------------------------------------------------------------------
+      Put the history in an array block so that it simply won't execute the loop if there is no history,
+      rather than fail
+      ---------------------------------------------------------------------------------------------------->
+
+      <%  Array(@breadcrumbs[:history]).each do |crumb|  %>
+          <li><%= link_to(crumb[:text], crumb[:url], class: '') %></li>
+      <% end %>
+
+
+      <li><%= @breadcrumbs[:current] %></li>
+
+
+    </ul>
+  </nav>
+</div>

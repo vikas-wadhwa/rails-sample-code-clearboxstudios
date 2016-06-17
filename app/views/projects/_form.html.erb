@@ -1,0 +1,77 @@
+<%= render '/layouts/form_errors', :model => @project %>
+
+
+<%= form_for @project, data: {abide: ''}, :html => {:class => 'space-above'} do |f| %>
+
+    <% if original_project_id %>
+        <%= hidden_field_tag :original_project_id, original_project_id %>
+    <% end %>
+
+
+    <div class="row no-child-padding">
+      <div class="columns medium-5">
+
+        <%= f.label :title %>
+        <%= f.text_field :title, required: '' %>
+
+
+        <%= f.label :account %>
+        <% if @project.invoice.nil? %>
+            <%= f.collection_select :account_id, @accounts, :id, :name, :prompt => "Select an account" %>
+        <% else %>
+            <%= text_field_tag 'project_account_name', @project.account.name, disabled: true %>
+        <% end %>
+
+
+        <%= f.label :description %>
+        <%= f.text_area :description, required: '' %>
+
+        <div class="row no-child-padding">
+
+          <%= f.label :start %>
+          <div class="row date collapse fdatepicker" data-date-format="mm-dd-yyyy">
+            <div class="small-10 columns">
+              <%= f.text_field :start, :id => 'date-start', :value => @project.start.nvl(Date.today).strftime("%m-%d-%Y") %>
+            </div>
+            <div class="small-2 columns">
+              <label class="postfix icon-calendar-31 inline"></label>
+            </div>
+          </div>
+
+          <%= f.label :end %>
+          <div class="row date collapse fdatepicker" data-date-format="mm-dd-yyyy">
+            <div class="small-10 columns">
+              <%= f.text_field :end, :id => 'date-end', :value => @project.end.nvl(Date.today).strftime("%m-%d-%Y") %>
+            </div>
+            <div class="small-2 columns">
+              <label class="postfix icon-calendar-31 inline"></label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="columns medium-6">
+        <%= f.label :category %>
+        <ul class="small-up-2 space-below-2x">
+          <% Project::ENUMERATIONS[:categories].each do |value| %>
+              <li><%= radio_box f, 'category', value %></li>
+          <% end %>
+        </ul>
+
+        <%= f.label :status %>
+        <ul class="small-up-2">
+          <% Project::ENUMERATIONS[:status].each do |value| %>
+              <li><%= radio_box f, 'status', value %></li>
+          <% end %>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <div class="row submission">
+      <%= f.submit :class => "button white bordered space-above-2x" %>
+    </div>
+
+<% end %>

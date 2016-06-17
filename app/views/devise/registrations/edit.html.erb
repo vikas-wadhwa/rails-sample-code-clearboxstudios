@@ -1,0 +1,47 @@
+
+
+<% content_for :title do %>
+    <title>Change Password</title>
+<% end %>
+
+<% content_for :foot do %>
+    <script> var flashFrameAlways = true; </script>
+<% end %>
+
+
+
+<h1 class='orange'>Change Password</h1>
+<div class="column no-padding medium-8 large-5 end">
+    <%= form_for(resource, :as => resource_name, :url => update_user_registration_url, :html => { :method => :put }) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div>
+          <br>
+          <%= f.label 'Email' %>
+          <input disabled id="profile_email" type="text" value="<%= current_user.email %>">
+        </div>
+
+
+        <div>
+          <%= f.label :current_password %>
+          <%= f.password_field :current_password %>
+        </div>
+
+
+        <div>
+          <%= f.label "New password" %>
+          <%= f.password_field :password, :autocomplete => "off" %>
+        </div>
+
+
+        <div>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+        <div><%= f.submit "Change Password", :class => "button small secondary" %></div>
+    <% end %>
+</div>

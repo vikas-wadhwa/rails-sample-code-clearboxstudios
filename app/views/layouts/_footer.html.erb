@@ -1,0 +1,53 @@
+
+<footer>
+
+  <div class="row">
+
+
+    <div class="columns medium-4">
+      <div class="space-above-4x">
+        <%= image_tag(AWS_CDN_PUBLIC_URL + "/branding/logo_graphic_small.png", :alt => "ClearBox Studios", class: "footer-logo left") %>
+        <span class="align-middle">©2010 Wadhwa Media, LLC. All rights reserved.</span>
+      </div>
+
+    </div>
+
+
+
+    <div class="columns medium-4">
+
+      <h5 class="">Contact us</h5>
+      <%= mail_to CORPORATE_EMAIL_INFO, nil, :class => "" %>
+      <br>
+      <%= mail_to CORPORATE_EMAIL_ACCOUNTS, nil, :class => "" %>
+      <br>
+      <%= mail_to CORPORATE_EMAIL_BILLING, nil, :class => "" %>
+      <br>
+      <%= CORPORATE_PHONE_WORK %>
+
+    </div>
+
+
+    <div class="columns medium-4">
+
+      <h5 class="">Follow us</h5>
+      <div class="row collapse social-bar small-up-2">
+        <%= render 'layouts/social_bar' %>
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+</footer>

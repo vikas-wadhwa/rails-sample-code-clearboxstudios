@@ -1,0 +1,28 @@
+<% @content_frame = "thin" %>
+<% @menu_hide = true %>
+
+
+<% content_for :title do %>
+    <title>Page not found</title>
+<% end %>
+
+<% content_for :head do %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+
+
+
+
+<h2 class="orange space-above-4x space-below">It seems you're looking for a non-existent page...</h2>
+
+<p>
+  Most likely, you've typed in a page address that doesn't actually exist.
+</p>
+
+<p>
+  However, if you have reached this page via a link on our website, please reach out to <b><%= mail_to(CORPORATE_EMAIL_INFO, CORPORATE_EMAIL_INFO) %> </b> with the details.
+</p>
+

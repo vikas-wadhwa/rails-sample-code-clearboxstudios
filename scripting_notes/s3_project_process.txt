@@ -1,0 +1,342 @@
+module S3LightroomProcessing
+
+
+###########################################################################
+## Loop through the AWS 'exports' folder for photos and create projects
+###########################################################################
+
+  s3_process_folder = 'lightroom_exports/'
+  hash_delimiter = '##'
+  key_value_delimiter = '#'
+
+  staff_id = 127127
+  project_start = '2016-02-01'
+  project_end = '2016-02-01'
+  project_title = 'Headshots'
+  project_description = 'Headshots taken at the Catapult Chicago office.'
+  task_title = 'Portrait Photography'
+  task_description = 'Onsite portraits'
+  task_hours = 1
+  task_rate = 20.00
+
+  detailed_descriptions = true
+
+
+
+
+  user_metadata = {}
+  project_groups = {}
+  invoicing = {}
+  bucket_objects = AwsMethods.get_bucket_objects(AWS_S3_PROJECTS_BUCKET, s3_process_folder) rescue network_error
+  if bucket_objects.any?
+
+    sequence_id = 0
+    bucket_objects.each do |object|
+
+      #########################################################################
+      ## Pull filename data from lightroom export
+      #########################################################################
+
+      filename = object.key.split('/').last
+      filedata = filename.split(hash_delimiter)
+      filedata.each {|file|file.chomp!('-') }
+      metadata = Hash[filedata.map {|filename| filename.split(key_value_delimiter)}]
+
+
+      #########################################################################
+      ## Find the billing account, based on input, otherwise create a new one
+      #########################################################################
+
+      account = Account.find_by_billing_email_and_billing_name(metadata['billing_email'], metadata['company'] )
+
+      if account.nil?
+        account = Account.new
+        account.name = metadata['company']
+        account.billing_name = metadata['company']
+        account.billing_email = metadata['billing_email'] || metadata['email']
+        account.company_name = metadata['company']
+        account.permissions = 220
+        account.save!
+      end
+
+
+
+      if metadata['email']
+
+        #########################################################################
+        ## Find or create new User
+        #########################################################################
+        user = User.find_by_email(metadata['email'])
+
+        if user.nil?
+          passCode = Devise.friendly_token.first(8)
+          user = User.new(
+              {
+                  email: metadata['email'],
+                  password: passCode,
+                  password_confirmation: passCode
+              })
+
+          user.skip_confirmation!
+          user.save!
+
+          #########################################################################
+          ## Create user profile
+          #########################################################################
+          profile = Profile.new
+          profile.company_name = metadata['company']
+          profile.name_first = metadata['name_first']
+          profile.name_middle = metadata['name_middle']
+          profile.name_last = metadata['name_last']
+
+          profile.user_id = user.id
+          profile.save!
+
+
+        end
+
+
+        #########################################################################
+        ## Set single users to their own account
+        #########################################################################
+        unless metadata['billing_email']
+          account.account_users.create(:user_id => user.id)
+        end
+
+        #########################################################################
+        ## Push object into a grouping by user, one project per user set
+        #########################################################################
+        user_metadata[user] = metadata
+        (project_groups[user] ||= []).push(object)
+
+
+      else
+
+        #########################################################################
+        ## Push object into a grouping by account, to be visible by everyone
+        ## on that account
+        #########################################################################
+        (account_groups[account] ||= []).push(object)
+
+      end
+
+
+    end
+
+
+
+    #########################################################################
+    ## Loop through grouping and create accounts and projects
+    #########################################################################
+    project_groups.each do |user, s3_objects|
+
+      #########################################################################
+      ## Create project
+      #########################################################################
+      account = Account.find_by_billing_email_and_billing_name(user_metadata[user]['billing_email'], user_metadata[user]['company'] )
+      project = account.projects.new
+
+      project.title = project_title
+      project.title += ' - ' + user.profile.full_name if detailed_descriptions
+
+      project.description = project_description
+      project.start = project_start
+      project.end = project_end
+
+      project.category = 'Billable'
+      project.status = 'Invoiced'
+      project.save!
+
+
+      #########################################################################
+      ## Bind to project users
+      #########################################################################
+      project_user = ProjectUser.create(project_id: project.id, user_id: user.id)
+      project_user.save!
+
+
+      #########################################################################
+      ## Add this project to the list of projects for this account, for billing
+      #########################################################################
+      (invoicing[account] ||= []).push(project)
+
+
+      #########################################################################
+      ## Attach exported objects
+      #########################################################################
+      s3_objects.each do |item|
+
+        filename = item.key.split('/').last
+        project_item = item.move_to(s3_process_folder + project.id.to_s + '/photos/original/' + filename)
+
+        attachment = project.images.new
+        attachment.sequence_id = sequence_id
+        attachment.image_file_name = filename
+        attachment.image_file_size     = project_item.content_length
+        attachment.image_content_type  = project_item.content_type
+        attachment.image_updated_at    = project_item.last_modified
+        attachment.save!
+
+        if attachment.image.reprocess!
+          project_item.delete
+          sequence_id += 1
+        end
+
+      end
+
+
+
+      #########################################################################
+      ## Create tasks
+      #########################################################################
+      task = project.tasks.new
+      task.staff_id = staff_id
+      task.start = project.start
+      task.end = project.start
+
+      task.title = task_title
+      task.description = task_description
+      task.description += ' for ' + user.profile.full_name if detailed_descriptions
+
+      task.hours_actual = task_hours
+      task.rate_actual = task_rate
+
+      task.category = 'Production'
+      task.task_type = 'Fixed'
+      task.status = 'Complete'
+      task.save!
+
+    end
+
+
+
+
+
+
+
+    #########################################################################
+    ## Loop through grouping and create accounts and projects
+    #########################################################################
+    account_groups.each do |account, s3_objects|
+
+      #########################################################################
+      ## Create project
+      #########################################################################
+      project = account.projects.new
+
+      project.title = project_title
+      project.title += ' - ' + account.name if detailed_descriptions
+
+      project.description = project_description
+      project.start = project_start
+      project.end = project_end
+
+      project.category = 'Billable'
+      project.status = 'Invoiced'
+      project.save!
+
+
+      #########################################################################
+      ## Give every account project user access to this project
+      #########################################################################
+
+      account.projects.each do |sub_project|
+        sub_project.users.each do |user|
+
+          project_user = ProjectUser.create(project_id: project.id, user_id: user.id)
+          project_user.save!
+
+        end
+
+      end
+
+
+      #########################################################################
+      ## Add this project to the list of projects for this account, for billing
+      #########################################################################
+      (invoicing[account] ||= []).push(project)
+
+
+      #########################################################################
+      ## Attach exported objects
+      #########################################################################
+      s3_objects.each do |item|
+
+        filename = item.key.split('/').last
+        project_item = item.move_to(s3_process_folder + project.id.to_s + '/photos/original/' + filename)
+
+        attachment = project.images.new
+        attachment.sequence_id = sequence_id
+        attachment.image_file_name = filename
+        attachment.image_file_size     = project_item.content_length
+        attachment.image_content_type  = project_item.content_type
+        attachment.image_updated_at    = project_item.last_modified
+        attachment.save!
+
+        if attachment.image.reprocess!
+          project_item.delete
+          sequence_id += 1
+        end
+
+      end
+
+
+
+      #########################################################################
+      ## Create tasks
+      #########################################################################
+      task = project.tasks.new
+      task.staff_id = staff_id
+      task.start = project.start
+      task.end = project.start
+
+      task.title = task_title
+      task.description = task_description
+      task.description += ' for ' + account.name if detailed_descriptions
+
+      task.hours_actual = task_hours
+      task.rate_actual = task_rate
+
+      task.category = 'Production'
+      task.task_type = 'Fixed'
+      task.status = 'Complete'
+      task.save!
+
+    end
+
+
+
+
+    #########################################################################
+    ## Create invoices
+    #########################################################################
+    invoicing.each do |account, projects|
+      invoice = account.invoices.find_by_bill_date_and_description(project_end, project_description)
+
+      if invoice.nil?
+        invoice = account.invoices.new
+
+        invoice.title = project_title
+        invoice.description = project_description
+        invoice.bill_date = project_end
+
+        invoice.category = 'Receivable'
+        invoice.status = 'Paid'
+        invoice.save!
+      end
+
+      projects.each do |project|
+        project.invoice = invoice
+        project.save!
+      end
+    end
+
+
+
+  else
+    puts 'No items in the "' + s3_process_folder + '" folder to process'
+  end
+
+
+end
+

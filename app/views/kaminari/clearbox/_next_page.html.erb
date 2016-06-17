@@ -1,0 +1,16 @@
+<% if current_page.last? %>
+
+    <li class="pagination-next disabled">
+        Next <span class="show-for-sr">page</span>
+    </li>
+
+<% else %>
+
+    <li class="pagination-next">
+
+      <%= link_to url, remote: remote, :"aria-label" => "Next" do |name| %>
+          Next<span class="show-for-sr">page</span>
+      <% end %>
+
+    </li>
+<% end %>

@@ -1,0 +1,325 @@
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<!-- <script type="text/javascript" src="/plupload/js/plupload.full.js"></script> -->
+<!-- <script type="text/javascript" src="/plupload-v2/js/plupload.full.min.js"></script> -->
+
+<!-- Photo Upload Progress  -->
+<!--------------------------------------------->
+<%= render '/layouts/upload_progress_list', list_id: 'upload_list', header: true, modal_id: 'upload_progress_modal' unless defined?(hide_progress) %>
+
+
+<script type="text/javascript" src="/plugins/plupload/js/plupload.full.min.js"></script>
+<script type="text/javascript">
+
+    var <%= pluploader_id %>_global_err,
+            <%= pluploader_id %>,
+    photo_upload_progress_modal = $('#upload_progress_modal');
+
+    var plupload_forms = ( typeof plupload_forms != 'undefined' && plupload_forms instanceof Object ) ? plupload_forms : {}
+
+
+    $(function () {
+
+        ////////////////////////////////////////////////////
+        //RoR - capture authenticity token
+        ////////////////////////////////////////////////////
+        var auth_token = $("input[name=authenticity_token]").val();
+
+        <%= pluploader_id %>= new plupload.Uploader({
+            url: '<%= image_object.class.image_attach_url %> ',
+            runtimes: 'html5,silverlight,flash,html4',
+            browse_button: '<%= upload_clicker_id %>',
+            container: '<%= upload_container_id %>',
+            max_file_size: '10mb',
+            //chunk_size : '1mb',
+            unique_names: true,
+
+            <% if defined?(single_select) && single_select %>
+            multi_selection: false,
+            <% end %>
+
+            ////////////////////////////////////////////////////
+            //RoR - make sure form is multipart
+            ////////////////////////////////////////////////////
+
+            multipart: true,
+
+            //////////////////////////////////////////////////////
+            //RoR - make sure to send authenticity token
+            //and any other parameters that on the plain html form
+            //////////////////////////////////////////////////////
+
+            multipart_params: {authenticity_token: auth_token},
+
+            ////////////////////////////////////////////////////
+            // Flash settings
+            ////////////////////////////////////////////////////
+
+            flash_swf_url: '/public/plupload/js/plupload.Moxie.swf',
+
+            ////////////////////////////////////////////////////
+            // Silverlight settings
+            ////////////////////////////////////////////////////
+            silverlight_xap_url: '/public/plupload/js/plupload.Moxie.xap'
+
+            ////////////////////////////////////////////////////
+            // Specify what files to browse for
+            ,filters : [
+                {title : "Image files", extensions : "tif,jpg, jpeg, gif, png, eps, tif, tiff, tga, pdf"}
+                //,{title : "Video files", extensions : "avi, mov, qt, mpg, mpeg, mp4, 3gp, 3g2, asf, wmv, dv, flc, m4v, h264, m2ts, m2v, mkv, mxf"}
+                //,{title : "Document files", extensions : "doc, docx, rtf, txt, odf, pdf, ppt, pps"}
+                //,{title : "Audio files", extensions : "aac, ac3, ape, mp3, wma, m4a, wav, mid, flac, ogg, aiff, aif"}
+            ]
+            ////////////////////////////////////////////////////
+
+        });
+
+
+        //////////////////////////////////////////////////////////////////////
+        //  Initialize the form and start
+        ///////////////////////////////////////////////////////////////////////
+        <%= pluploader_id %>.init();
+        plupload_forms['<%= pluploader_id %>']= <%= pluploader_id %>;
+
+
+        //////////////////////////////////////////////////////////////////////
+        //  Don't start on click if there are no files to upload
+        ///////////////////////////////////////////////////////////////////////
+        <% if defined?(upload_starter_id) %>
+        $('#<%= upload_starter_id %>').click(function(e) {
+            if (<%= pluploader_id %>.files.length > 0) {
+                <%= pluploader_id %>.start();
+                photo_upload_progress_modal.foundation('open');
+                e.preventDefault();
+            }
+        });
+        <% end %>
+
+
+        ///////////////////////////////////////////////////////////////////////
+        //  File Added
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('FilesAdded', function (up, files) {
+
+            photo_upload_complete = false;
+            $('#mediafile-basis-row').hide();
+
+            <% unless defined?(upload_starter_id) %>
+                photo_upload_progress_modal.foundation('open');
+            <% end %>
+
+
+            <% if defined?(single_select) && single_select %>
+
+            plupload.each(files, function (file) {
+
+                if (up.files.length > 1) {
+
+                    $('#photo_uploadrow_' + up.files[0].id).remove();
+
+                    $('#mediafile-basis-row').clone().attr('id', 'photo_uploadrow_' + file.id).insertBefore('#mediafile-basis-row');
+                    $('#photo_uploadrow_' + file.id).find('.mediafile-name').html(file.name);
+                    $('#photo_uploadrow_' + file.id).find('.mediafile-length').html(plupload.formatSize(file.size));
+                    $('#photo_uploadrow_' + file.id).show();
+
+                }
+
+                else {
+                    $.each(files, function (i, file) {
+
+                        $('#mediafile-basis-row').clone().attr('id', 'photo_uploadrow_' + file.id).insertBefore('#mediafile-basis-row');
+                        $('#photo_uploadrow_' + file.id).find('.mediafile-name').html(file.name);
+                        $('#photo_uploadrow_' + file.id).find('.mediafile-length').html(plupload.formatSize(file.size));
+                        $('#photo_uploadrow_' + file.id).show();
+
+                    });
+
+                }
+
+
+                <% unless defined?(upload_starter_id) %>
+                    <%= pluploader_id %>.start();
+                <% end %>
+
+                ////////////////////////////////////////////////////
+                // Reposition flash/silverlight
+                ////////////////////////////////////////////////////
+                up.refresh();
+
+            });
+
+            <% else %>
+
+            $.each(files, function (i, file) {
+
+                $('#mediafile-basis-row').clone().attr('id', 'photo_uploadrow_' + file.id).insertBefore('#<%= list_id %> #mediafile-basis-row');
+                $('#photo_uploadrow_' + file.id).find('.mediafile-name').html(file.name);
+                $('#photo_uploadrow_' + file.id).find('.mediafile-length').html(plupload.formatSize(file.size));
+                $('#photo_uploadrow_' + file.id).show();
+
+                <% unless defined?(upload_starter_id) %>
+                <%= pluploader_id %>.start();
+                <% end %>
+
+            });
+
+
+            ////////////////////////////////////////////////////
+            // Reposition Flash/Silverlight
+            ////////////////////////////////////////////////////
+            up.refresh();
+
+            <% end %>
+
+        });
+
+
+        //////////////////////////////////////////////////////////////////////
+        //  File Removed
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('FilesRemoved', function (up, files) {
+            $.each(files, function (i, file) {
+                $('#photo_uploadrow_' + file.id).remove();
+            });
+        });
+
+        <% if defined?(post_params) %>
+
+        ///////////////////////////////////////////////////////////////////////
+        //  Before Upload File
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('BeforeUpload', function (up, file) {
+
+            <% post_params.each do |key, javascript_variable| %>
+            up.settings.multipart_params['<%= key %>'] = <%= javascript_variable %>;
+            <% end %>
+
+        });
+
+        <% end %>
+
+        ///////////////////////////////////////////////////////////////////////
+        //  Upload Progress
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.
+
+        bind('UploadProgress', function (up, file) {
+            if (file.percent == '100') {
+                file.percent = 'Processing';
+            }
+
+            else {
+                file.percent = file.percent + '%'
+            }
+
+            $('#photo_uploadrow_' + file.id).find('.mediafile-percent').html("<span class='orange'>" + file.percent + "</span>");
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////
+        //  File Uploaded
+        ///////////////////////////////////////////////////////////////////////
+        <%= pluploader_id %>.
+        bind('FileUploaded', function (up, file, response) {
+
+            var data = jQuery.parseJSON(response.response);
+
+
+            if (data[0].error_message) {
+                up.trigger('Error', {code: response.status, message: data[0].error_message, file: file});
+            }
+
+            else {
+
+                $('.image-gallery-grid').append(data[0].photo_gallery_item);
+
+                $('#photo_uploadrow_' + file.id).find('.mediafile-percent').html("<span class='orange'>COMPLETE</span>");
+
+                <% if defined?(single_select) && single_select %>
+                    photo_to_refresh.attr("src", data[0].refresh_photo_url);
+                <% end %>
+
+            }
+
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////
+        //  Error Handling
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('Error', function (up, err) {
+
+            <%= pluploader_id %>_global_err = err;
+
+            if (err.file) {
+
+                if ($('#photo_uploadrow_' + err.file.id).length == 0) {
+                    $('#error_explanation ul li').remove();
+                    $('#error_explanation ul').append('<li> File corrupt, please select another file. </li>');
+                    form_error_modal.foundation('open');
+
+                }
+
+                else {
+                    $('#photo_uploadrow_' + err.file.id).find('.mediafile-percent').html("<span class='orange'> " + err.message + " </span>");
+                    $('#mediafile-basis-row').hide();
+                    photo_upload_progress_modal.foundation('open');
+                }
+            }
+
+            up.refresh(); // Reposition Flash/Silverlight
+            //upload_failure('photo');
+
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////
+        //  Queue Complete
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.
+        bind('UploadComplete', function (up, files) {
+
+            if (<%= pluploader_id %>_global_err == null) {
+                $.each(files, function (i, file) {
+                    $('#photo_uploadrow_' + file.id).remove();
+                });
+
+                ///////////////////////////////////////////////////////////////////////
+                //  Only close the queue if this was an automatic load,
+                //  If a start clicker was used, wait until the upload is fully complete
+                // to close
+                ///////////////////////////////////////////////////////////////////////
+                <% if defined?(upload_starter_id) %>
+                    delete plupload_forms['<%= pluploader_id %>']
+
+                <% else %>
+                    photo_upload_progress_modal.foundation('close');
+
+                <% end %>
+
+                upload_completion(<%= pluploader_id %>);
+
+            }
+
+        });
+
+        ///////////////////////////////////////////
+        // Bind file cancel button
+        ///////////////////////////////////////////
+        $("#<%= list_id %>_cancel").click(function () {
+
+            $('<%= list_id %> .mediafile-percent').html("<i class='icon-spin6 animate-spin' style='font-size: 1.2em;'></i> Stopping");
+            <%= pluploader_id %>.stop();
+            photo_upload_progress_modal.foundation('close');
+
+        });
+
+    });
+</script>
+
+

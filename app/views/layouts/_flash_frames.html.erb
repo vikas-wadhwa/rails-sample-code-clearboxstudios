@@ -1,0 +1,83 @@
+
+<% content_for :foot do %>
+
+    <script>
+      $(document).ready(function() {
+
+        $('.flash-frame .close').click(function () {
+          $('.flash-frame').hide();
+        })
+      });
+    </script>
+
+<% end %>
+
+
+
+<!--  Flash messages  -->
+<!-------------------------------------------------------------------------------------------->
+
+
+<% @key_class = { 'error'=>'secondary', 'notice'=>'secondary' } %>
+
+
+<% flash.each do |key, value| %>
+
+    <% if key == 'modal' %>
+
+
+        <% content_for :foot do %>
+
+            <script>
+              $('#form_error_modal').foundation('open');
+            </script>
+
+        <% end %>
+
+
+        <% content_for :modal do %>
+            <div id="form_error_modal" class="reveal" data-reveal aria-labelledby="<%= value[:title] %>" role="dialog">
+
+              <h2 class="orange"><%= value[:title].html_safe %></h2>
+
+              <div id="flash_modal_explanation">
+                <p><%= value[:message].html_safe %></p>
+
+                <% if value[:list] %>
+                    <ul class="square">
+                      <% value[:list].each do |item| %>
+                          <li><%= item %></li>
+                      <% end %>
+                    </ul>
+                <% end %>
+
+                <% if value[:followup] %>
+                    <p class="space-above-2x">
+                      <%= value[:followup].html_safe %>
+                    </p>
+                <% end %>
+
+              </div>
+
+              <div class="row submission">
+                <button class="close-button button secondary" data-close aria-label="Close reveal" type="button">Close</button>
+              </div>
+
+
+            </div>
+
+        <% end %>
+
+        <!--  Removable flash message bar  -->
+        <!-------------------------------------------------------------------------------------------->
+    <% else %>
+
+        <div data-alert class="flash-frame alert-box <%= @key_class[key] %> text-center">
+          <%= content_tag(:span, value, class:'message') unless value.blank? %>
+          <a href="#" class="close">&times;</a>
+        </div>
+
+    <% end %>
+
+
+<% end %>

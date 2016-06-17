@@ -1,0 +1,13 @@
+
+<!--  Pagination  -->
+<!-------------------->
+<div class='row column space-above-2x'>
+
+  <% if pagination_object.empty? %>
+      <h4>No results found.</h4>
+
+  <% else %>
+      <%= paginate pagination_object, theme: 'clearbox' %>
+  <% end %>
+
+</div>

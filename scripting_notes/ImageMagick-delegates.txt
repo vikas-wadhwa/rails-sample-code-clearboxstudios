@@ -1,0 +1,227 @@
+wget http://www.imagemagick.org/download/delegates/bzip2-1.0.6.tar.gz
+wget http://www.imagemagick.org/download/delegates/freetype-2.4.10.tar.gz
+wget http://www.imagemagick.org/download/delegates/ft245.zip
+wget http://www.imagemagick.org/download/delegates/ftdmo245.zip
+wget http://www.imagemagick.org/download/delegates/ftdoc245.zip
+wget http://www.imagemagick.org/download/delegates/ghostscript-9.05.tar.bz2
+wget http://www.imagemagick.org/download/delegates/ghostscript-9.05.tgz
+wget http://www.imagemagick.org/download/delegates/ghostscript-fonts-std-8.11.tar.gz
+wget http://www.imagemagick.org/download/delegates/jbigkit-2.0.tar.gz
+wget http://www.imagemagick.org/download/delegates/jpegsrc.v7.tar.gz
+wget http://www.imagemagick.org/download/delegates/jpegsrc.v8.tar.gz
+wget http://www.imagemagick.org/download/delegates/jpegsrc.v8b.tar.gz
+wget http://www.imagemagick.org/download/delegates/lcms2-2.4.tar.gz
+wget http://www.imagemagick.org/download/delegates/libfpx-1.3.1-2.tar.gz
+wget http://www.imagemagick.org/download/delegates/liblqr-1-0.1.0-1.tar.gz
+wget http://www.imagemagick.org/download/delegates/libpng-1.6.0.tar.gz
+wget http://www.imagemagick.org/download/delegates/libwmf-0.2.8.4.tar.gz
+wget http://www.imagemagick.org/download/delegates/libxml2-2.9.0.tar.gz
+wget http://www.imagemagick.org/download/delegates/ralcgm-3.50.tar.gz
+wget http://www.imagemagick.org/download/delegates/ralcgm.tar.gz
+wget http://www.imagemagick.org/download/delegates/sane-backends-1.0.11.tar.gz
+wget http://www.imagemagick.org/download/delegates/sane-frontends-1.0.10.tar.gz
+wget http://www.imagemagick.org/download/delegates/tiff-4.0.3.tar.gz
+wget http://www.imagemagick.org/download/delegates/trio-1.10.tar.gz
+wget http://www.imagemagick.org/download/delegates/xtp-5.4.3.tar.gz
+wget http://www.imagemagick.org/download/delegates/zlib-1.2.7.tar.gz
+
+
+tar xzvf *.tar.gz
+
+cd bzip2-1.0.6/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd freetype-2.4.10/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd ft245.zip/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd ftdmo245.zip/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd ftdoc245.zip/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd ghostscript-9.05.tar.bz2/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd ghostscript-9.05.tgz/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd ghostscript-fonts-std-8.11/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd jbigkit-2.0/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd jpegsrc.v7/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd jpegsrc.v8/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd jpegsrc.v8b/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd lcms2-2.4/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd libfpx-1.3.1-2/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd liblqr-1-0.1.0-1/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd libpng-1.6.0/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd libwmf-0.2.8.4/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd libxml2-2.9.0/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd ralcgm-3.50/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd ralcgm/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd sane-backends-1.0.11/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd sane-frontends-1.0.10/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd tiff-4.0.3/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd trio-1.10/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd xtp-5.4.3/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd zlib-1.2.7.tar.bz2/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd zlib-1.2.7/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+cd zlib127.zip/
+./configure
+sudo make
+sudo make install
+make clean
+cd ..
+
+`

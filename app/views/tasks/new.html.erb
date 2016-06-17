@@ -1,0 +1,24 @@
+<% #@background_opacity_class = 'transparent' %>
+<% @content_frame = 'wide-with-sidebar' %>
+
+<% content_for :title do %>
+    <title>New task for <%= @project.title %> </title>
+<% end %>
+
+<% content_for :head do %>
+  <%= javascript_include_tag "tasks" %>
+  <%= stylesheet_link_tag "tasks" , :media => 'all' %>
+  <script>
+  $(function() {
+    $("#project_start").datepicker( 'option' , 'onSelect', function() {
+            var selected_date = $(this).datepicker('getDate', '+1m');
+            selected_date.setDate(selected_date.getDate()+14); 
+            $("#project_end").datepicker("setDate", selected_date);
+    });  
+  });  
+  </script>
+<% end %>
+
+
+
+<%= render 'form' %>

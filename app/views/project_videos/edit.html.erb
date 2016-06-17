@@ -1,0 +1,16 @@
+<% content_for :title do %>
+    <title>Edit Video Information</title>
+<% end %>
+
+
+<nav class="breadcrumbs hide-for-small-only space-below-3x">
+  <%= link_to('Dashboard', dashboard_url, class: '') %>
+  <%= link_to('Edit Project', edit_project_url(@project), class: '' ) %>
+  <%= link_to('Edit Video - ' + @video.title, '#', class: 'current' ) %>
+</nav>
+
+
+
+<%= render 'video_upload', video: @video, type: "edit" %>
+
+

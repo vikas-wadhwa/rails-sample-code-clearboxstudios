@@ -1,0 +1,62 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag "/plugins/jcrop-0.9.12/jquery-jcrop.min.css", :media => 'all' %>
+    <%= stylesheet_link_tag "photo_crop" , :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+    <%= javascript_include_tag "/plugins/jcrop-0.9.12/jquery-jcrop.min.js" %>
+    <%= javascript_include_tag "photo-crop.js" %>
+<% end %>
+
+
+<% content_for :modal do %>
+
+    <div id="jcrop_modal" class="large reveal" data-reveal aria-labelledby="Size your image" aria-hidden="true" role="dialog">
+      <input type="hidden" id="photo_to_crop_id" name="photo_to_crop_id" value="<%= photo_to_crop_id %>" />
+      <input type="hidden" size="4" id="x1" name="coordinates[crop_x]" />
+      <input type="hidden" size="4" id="y1" name="coordinates[crop_y]" />
+      <input type="hidden" size="4" id="x2" name="coordinates[x2]" />
+      <input type="hidden" size="4" id="y2" name="coordinates[y2]" />
+      <input type="hidden" size="4" id="w" name="coordinates[crop_w]" />
+      <input type="hidden" size="4" id="h" name="coordinates[crop_h]" />
+
+
+      <div class="row">
+
+        <div class="columns medium-6">
+          <div id="jcrop_processing">
+            <i class="icon-spin6 animate-spin"></i>
+          </div>
+
+          <h2 class="orange">Photo Crop</h2>
+          <p class="section-details">
+            Simply select a square area to crop.
+          </p>
+
+          <%= image_tag fullsize_photo_url, id: 'jcrop_image_source', class:'image-to-crop' %>
+        </div>
+
+
+        <div class="columns medium-6">
+
+          <h2 class="orange">Preview</h2>
+          <p class="section-details">
+            This is how your profile will look on search results.
+          </p>
+
+          <div id="jcrop_preview_container">
+
+            <%= image_tag fullsize_photo_url, id: 'jcrop_preview', class:'live-thumbnail' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row submission">
+        <button id="do_crop" class="button">Save</button>
+        <button class="close-button button secondary" data-close aria-label="Close reveal" type="button">Cancel</button>
+      </div>
+
+
+
+    </div>
+<% end %>

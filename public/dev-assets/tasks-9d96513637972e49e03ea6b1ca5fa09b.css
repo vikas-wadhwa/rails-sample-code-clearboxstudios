@@ -1,0 +1,94 @@
+/******************************************************
+** Import variables
+******************************************************/
+/******************************************************
+** Variables
+******************************************************/
+/******************************************************
+** General styles
+******************************************************/
+/* line 10, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.responsive-form label {
+  width: 7em;
+}
+
+/* line 14, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.floating-container {
+  min-height: 0;
+  margin-top: 1em;
+}
+
+/* line 19, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+#accordion {
+  margin-top: 24em;
+}
+
+/* line 23, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+#accordion .floating-container {
+  padding: .25em 0;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+/* line 29, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.spacer {
+  min-height: 1em;
+}
+
+/* line 33, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.multi-column {
+  min-width: 15em;
+}
+
+/* line 37, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.multi-column .section-details {
+  color: #646464;
+  font-size: .9em;
+}
+
+/* line 42, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.section-details label {
+  vertical-align: inherit;
+}
+
+/* line 49, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.column-1 label {
+  width: 12em;
+}
+
+/* line 53, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.column-2 label {
+  width: 10em;
+  margin-left: 4em;
+}
+
+/* line 61, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.profile-image {
+  margin-right: 2em;
+}
+
+/* line 65, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+#file-upload-form {
+  clear: both;
+}
+
+/* line 69, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+#table_mediafiles thead td {
+  font-size: 1.25em;
+}
+
+/* line 73, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+#table_mediafiles tbody td {
+  font-size: .8em;
+  color: #646464;
+}
+
+/* line 78, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+#table_mediafiles td {
+  padding: .1em;
+}
+
+/* line 82, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/tasks.css.scss.erb */
+.profile-image {
+  width: 14em;
+}

@@ -1,0 +1,62 @@
+/******************************************************
+** min-width 641px, large screens
+******************************************************/
+@media only screen and (min-width: 64.063em) {
+
+  .inner-wrap {
+    -webkit-transition:  none !important;
+    -moz-transition:  none !important;
+    -ms-transition:  none !important;
+    -o-transition:  none !important;
+    transition:  none !important;
+  }
+
+  .main-section {
+    width: -moz-calc(100% - #{$sidebar-width});
+    width: -webkit-calc(100% - #{$sidebar-width});
+    width: calc(100% - #{$sidebar-width});
+  }
+
+  .main-section.menu-hide {
+    width: 100%;
+  }
+
+  .content-frame {
+    min-height: 60em;
+  }
+
+  .content-frame.wide {
+    padding: 1em 6em;
+  }
+
+  footer {
+    padding: 2em 5em;
+  }
+
+  .banner-ribbon,
+  .menu-icon-toggle {
+    height: 5em;
+  }
+
+  .banner-logo img {
+    max-height: 3em;
+  }
+
+
+  .banner-logo {
+    margin: 1em;
+  }
+
+  #sidebar li a {
+    font-size: 1em;
+  }
+
+  .callout-details h3 {
+    font-size: 3em;
+  }
+
+  .callout-description {
+    font-size: 1.5em;
+  }
+
+}

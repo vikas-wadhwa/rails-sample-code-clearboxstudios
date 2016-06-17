@@ -1,0 +1,35 @@
+///////////////////////////////////////////
+// Foundation JS changes
+///////////////////////////////////////////
+
+$(document).foundation();
+
+
+///////////////////////////////////////////
+// Add deep linking for tabs
+///////////////////////////////////////////
+$(document).ready(function() {
+
+  if(window.location.hash){
+    $('.tabs-title a').each(function(){
+      var hash = $(this).attr('href');
+      if(hash == window.location.hash){
+        $(this).click();
+      }
+    });
+  }
+});
+
+
+///////////////////////////////////////////
+// Reveal modal actions
+///////////////////////////////////////////
+
+// Add a blur to base layers when a modal is created
+$(document).on('open.zf.reveal', '[data-reveal]', function () {
+  $('.banner-ribbon, .banner-logo, .off-canvas-wrapper').addClass('blur');
+});
+
+$(document).on('closed.zf.reveal', '[data-reveal]', function () {
+  $('.banner-ribbon, .banner-logo, .off-canvas-wrapper').removeClass('blur');
+});

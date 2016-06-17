@@ -1,0 +1,10 @@
+<% if page.current? %>
+    <li class="current"><a><span class="show-for-sr">You're on page</span><%= page %></a></li>
+
+<% else %>
+
+    <li>
+      <%= link_to page, url, :class => '', :remote => remote, :"aria-label" => page %>
+    </li>
+
+<% end %>

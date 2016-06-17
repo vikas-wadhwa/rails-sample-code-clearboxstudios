@@ -1,0 +1,52 @@
+<% content_for :title do %>
+    <title>Dashboard</title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "dashboard" , :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+
+<h1 class='orange'>Settings</h1>
+<div class='section-details'>
+  <h5 class="subheader">Change your password and change your profile information.</h5>
+</div>
+
+
+<div class="row small-up-2 medium-up-4 large-up-5 space-above-2x">
+  <div class="column"><%= icon_button(edit_user_registration_url,'lock', 'Change Password') %></div>
+  <div class="column"><%= icon_button(edit_profile_url(current_user.profile),'edit', 'Edit profile') %></div>
+</div>
+
+
+
+<h1 class='orange space-above'>Creative Portfolio</h1>
+<div class='section-details'>
+  <h5 class="subheader">Polish your profile for public viewing. Get started by uploading photos, videos, and crediting friends! </h5>
+</div>
+
+
+<div class="row small-up-2 medium-up-4 large-up-5 space-above-2x">
+  <div class="column"><%= icon_button(profile_url(current_user.profile),'user', 'View your profile') %></div>
+  <div class="column"><%= icon_button(profiles_url,'users', 'Find professionals') %></div>
+  <div class="column"><%= icon_button(edit_profile_url(current_user.profile, :anchor => 'photos'),'pictures', 'Manage photos') %></div>
+  <div class="column"><%= icon_button(edit_profile_url(current_user.profile, :anchor => 'videos'),'videocam-alt', 'Manage videos') %></div>
+</div>
+
+
+<% if current_user.projects %>
+    <h1 class='orange space-above'>Client Account</h1>
+    <div class='section-details'>
+      <h5 class="subheader">If you are a Clearbox Studios client, find your projects, deliverables, and invoices here.</h5>
+    </div>
+
+    <div class="row small-up-2 medium-up-4 large-up-5 space-above-2x">
+      <!--<div class="column"><%= icon_button(accounts_url,'doc-alt', 'Account info') %></div>-->
+      <div class="column"><%= icon_button(projects_url,'archive', 'Projects') %></div>
+      <div class="column"><%= icon_button(invoices_url,'docs', 'Invoices') %></div>
+    </div>
+
+<% end %>

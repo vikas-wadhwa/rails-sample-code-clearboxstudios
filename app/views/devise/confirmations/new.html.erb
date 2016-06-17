@@ -1,0 +1,32 @@
+<% @menu_hide = true %>
+
+
+<% content_for :title do %>
+    <title>Resend Confirmation</title>
+<% end %>
+
+<% content_for :foot do %>
+   <script> var flashFrameAlways = true; </script>
+<% end %>
+
+
+<h1 class='orange'>Resend Confirmation Instructions</h1>
+<div class="column no-padding medium-8 large-5 end">
+
+      <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, :class => '' }) do |f| %>
+
+        <%= devise_error_messages! %>
+
+        <div>
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+        </div>
+
+
+        <div class="space-above"><%= f.submit "Resend confirmation" , class: "button small secondary" %></div>
+
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+
+</div>

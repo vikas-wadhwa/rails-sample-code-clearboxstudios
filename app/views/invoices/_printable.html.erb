@@ -1,0 +1,154 @@
+<div class="invoice-header space-below-2x">
+  <%= image_tag(AWS_CDN_PUBLIC_URL + "/branding/logo_full.png", :alt => "ClearBox Studios") %>
+  <div class="invoice-address">231 Redwood Ave &nbsp;&nbsp;  Elk Grove village IL 60007 &nbsp;&nbsp; (773) 270-0269</div>
+</div>
+
+<h1 class='orange'>Invoice #<%= @invoice.id %></h1>
+
+<div class="row column model-details">
+    <span class="model-stats">
+      <div class="title"><p>Invoice ID</p></div>
+      <div class="content"><h5><%=  @invoice.id %></h5></div>
+    </span>
+
+  <span class="model-stats">
+      <div class="title"><p>Status</p></div>
+      <div class="content"><h5><%=  @invoice.status %></h5></div>
+    </span>
+
+    <span class="model-stats">
+      <div class="title"><p>Bill Date</p></div>
+      <div class="content"><h5><%=  @invoice.bill_date %></h5></div>
+    </span>
+
+
+    <span class="model-stats">
+      <div class="title"><p>Due Date</p></div>
+      <div class="content"><h5><%=  @invoice.bill_date + 30 %></h5></div>
+    </span>
+</div>
+
+
+
+<div class="row column model-details tight" >
+
+    <span class="model-stats">
+      <div class="title"><p>Billed Account</p></div>
+      <div class="content"><h6><%=  @invoice.account.company_name %></h6></div>
+
+      <div class="">
+        <a href="<%= @invoice.account.company_website %>"><%= @invoice.account.company_website %></a>
+      </div>
+
+      <div class="">
+        <a href="#"><%= @invoice.account.billing_email %></a>
+      </div>
+
+    </span>
+
+      <span class="model-stats">
+        <div class="title"><p>Pay via check</p></div>
+        <div class="content"><h6>Clearbox Studios</h6></div>
+        <div class="">231 Redwood Ave</div>
+        <div class="">Elk Grove Village <span class="state">IL</span>, <span class="zip">60007</span></div>
+    </span>
+
+
+    <span class="model-stats">
+        <div class="title"><p>Pay via Paypal/Chase Payments</p></div>
+        <div class="content"><h6>billing@clearboxstudios.com</h6></div>
+    </span>
+
+</div>
+
+<h1 class='orange space-above'>Description</h1>
+<p><%= @invoice.description %></p>
+
+
+<% if @tasks['hourly'] %>
+    <h1 class='orange space-above'>Hourly Charges</h1>
+    <table style="width:100%;">
+      <thead>
+      <tr>
+        <th>Staff Member</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th class="text-center">Hrs</th>
+        <th class="text-center">Rate</th>
+        <th class="text-right">Total</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <% @tasks['hourly'].each do |task| %>
+
+          <tr>
+            <td class="no-wrap">
+              <% unless task.staff_profile == @staff_profile %>
+                  <%= link_to profile_url(task.staff_profile) do %>
+                      <div class="tiny-thumb-image" style="background: url('<%= task.staff_profile.image_url(:tiny) %>');"></div>
+                      <span class="tiny-thumb-name"><%= task.staff_profile.full_name %></span>
+                  <% end %>
+              <% end %>
+            </td>
+            <td class="no-wrap"><%= task.start %></td>
+            <td><%= task.description %></td>
+            <td class="text-center"><%= number_with_precision(task.hours_actual.to_i, :precision => 0)  %></td>
+            <td class="text-center"><%= number_to_currency(task.rate_actual.to_i) %></td>
+            <td class="text-right"><%= number_to_currency(task.amount_due) %></td>
+          </tr>
+
+          <% @start_date = task.start %>
+          <% @staff_profile = task.staff_profile %>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+
+
+<% if @tasks['fixed'] %>
+    <h1 class='orange space-above'>Fixed Charges</h1>
+    <table style="width:100%;">
+      <thead>
+      <tr>
+        <th>Staff Member</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th class="text-right">Total</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @tasks['fixed'].each do |task| %>
+          <tr>
+            <td class="no-wrap">
+              <% unless task.staff_profile == @staff_profile %>
+                  <%= link_to profile_url(task.staff_profile) do %>
+                      <div class="tiny-thumb-image" style="background: url('<%= task.staff_profile.image_url(:tiny) %>');"></div>
+                      <span class="tiny-thumb-name"><%= task.staff_profile.full_name %></span>
+                  <% end %>
+              <% end %>
+            </td>
+            <td class="no-wrap"><%= task.start %></td>
+            <td><%= task.description %></td>
+            <td class="text-right"><%= number_to_currency(task.amount_due) %></td>
+          </tr>
+
+          <% @start_date = task.start %>
+          <% @staff_profile = task.staff_profile %>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+
+
+
+<h1 class='orange black-header space-above text-right'>
+  Total Due:
+  <%= number_to_currency(@invoice.amount_due) %>
+</h1>
+
+
+
+</div>

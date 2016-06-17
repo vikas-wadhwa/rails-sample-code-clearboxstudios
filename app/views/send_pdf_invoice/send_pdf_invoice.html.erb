@@ -1,0 +1,20 @@
+<% @content_frame = 'email' %>
+
+<%= email_subheading("Hello,") %>
+
+<% if @password %>
+
+    <%= email_subheading("Please use the login information below to access your projects.") %>
+    <%= email_text("<b>username: </b> <email>" + @user.email + "</email>") %>
+    <%= email_text("<b>password: </b> <span>" + @password + "</span>") %>
+
+<% else %>
+
+    <%= email_text("You have a newly billed invoice, attached here, for <i><b>" + @invoice.title + "</b></i>.") %>
+    <%= email_text("Please remit payment via check or electronic methods outlined in the document. To view your project and invoice history, please visit the link below.") %>
+<% end %>
+
+<%= email_button("VIEW INVOICES", invoices_url) %>
+
+
+<%= render "layouts/email_footer_billing"%>

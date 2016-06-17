@@ -1,0 +1,71 @@
+    project = Project.find(127291)
+    project.images.each do |attachment|
+        attachment.destroy
+    end
+    
+    
+    project = Project.find(127291)
+    account = project.account
+    users = account.users
+    
+    
+    s3 = AWS::S3.new
+    bucket = s3.buckets[project.media_bucket]
+    objects = bucket.objects.with_prefix(project.id.to_s + '/photos/original')
+    objects.first.key
+     
+
+
+rails c production
+
+
+
+start_proj = 127304
+end_proj = 127304
+(start_proj..end_proj).each do |project_id|
+
+    project = Project.find(project_id)
+    account = project.account
+    users = account.users
+     
+    bucket_objects = project.bucket_objects('photos/original') rescue network_error
+
+    if bucket_objects.any?
+
+        sequence_id = 0
+
+        bucket_objects.each do |object| 
+        
+            bucket = object.bucket
+            object_filename = object.key.split('/').last
+            #target_key = project.id.to_s + '/photos/original/' + target_filename
+            #target = bucket.objects[target_key]
+            #object.copy_to(target)
+
+            unless object_filename == 'original'
+                unless project.images.find_by_image_file_name(object_filename)
+                    attachment = project.images.new
+                    attachment.sequence_id = sequence_id
+                    attachment.image_file_name = object_filename
+                    attachment.image_file_size     = object.content_length
+                    attachment.image_content_type  = object.content_type
+                    attachment.image_updated_at    = object.last_modified
+                    attachment.save!
+                end
+                
+                if attachment.image.reprocess!
+                    object.delete
+                    sequence_id += 1
+                end
+
+                
+            end
+            
+
+        end
+
+    else 
+        puts 'Project ' + project.id.to_s + ' has nothing in the "/photos/original" folder.'
+    end
+  	
+end

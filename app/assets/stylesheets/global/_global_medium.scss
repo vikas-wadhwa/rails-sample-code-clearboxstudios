@@ -1,0 +1,36 @@
+/******************************************************
+** min-width 641px, medium screens
+******************************************************/
+
+@media only screen and (min-width: 40.063em) {
+
+
+  .content-frame {
+    min-height: 40em;
+  }
+
+  .content-frame.wide {
+    padding: 1em 3em;
+  }
+
+  footer {
+    padding: 2em;
+  }
+
+
+  .banner-ribbon,
+  .menu-icon-toggle {
+    height: 4em;
+  }
+
+  .banner-logo img {
+    max-height: 2em;
+  }
+
+
+  #sidebar li a {
+    font-size: 1.15em;
+  }
+
+
+}

@@ -1,0 +1,41 @@
+
+Account info
+
+
+Project info
+title
+category
+description
+account
+start
+end
+
+UPLOADS
+
+staff
+task
+rate
+date
+
+
+
+
+dark orange rgb(239, 105, 48)
+yellow orange rgb(227, 168, 67)
+light gray (125, 125, 125)
+
+<div class="message-overlay" style="
+    position: absolute;
+    font-size: 5em;
+    z-index: 2;
+    color: white;
+    text-shadow: 0 0 25px rgb(50,50,50);
+    width: 100%;
+    text-align: center;
+    margin-top: 2em;
+    font-weight: 100;
+">PRODUCE</div>
+
+
+312-469-1055 or Alex.Paul@swoontech.com.
+

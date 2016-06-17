@@ -1,0 +1,17 @@
+<% content_for :title do %>
+    <title>New Video Information</title>
+<% end %>
+
+<% @breadcrumbs = {history: [{text: 'Edit Profile', url: edit_profile_url(current_user)}], current: 'Add Video'} %>
+<%= render 'layouts/breadcrumb' %>
+
+<% content_for :foot do %>
+    <script>
+        var video_player_empty = true;
+    </script>
+
+<% end %>
+
+<%= render 'layouts/video_upload', video: @video, type: "new" %>
+
+

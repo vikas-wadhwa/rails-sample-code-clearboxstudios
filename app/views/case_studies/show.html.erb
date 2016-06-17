@@ -1,0 +1,29 @@
+<% @content_frame = "thin" %>
+<% @menu_hide = true %>
+
+<% content_for :title do %>
+    <title>Case Study - <%= @study[:title] %> </title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "case_studies", :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+
+
+<% @breadcrumbs = {history: [text: 'Case Studies', url: case_studies_url ], current: @study[:title] } %>
+<%= render 'layouts/breadcrumb' %>
+
+
+<%= render @study[:id], @study %>
+
+
+
+
+
+
+
+

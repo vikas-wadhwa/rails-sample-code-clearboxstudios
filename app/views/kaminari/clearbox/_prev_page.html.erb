@@ -1,0 +1,15 @@
+<% if current_page.first? %>
+
+    <li class="pagination-previous disabled">
+      Previous
+      <span class="show-for-sr">page</span
+      ></li>
+
+<% else %>
+
+    <li class="pagination-previous">
+      <%= link_to url, remote: remote, :"aria-label" => "Previous" do %>
+          Previous <span class="show-for-sr">page</span>
+      <% end %>
+    </li>
+<% end %>

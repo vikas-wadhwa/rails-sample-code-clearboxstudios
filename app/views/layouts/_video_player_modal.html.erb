@@ -1,0 +1,41 @@
+<% content_for :foot do %>
+    <%= javascript_include_tag "video-player-modal" %>
+<% end %>
+
+
+<% content_for :modal do %>
+
+    <div id="video_preview_modal" class="large reveal" style="height: 96%; max-height: 96%; overflow: hidden;text-overflow: ellipsis;" data-reveal aria-labelledby="Gallery Video" aria-hidden="true" role="dialog">
+
+
+      <div class="row">
+        <div class="columns medium-5">
+          <h4 class="orange space-below">Uploaded by</h4>
+          <%= render 'layouts/social_thumbnail', profile: profile, right_sided: false, character_limit: 750 %>
+        </div>
+
+
+        <div class="columns medium-7 border-left">
+
+          <h4 id="video_title" class="orange space-below"><%= video.title %></h4>
+
+          <%= render '/layouts/video_player', video: video %>
+
+          <dl class="space-above">
+            <dt>Description</dt>
+            <dd><i><span id='video_description' class="section-details" >
+            <%= video.description %>
+        </span></i></dd>
+          </dl>
+
+        </div>
+      </div>
+
+      <div class="row submission">
+        <button class="close-button button secondary" data-close aria-label="Close reveal" type="button">Close</button>
+      </div>
+
+
+    </div>
+
+<% end %>

@@ -1,0 +1,144 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "global/variables";
+
+
+
+
+
+/******************************************************
+** Magnific Popup
+******************************************************/
+
+.mfp-bottom-bar {
+  margin-top: -2em;
+}
+
+img.mfp-img {
+  padding: 40px 0 0 0;
+}
+
+.mfp-title {
+  position: absolute;
+  background: rgb(0, 0, 0);
+  padding: 0 10px;
+  margin-top: -28px;
+}
+
+.mfp-counter {
+  right: 10px;
+  background: rgb(0, 0, 0);
+  padding: 5px;
+}
+
+
+.download {
+  font-size: 2em;
+  color: $orange;
+  background: rgba(0,0,0,.75);
+}
+
+
+.mfp-arrow:after, .mfp-arrow .mfp-a {
+  border-top-width: 25px;
+  border-bottom-width: 25px;
+}
+
+.mfp-arrow-right:after, .mfp-arrow-right .mfp-a {
+  border-left: 35px solid $orange;
+}
+
+.mfp-arrow-left:after, .mfp-arrow-left .mfp-a {
+  border-right: 35px solid $orange;
+}
+
+.mfp-arrow-right:before, .mfp-arrow-right .mfp-b {
+  border-left: none;
+}
+
+.mfp-arrow-left:before, .mfp-arrow-left .mfp-b {
+  border-right: none;
+}
+
+.mfp-arrow-left:hover,
+.mfp-arrow-right:hover,
+.mfp-arrow-left:focus,
+.mfp-arrow-right:focus {
+  background: none;
+}
+
+
+
+/******************************************************
+** Breakpoint differences
+******************************************************/
+
+
+/******************************************************
+** max-width 640px, mobile-only styles, use when QAing mobile issues
+******************************************************/
+@media only screen and (max-width: 40em) {
+
+
+  .mfp-image-holder .mfp-content {
+    max-width: 80%;
+  }
+
+
+  .mfp-arrow-right {
+    right: 0em;
+  }
+
+  .mfp-arrow-left {
+    left: -1em;
+  }
+
+
+}
+
+
+
+/******************************************************
+** min-width 641px, medium screens
+******************************************************/
+
+@media only screen and (min-width: 40.063em) {
+
+  .mfp-image-holder .mfp-content {
+    max-width: 80%;
+  }
+
+
+  .mfp-arrow-right {
+    right: -1em;
+  }
+
+  .mfp-arrow-left {
+    left: 0em;
+  }
+
+}
+
+
+
+/******************************************************
+** min-width 641px, medium screens
+******************************************************/
+@media only screen and (min-width: 64.063em) {
+
+
+  .mfp-image-holder .mfp-content {
+    max-width: 100%;
+  }
+
+
+  .mfp-arrow-right {
+    right: 4em;
+  }
+
+  .mfp-arrow-left {
+    left: 4em;
+  }
+
+}

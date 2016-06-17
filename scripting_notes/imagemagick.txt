@@ -1,0 +1,34 @@
+wget ftp://mirror.aarnet.edu.au/pub/imagemagick/ImageMagick-6.8.3-10.tar.gz
+wget ftp://ftp.imagemagick.org/pub/ImageMagick/linux/CentOS/i386/ImageMagick-6.8.3-10.i386.rpm
+rpm -Uvh ImageMagick-6.8.3-10.i386.rpm
+
+
+yum install yum-utils
+package-cleanup --quiet --leaves --exclude-bin
+package-cleanup --quiet --leaves --exclude-bin | xargs yum remove -y
+
+
+
+export MAGICK_HOME=/opt/image_magick
+wget http://www.imagemagick.org/download/ImageMagick.tar.gz
+tar xvfz ImageMagick.tar.gz
+
+
+wget -m -p -E -k -K -np http://www.imagemagick.org/download/delegates/
+yum install freetype-devel ghostscript-devel libwmf-devel jasper-devel lcms-devel bzip2-devel librsvg2 librsvg2-devel liblpr-1 liblqr-1-devel libtool-ltdl-devel autotrace-devel
+
+
+
+cd ImageMagick-6.8.3-10
+rm -rf config.status config.log
+nice ./configure --prefix=$MAGICK_HOME --without-rsvg --with-quantum-depth=8 --disable-installed --enable-shared --disable-static --without-modules --with-x --without-perl --without-magick-plus-plus --disable-openmp --with-wmf --with-gslib --with-rsvg --with-xml CFLAGS=-Wextra;
+nice make clean
+nice make
+nice make install
+
+export MAGICK_HOME=/opt/image_magick
+export PATH="$MAGICK_HOME/bin:$PATH"
+export LD_LIBRARY_PATH="$MAGICK_HOME/lib:$LD_LIBRARY_PATH"
+chown -R webadmin /opt
+
+convert -version  

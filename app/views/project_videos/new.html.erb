@@ -1,0 +1,22 @@
+<% content_for :title do %>
+    <title>New Video Information</title>
+<% end %>
+
+<nav class="breadcrumbs hide-for-small-only space-below-3x">
+  <%= link_to('Dashboard', dashboard_url, class: '') %>
+  <%= link_to('Edit Project', edit_project_url(@project), class: '' ) %>
+  <%= link_to('New Video', '#', class: 'current' ) %>
+</nav>
+
+
+
+<% content_for :foot do %>
+    <script>
+        var video_player_empty = true;
+    </script>
+
+<% end %>
+
+<%= render 'video_upload', video: @video, type: "new" %>
+
+

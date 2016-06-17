@@ -1,0 +1,81 @@
+  # PostgreSQL. Versions 8.2 and up are supported.
+  #
+  # Install the pg driver:
+  #   gem install pg
+  # On Mac OS X with macports:
+  #   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+  # On Windows:
+  #   gem install pg
+  #       Choose the win32 build.
+  #       Install PostgreSQL and put its /bin directory on your path.
+  #
+  # Configure Using Gemfile
+  # gem 'pg'
+  #
+
+
+
+  ################################################
+  # Setup global connection settings
+  ################################################
+  connection: &connection
+    adapter: postgresql
+    encoding: unicode
+    pool: 5
+    host: clearboxstudios.com
+    port: 5432
+
+  rails_user: &rails_user
+    username: <%= Rails.application.secrets.postgres_railsuser_user %>
+    password: <%= Rails.application.secrets.postgres_railsuser_pass %>
+
+
+  admin_user: &admin_user
+    username: <%= Rails.application.secrets.postgres_webadmin_user %>
+    password: <%= Rails.application.secrets.postgres_webadmin_pass %>
+
+
+
+  # rake db:migrate RAILS_ENV="webadmin_development"
+  # rake db:migrate RAILS_ENV="webadmin_production"
+
+  ################################################
+  # Setup development
+  ################################################
+  development:
+    <<: *connection
+    <<: *rails_user
+    database: clearboxstudios_development
+
+  webadmin_development:
+    <<: *connection
+    <<: *admin_user
+    database: clearboxstudios_development
+
+
+  ################################################
+  # Setup test
+  ################################################
+  test:
+    <<: *connection
+    <<: *rails_user
+    database: clearboxstudios_test
+
+  webadmin_test:
+    <<: *connection
+    <<: *admin_user
+    database: clearboxstudios_test
+
+
+  ################################################
+  # Setup production
+  ################################################
+  production:
+    <<: *connection
+    <<: *rails_user
+    database: clearboxstudios_production
+
+  webadmin_production:
+    <<: *connection
+    <<: *admin_user
+    database: clearboxstudios_production

@@ -1,0 +1,595 @@
+@charset 'utf-8';
+
+@import 'settings';
+@import 'foundation';
+
+// If you'd like to include motion-ui, you need to install the motion-ui sass package.
+@import 'motion-ui/motion-ui';
+
+// We include everything by default.  To slim your CSS, remove components you don't use.
+
+@include foundation-global-styles;
+@include foundation-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-accordion;
+@include foundation-accordion-menu;
+@include foundation-badge;
+@include foundation-breadcrumbs;
+@include foundation-button-group;
+@include foundation-callout;
+@include foundation-close-button;
+@include foundation-drilldown-menu;
+@include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-flex-video;
+@include foundation-label;
+@include foundation-media-object;
+@include foundation-menu;
+@include foundation-off-canvas;
+@include foundation-orbit;
+@include foundation-pagination;
+@include foundation-progress-bar;
+@include foundation-slider;
+@include foundation-sticky;
+@include foundation-reveal;
+@include foundation-switch;
+@include foundation-table;
+@include foundation-tabs;
+@include foundation-thumbnail;
+@include foundation-title-bar;
+@include foundation-tooltip;
+@include foundation-top-bar;
+
+// If you'd like to include motion-ui, you need to install the motion-ui sass package.
+//
+@include motion-ui-transitions;
+@include motion-ui-animations;
+
+
+/******************************************************
+** Import variables
+******************************************************/
+@import "variables";
+
+
+/******************************************************
+** Rows and columns
+******************************************************/
+.row.no-child-padding .column:first-child,
+.row.no-child-padding .columns:first-child {
+  padding-left: 0 !important;
+}
+
+.row.never-child-padding .column,
+.row.never-child-padding .columns {
+  padding-left: 0 !important;
+}
+
+.no-child-padding,
+.no-padding {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.row.collapse-child-borders {
+  border-top: 1px solid $gray-225 !important;
+  border-right: 1px solid $gray-225 !important;
+
+  .column {
+    border-bottom: 1px solid $gray-225 !important;
+    border-left: 1px solid $gray-225 !important;
+    border-top: none;
+    border-right: none;
+  }
+}
+
+
+.column.collapse-border {
+  padding: 0 !important;
+}
+
+
+
+
+/******************************************************
+** Grid and tables
+******************************************************/
+
+[class*="up-"]>li.no-border {
+  padding: 0;
+}
+
+
+/******************************************************
+** Off-canvas
+******************************************************/
+.off-canvas {
+  background: none;
+}
+
+.off-canvas-content {
+  box-shadow: none;
+}
+
+.off-canvas-wrapper-inner.is-off-canvas-open footer {
+  opacity: 0;
+  -webkit-transition: opacity .75s ease-in-out;
+  -moz-transition: opacity .75s ease-in-out;
+  -o-transition: opacity .75s ease-in-out;
+  transition: opacity .75s ease-in-out;
+}
+
+.off-canvas-wrapper-inner.is-off-canvas-open .off-canvas-content {
+  opacity:0;
+}
+
+.off-canvas-content {
+  -webkit-transition: opacity .75s ease-in-out;
+  -moz-transition: opacity .75s ease-in-out;
+  -o-transition: opacity .75s ease-in-out;
+  transition: opacity .75s ease-in-out;
+}
+
+
+
+/******************************************************
+** Forms
+******************************************************/
+form .column,
+form .columns {
+  padding-left: 0 !important;
+}
+
+
+/******************************************************
+** Borders
+******************************************************/
+.border-right {
+  border-right: 1px solid $gray-225;
+}
+
+.border-left {
+  border-left: 1px solid $gray-225;
+}
+
+
+/******************************************************
+** Foundation Datepicker
+******************************************************/
+.clearing-assembled {
+  padding: 4em 14em 4em 4em;
+}
+
+.clearing-blackout,
+.clearing-assembled .clearing-container .visible-img,
+.clearing-assembled .clearing-container .carousel {
+  background: black;
+}
+
+
+/******************************************************
+** Alerts
+******************************************************/
+
+.alert-box {
+  font-size: 1.25rem;
+  background: $gray-100;
+  color: white;
+  padding: 2em 1em;
+  opacity: .9;
+  width: 100%;
+  z-index: 99;
+  margin-bottom: 3em;
+}
+
+.alert-box .message {
+  vertical-align: middle;
+}
+
+.alert-box .close {
+  color: white;
+  float: right;
+  margin-right: 1em;
+  font-size: 1.5rem;
+}
+
+.alert-box .error {
+  padding: .5em;
+}
+
+
+
+/******************************************************
+** Navigation
+******************************************************/
+
+.breadcrumbs {
+  background: none;
+  border: none;
+  padding: 0 0 2em 0;
+}
+
+.breadcrumbs>* {
+  color: $orange;
+}
+
+/******************************************************
+** Prefix/Postfix
+******************************************************/
+
+span.prefix,
+span.postfix {
+  background: none;
+  border: none;
+  color: $gray-150;
+}
+
+span.prefix {
+  text-align: right;
+  padding-right: 0.5em;
+}
+
+span.postfix {
+  text-align: left;
+  padding-left: 0.5em;
+}
+
+span.prefix img {
+  vertical-align: inherit;
+  height: 100%;
+}
+
+span.postfix img {
+  vertical-align: inherit;
+  height: inherit;
+}
+
+.postfix {
+  font-size: 1.2em;
+}
+
+
+/******************************************************
+** Modals
+******************************************************/
+.reveal {
+  max-height: 96% !important;
+  margin: 2% auto 0;
+  top: 0 !important;
+  position: fixed;
+  font-size: 14px;
+  padding: 2rem;
+
+}
+
+.reveal .close-button {
+  position: relative;
+  right: 0;
+  top: inherit;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.reveal-overlay {
+  background-color: rgba(10,10,10,.75);
+}
+
+
+/******************************************************
+** Tables
+******************************************************/
+tbody, tfoot, thead {
+  border: none;
+}
+
+tbody tr:nth-child(even) {
+  background-color: inherit;
+}
+
+caption, tbody td, tbody th {
+  padding: .2em 0.75em;
+}
+
+dl dt {
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+
+/******************************************************
+** Tabs
+******************************************************/
+
+ul.tabs {
+  border: none;
+  border-bottom: 1px solid $gray-225;
+  text-align: center;
+  li {
+    /*
+        float: none !important;
+        display: inline-block;
+    */
+
+  }
+}
+
+
+.tabs-content {
+  background: transparent;
+  transition: all .5s ease;
+  border-top: 0;
+}
+
+.tabs-panel {
+  padding: 0;
+}
+
+.tabs, .tabs-content {
+  border: none;
+}
+
+
+.main-section {
+
+  .tabs {
+    h1,h2,h3,h4,h5,h6 {
+      color: $gray-125;
+    }
+  }
+
+  .tabs.padded li {
+    padding: 0 1em !important;
+  }
+
+  .tabs.buttons .tabs-title>a,
+  .tabs.buttons .tabs-title>a:hover {
+    padding: .5rem 1rem;
+  }
+
+  .tabs .tabs-title {
+    h1,h2,h3,h4,h5,h6 {
+      font-weight: 400;
+    }
+  }
+
+  .tabs .tabs-title.border-right {
+    text-align: right;
+    border-right: 1px solid $gray-100;
+  }
+
+
+  .tabs .tabs-title>a {
+    padding: 0;
+    background: none;
+  }
+
+  .tabs .tabs-title>a:hover {
+    h1,h2,h3,h4,h5,h6 {
+      color: $orange;
+    }
+  }
+
+
+  .tabs .tabs-title.is-active a,
+  .tabs .tabs-title.is-active>a:hover,
+  .tabs .tabs-title.is-active a  {
+    h1,h2,h3,h4,h5,h6 {
+      color: black;
+      cursor: default;
+    }
+
+  }
+
+}
+
+
+.main-section.dark {
+
+  .breadcrumbs li {
+    color: white;
+  }
+
+  .tabs {
+    background: none !important;
+  }
+
+  .tabs .tabs-title>a,
+  .tabs .tabs-title>a:hover {
+    background: none;
+  }
+
+
+  .tabs .tabs-title.is-active a,
+  .tabs .tabs-title.is-active>a:hover,
+  .tabs .tabs-title.is-active {
+    h1,h2,h3,h4,h5,h6 {
+      color: $orange;
+      cursor: default;
+    }
+  }
+
+
+  .tabs .tabs-title>a:hover  {
+    h1,h2,h3,h4,h5,h6 {
+      color: white;
+    }
+  }
+}
+
+
+
+/******************************************************
+** Buttons
+******************************************************/
+
+.button.tile {
+  position: relative;
+  height: 12rem;
+  width: 15rem;
+  background: $gray-75;
+  line-height: 12rem;
+
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+}
+
+
+.button.tile {
+
+  .content {
+
+    * {
+      color: white !important;
+      font-weight: 700 !important;
+    }
+
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 0 100%;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    -webkit-align-self: flex-end;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+  }
+
+  .title {
+
+    * {
+      color: white !important;
+      font-weight: 200 !important;
+    }
+
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+
+    -webkit-flex: 0 0 100%;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    -webkit-align-self: flex-end;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+
+    font-weight: 200 !important;
+  }
+
+}
+
+
+button.clear,
+.button.clear,
+button.clear.disabled:hover,
+.button.clear.disabled:hover,
+button.clear.disabled:focus,
+.button.clear.disabled:focus {
+  background: none;
+  border: 1px solid rgba(255,255,255,0);
+  color: $gray-75;
+  -moz-transition: all .5s;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  outline: none;
+}
+
+button.clear:hover,
+button.clear:focus,
+.button.clear:hover,
+.button.clear:focus {
+  color: black;
+  outline: none;
+}
+
+
+button.clear.hover-red:hover,
+button.clear.hover-red:focus,
+.button.clear.hover-red:hover,
+.button.clear.hover-red:focus {
+  color: red;
+  outline: none;
+}
+
+
+button.clear.bordered,
+.button.clear.bordered,
+button.clear.bordered.disabled:hover,
+.button.clear.bordered.disabled:hover,
+button.clear.bordered.disabled:focus,
+.button.clear.bordered.disabled:focus {
+  border: 1px solid rgb(198, 50, 50);
+  color: rgb(198, 50, 50);
+  outline: none;
+}
+
+button.clear.bordered:hover,
+button.clear.bordered:focus,
+.button.clear.bordered:hover,
+.button.clear.bordered:focus {
+  background: rgb(198, 50, 50);
+  color: white;
+  outline: none;
+}
+
+
+
+/******************************************************
+** Pagination
+******************************************************/
+
+// The below is a bugfix for foundation 6.1.1 for sites, I expect it to be fixed in a later release
+.pagination-next.disabled::after,
+.pagination-previous.disabled::before {
+  content: initial;
+}
+
+.pagination .current {
+  padding: 0;
+}
+
+.pagination-next a::after,
+.pagination-next.disabled::after {
+  margin-left: 0.25rem;
+}
+
+.pagination-previous a::before,
+.pagination-previous.disabled::before {
+  margin-right: .25rem;
+}
+
+// The below is needed to override the li {padding: 0 !important;} found in global for the banner links
+.pagination .disabled {
+  padding: .1875rem .625rem !important;
+}
+
+
+
+/******************************************************
+** Vcards
+******************************************************/
+.vcard h5,
+.vcard b {
+  color: $gray-75;
+}

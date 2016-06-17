@@ -1,0 +1,54 @@
+
+<% content_for :modal do %>
+    <div id="<%= modal_id %>" class="medium reveal" data-reveal aria-labelledby="Uploading" aria-hidden="true" role="dialog">
+
+      <h2 class="orange space-above">Upload Progress</h2>
+
+      <table id="<%= list_id %>" class="space-above mediafiles-table">
+
+        <colgroup>
+          <col>
+          <col>
+          <col>
+        </colgroup>
+
+        <% if defined?(header) && header %>
+            <thead>
+            <tr class="orange">
+              <td>Filename</td>
+              <td>Size</td>
+              <td>Progress</td>
+            </tr>
+            </thead>
+        <% end %>
+        <tbody class="mediafiles-body">
+        <tr id="mediafile-basis-row">
+          <td class="mediafile-name">
+          </td>
+          <td class="mediafile-length">
+          </td>
+          <td class="mediafile-percent">
+            0%
+          </td>
+        </tr>
+        </tbody>
+        <% if defined?(include_cancel) && include_cancel %>
+            <tfoot class="mediafiles-footer">
+            <tr>
+              <td>
+                <br>
+                <span id="<%= list_id %>_cancel" class="button hoverable">Cancel</span>
+              </td>
+            </tr>
+            </tfoot>
+        <% end %>
+      </table>
+
+      <div class="row submission">
+        <button class="close-button button secondary" data-close aria-label="Close reveal" type="button">Close</button>
+      </div>
+
+    </div>
+
+<% end %>
+

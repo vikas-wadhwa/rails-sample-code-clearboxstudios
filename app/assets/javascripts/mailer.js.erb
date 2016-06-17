@@ -1,0 +1,38 @@
+//////////////////////////////////////////////////////////////////////////////////////
+// Bind a given mailer form to AJAX
+//////////////////////////////////////////////////////////////////////////////////////
+function submit_email(details){
+
+  $('#emailer_status').addClass('emailer_sending');
+
+
+  $.ajax({
+    type: "POST",
+    url: mailer_contact_us_url,
+    data: details
+  }).done(function (response) {
+    console.log(response);
+    $('#emailer_status').addClass('emailer_sent');
+  });
+
+}
+
+
+$('#contact_submit').click(function () {
+
+  event.preventDefault();
+
+  client_data = {
+    name: $('#client_name').val(),
+    phone: $('#client_phone').val(),
+    email: $('#client_email').val(),
+    notes: $('#client_notes').val()
+  };
+
+
+  if (($('#client_phone').val() + $('#client_email').val()).length > 0) {
+    submit_email(client_data);
+    $("[id^=client_]").val('');
+  }
+
+});

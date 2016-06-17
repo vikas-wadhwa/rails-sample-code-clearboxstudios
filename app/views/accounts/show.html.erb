@@ -1,0 +1,157 @@
+
+<% content_for :title do %>
+    <title>Account: <%= @account.name %></title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "accounts" , :media => 'all' %>
+<% end %>
+
+
+<% @breadcrumbs = {history: [{text: 'Accounts', url: accounts_url}], current: @account.name} %>
+<%= render 'layouts/breadcrumb' %>
+
+
+
+
+
+<ul id="tabs-list" class="tabs space-below-4x small-up-1 medium-up-4 large-up-4" role="tablist" data-options="deep_linking:true; scroll_to_content: false" data-tabs >
+
+  <li class="column tabs-title is-active">
+    <a href="#details" aria-selected="true">
+      <h5>Details</h5>
+    </a>
+  </li>
+
+  <li class="column tabs-title">
+    <a href="#projects">
+      <h5>Projects</h5>
+    </a>
+  </li>
+
+  <li class="column tabs-title">
+    <a href="#invoices">
+      <h5>Invoices</h5>
+    </a>
+  </li>
+
+</ul>
+
+
+<div class="tabs-content" data-tabs-content="tabs-list">
+
+  <div id="details" class="tabs-panel content is-active">
+
+
+
+    <h2 class="orange">Email</h2>
+    <h4><%=  @account.billing_email %></h4>
+
+
+    <h2 class="orange space-above">Company</h2>
+    <h4><%=  @account.company_name %></h4>
+
+
+
+  </div>
+</div>
+
+
+
+
+<div class="tabs-content" data-tabs-content="tabs-list">
+
+  <div id="projects" class="tabs-panel content">
+
+
+    <div class="search-results">
+
+      <% @projects.each do |project|%>
+
+
+          <div class="row column results-item">
+
+            <div class="search-thumbnail">
+              <%= link_to project_url(project) do %>
+                  <%= image_tag(project.image_url(:medium), class: '' ) %>
+              <% end %>
+            </div>
+
+            <div class="results-content">
+
+              <%= link_to project_url(project) do %>
+                  <h4 class="orange"><%= project.title %></h4>
+              <% end %>
+
+              <p><%= project.description %></p>
+
+
+            </div>
+
+            <div class="results-stats">
+
+              <span class="results-stat">Invoice ID: <%= link_to project.invoice.id, invoice_url(project.invoice) %></span>
+              <span class="results-stat"><b><%= project.images.size.to_s %> photos</b></span>
+              <span class="results-stat"><b><%= project.videos.size.to_s %> videos</b></span>
+              <span class="results-stat"><%= project.status %></span>
+              <span class="results-stat"><%= project.updated_at.strftime('%b %d, %Y') %></span>
+
+
+
+            </div>
+
+          </div>
+
+
+      <% end %>
+
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+<div class="tabs-content" data-tabs-content="tabs-list">
+
+  <div id="invoices" class="tabs-panel content">
+
+
+
+    <div class="search-results">
+
+      <% @invoices.each do |invoice|%>
+          <% status_css = invoice.status.downcase=='paid' ? 'success' : 'alert' %>
+
+          <div class="row column results-item">
+
+
+            <%= link_to number_to_currency(invoice.amount_due, :precision => (invoice.amount_due.round == invoice.amount_due) ? 0 : 2), invoice_url(invoice), class: 'button search-summary hollow ' + status_css %>
+
+            <div>
+              <%= link_to invoice_url(invoice) do %>
+                  <h4 class="orange">Invoice #<%= invoice.id.to_s %></h4>
+              <% end %>
+
+              <p><%= invoice.description %></p>
+            </div>
+
+          </div>
+
+
+      <% end %>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+

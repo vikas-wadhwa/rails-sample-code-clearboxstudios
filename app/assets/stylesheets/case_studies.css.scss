@@ -1,0 +1,17 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "global/variables";
+
+
+.case-study-container {
+  padding: 0 2em !important;
+}
+
+.case-study-container.right {
+  padding: 0;
+}
+
+.study-description {
+  padding-right: 2em;
+}

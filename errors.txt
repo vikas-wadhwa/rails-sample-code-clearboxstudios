@@ -1,0 +1,11 @@
+** Invoke assets:precompile (first_time)
+** Execute assets:precompile
+C:/Storage/Development/resources/RailsFTW193/bin/ruby.exe C:/Storage/Development/resources/RailsFTW193/bin/rake assets:precompile:all RAILS_ENV=development RAILS_GROUPS=assets --trace
+** Invoke assets:precompile:all (first_time)
+** Execute assets:precompile:all
+** Invoke assets:precompile:primary (first_time)
+** Invoke assets:environment (first_time)
+** Execute assets:environment
+** Invoke tmp:cache:clear (first_time)
+** Execute tmp:cache:clear
+** Execute assets:precompile:primary

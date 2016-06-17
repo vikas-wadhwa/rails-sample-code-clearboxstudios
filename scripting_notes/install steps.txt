@@ -1,0 +1,50 @@
+install centos minimal
+run ifup eth0 and edit ifcfg-eth0
+install per packages.all
+install rvm via \curl -L https://get.rvm.io | bash -s stable --rails
+install nodejs
+install passenger/nginx
+update runtimes.rb to point to nodejs
+http://forums.freebsd.org/showthread.php?t=35539
+turn off iptables
+update node.conf
+chkconfig postgresql on
+
+
+
+
+
+
+
+
+
+
+
+50.116.46.19
+
+ssh [lish-username]@[host-id].linode.com
+
+
+
+rsync --exclude="/sys/*" --exclude="/proc/*" -aHSKDvz -e ssh / root@50.116.46.19:/media/xvda/
+
+
+chkconfig --set postgresql on
+iptables -A INPUT -s 50.116.46.19 -j ACCEPT
+
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT DROP
+
+iptables -A INPUT -p tcp -m tcp --dport 21 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp --sport 21 -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp --sport 22 -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp --sport 80 -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp --sport 443 -j ACCEPT
+
+service iptables save
+iptables-save > /root/iptables.saved
+service iptables restart

@@ -1,0 +1,59 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "variables";
+
+.alert {
+  color: $red
+}
+
+.success {
+  color: $green
+}
+
+.text-white {
+  color: white !important;
+}
+
+
+.background-black {
+  background: black !important;
+}
+.background-gray-dark {
+  background: $gray-25 !important;
+}
+.background-gray-light {
+  background: rgb(40,40,40) !important;
+}
+
+
+.orange {
+  color: $orange;
+  font-weight: 200;
+}
+
+a.orange-gradient, .orange-gradient {
+  color: #FFFFFF;
+  border: solid 1px #da7c0c;
+  background: $orange;
+}
+
+a.orange-gradient:hover, .orange-gradient:hover {
+  background: #f47c20;
+  color: #FFFFFF;
+}
+
+a.red-gradient, .red-gradient {
+  color: #FFFFFF;
+  border: solid 1px #da7c0c;
+  background: red;
+}
+
+a.red-gradient:hover, .red-gradient:hover {
+  background: #8B0000;
+  color: #FFFFFF;
+}
+
+.orange-text, a.orange-text {
+  color: $orange;
+}

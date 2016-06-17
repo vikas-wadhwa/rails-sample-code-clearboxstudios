@@ -1,0 +1,335 @@
+<% @page_theme = "dark" %>
+<% @content_frame = "wide" %>
+<% @menu_hide = true %>
+
+
+<% content_for :title do %>
+    <title>Portfolio</title>
+<% end %>
+
+
+<% content_for :head do %>
+    <link href="/plugins/magnific-popup-1.0.0/mp-lightbox.css" media="all" rel="stylesheet">
+    <%= stylesheet_link_tag "custom-magnific" , :media => 'all' %>
+    <%= stylesheet_link_tag "portfolio" , :media => 'all' %>
+<% end %>
+
+
+<% content_for :foot do %>
+    <script src="/plugins/multi-download/jquery.multiDownload.js"></script>
+    <script src="/plugins/magnific-popup-1.0.0/mp-lightbox.js"></script>
+    <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js"></script>
+    <%= javascript_include_tag "portfolio" %>
+    <script>
+        ///////////////////////////////////////////
+        // Initialize wistia videos
+        ///////////////////////////////////////////
+        <% WISTIA_PORTFOLIO_VIDEOS.each do |key, video| %>
+        wistiaEmbed<%= video[:id] %> = Wistia.embed("<%= video[:id] %>", {videoFoam: true});
+        <% end %>
+
+
+        $('#video [data-equalizer]').on('postequalized.zf.equalizer', function() {
+            console.log('just equalized');
+        });
+
+    </script>
+<% end %>
+
+
+<% @breadcrumbs = {current: 'Portfolio'} %>
+<%= render 'layouts/breadcrumb' %>
+
+
+<div class="row column small-centered">
+  <ul id="tabs-list" class="tabs padded space-below-4x" role="tablist" data-options="deep_linking:true; scroll_to_content: false" data-tabs >
+
+    <li class="tabs-title is-active columns small-6 border-right">
+      <a href="#photo" aria-selected="true">
+        <h2>Photo</h2>
+      </a>
+    </li>
+
+    <li class="tabs-title columns small-6">
+      <a href="#video">
+        <h2>Video</h2>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="tabs-content" data-tabs-content="tabs-list">
+
+
+  <div id="photo" class="tabs-panel content is-active" >
+
+    <div class="row photos-wrapper">
+
+
+      <!--ROW #1-->
+      <!---------------------------------------------->
+      <div class="row no-child-padding headshots">
+
+        <div class="medium-7 columns height-5x7">
+
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:daises]) %>
+
+        </div>
+
+
+        <div class="medium-5 columns" data-equalizer="row">
+
+          <div class="image-gallery-title text-center" data-equalizer-watch="row">
+            Headshots
+          </div>
+
+
+          <div class="row no-child-padding" data-equalizer-watch="row">
+            <div class="medium-6 columns">
+              <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:justin_bennett]) %>
+            </div>
+            <div class="medium-6 columns">
+              <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:courtney]) %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!--ROW #2-->
+      <!---------------------------------------------->
+      <div class="row no-child-padding headshots">
+
+        <div class="medium-5 columns">
+
+          <div class="medium-6 columns">
+            <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:kristin]) %>
+          </div>
+          <div class="medium-6 columns">
+            <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:justin_kim]) %>
+          </div>
+          <div class="medium-6 columns">
+            <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:jason]) %>
+          </div>
+          <div class="medium-6 columns">
+            <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:meg]) %>
+          </div>
+        </div>
+
+
+        <div class="medium-7 columns height-5x7">
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:amy_headshot]) %>
+        </div>
+      </div>
+
+
+      <!--ROW #3-->
+      <!---------------------------------------------->
+      <div class="row no-child-padding architecture">
+
+
+        <div class="medium-4 columns height-7x5" data-equalizer="row">
+
+          <div class="image-gallery-title text-center" data-equalizer-watch="row">
+            Architecture
+          </div>
+
+          <div class="row no-child-padding" data-equalizer-watch="row">
+            <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:river_scrapers]) %>
+          </div>
+        </div>
+
+        <div class="medium-4 columns">
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:greek_god]) %>
+        </div>
+
+        <div class="medium-4 columns height-7x5">
+
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:amy_bridge]) %>
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:italian_road]) %>
+        </div>
+
+
+      </div>
+
+
+      <!--ROW #4-->
+      <!---------------------------------------------->
+      <div class="row no-child-padding surrel">
+
+        <div class="medium-4 columns height-7x5">
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:mountains]) %>
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:ogunquit]) %>
+        </div>
+
+        <div class="medium-4 columns height-7x5" data-equalizer="row">
+
+          <div class="image-gallery-title text-center" data-equalizer-watch="row">
+            Surreal
+          </div>
+
+          <div class="row no-child-padding" data-equalizer-watch="row">
+            <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:amy_forest]) %>
+          </div>
+        </div>
+
+        <div class="medium-4 columns height-7x5" data-equalizer-watch="row">
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:railroad]) %>
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:michigan_forest]) %>
+        </div>
+
+
+      </div>
+
+
+
+      <!--ROW #5-->
+      <!---------------------------------------------->
+      <div class="row no-child-padding animals">
+
+
+        <div class="medium-4 columns">
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:boomer]) %>
+        </div>
+
+
+        <div class="medium-4 columns height-7x5" data-equalizer="row">
+
+          <div class="image-gallery-title text-center" data-equalizer-watch="row">
+            Animals
+          </div>
+
+          <div class="row no-child-padding" data-equalizer-watch="row">
+            <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:flamingo]) %>
+          </div>
+        </div>
+
+
+        <div class="medium-4 columns height-7x5">
+
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:rhino]) %>
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:amy_boomer_sitting]) %>
+        </div>
+
+      </div>
+
+
+
+      <!--ROW #6-->
+      <!---------------------------------------------->
+
+      <div class="row no-child-padding candid">
+
+        <div class="medium-4 columns height-7x5" data-equalizer="row">
+
+          <div class="image-gallery-title text-center" data-equalizer-watch="row">
+            Candid
+          </div>
+
+          <div class="row no-child-padding" data-equalizer-watch="row">
+            <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:amy_beach]) %>
+          </div>
+        </div>
+
+
+        <div class="medium-4 columns height-7x5">
+
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:mahir]) %>
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:stairwell]) %>
+        </div>
+
+
+        <div class="medium-4 columns">
+          <%= portfolio_image_gallery_item(PORTFOLIO_PHOTOS[:kay]) %>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+  <div id="video" class="tabs-panel content" >
+
+    <div class="row no-child-padding videos-wrapper">
+
+      <div class="medium-4 columns" data-equalizer="row">
+
+        <div class="image-gallery-title text-center" data-equalizer-watch="row">
+          Narrative
+        </div>
+
+        <div class="column" data-equalizer-watch="row">
+          <%= wistia_helper(WISTIA_PORTFOLIO_VIDEOS[:responsibility]) %>
+        </div>
+
+      </div>
+
+
+      <div class="medium-8 columns">
+        <%= wistia_helper(WISTIA_PORTFOLIO_VIDEOS[:grinning_demons]) %>
+      </div>
+
+    </div>
+
+
+    <div class="row no-child-padding videos-wrapper">
+      <div class="medium-6 columns" data-equalizer="row">
+
+      <div class="image-gallery-title text-center" data-equalizer-watch="row">
+        Interview &
+        <br>
+        Documentary
+      </div>
+
+      <div class="" data-equalizer-watch="row">
+        <%= wistia_helper(WISTIA_PORTFOLIO_VIDEOS[:garcc]) %>
+      </div>
+
+    </div>
+
+    <div class="medium-6 columns">
+      <%= wistia_helper(WISTIA_PORTFOLIO_VIDEOS[:rooted]) %>
+      <%= wistia_helper(WISTIA_PORTFOLIO_VIDEOS[:analytics]) %>
+    </div>
+
+  </div>
+
+
+
+  <div class="row no-child-padding videos-wrapper">
+
+    <div class="medium-6 columns">
+      <%= wistia_helper(WISTIA_PORTFOLIO_VIDEOS[:digital_factory]) %>
+      <%= wistia_helper(WISTIA_PORTFOLIO_VIDEOS[:great_gig]) %>
+    </div>
+
+    <div class="medium-6 columns" data-equalizer="row">
+      <div class="image-gallery-title text-center" data-equalizer-watch="row">
+        Compositing &
+        <br>
+        Motion Graphics
+      </div>
+
+      <div class="" data-equalizer-watch="row">
+        <%= wistia_helper(WISTIA_PORTFOLIO_VIDEOS[:trip]) %>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+
+</div>
+
+

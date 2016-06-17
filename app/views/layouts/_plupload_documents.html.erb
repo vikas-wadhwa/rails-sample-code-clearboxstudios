@@ -1,0 +1,155 @@
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<!-- <script type="text/javascript" src="/plupload/js/plupload.full.js"></script> -->
+<!-- <script type="text/javascript" src="/plupload-v2/js/plupload.full.min.js"></script> --> 
+<script type="text/javascript" src="/plupload/js/plupload.full.js"></script>
+
+<script type="text/javascript">
+$(function() {
+
+
+  $('#<%= list_id %>').hide();
+
+  ////////////////////////////////////////////////////
+  //RoR - capture authenticity token  
+  ////////////////////////////////////////////////////
+  var atoken = $("input[name=authenticity_token]").val();  
+
+  var uploader = new plupload.Uploader({
+    url : '<%= post_url %> ',
+    runtimes : 'html5,silverlight,flash,html4',
+    browse_button : 'pickfiles',
+    container : 'container',
+    max_file_size : '10mb',
+    chunk_size : '1mb',  
+    unique_names : true,  
+
+
+    ////////////////////////////////////////////////////     
+    //RoR - make sure form is multipart  
+    ////////////////////////////////////////////////////     
+
+    multipart: true,  
+
+    //////////////////////////////////////////////////////
+    //RoR - make sure to send authenticity token 
+    //and any other parameters that on the plain html form  
+    //////////////////////////////////////////////////////
+
+    multipart_params : {authenticity_token : atoken},  
+
+    ////////////////////////////////////////////////////     
+    // Flash settings 
+    ////////////////////////////////////////////////////     
+
+    flash_swf_url : '/plupload/js/plupload.flash.swf',
+
+    ////////////////////////////////////////////////////     
+    // Silverlight settings  
+    ////////////////////////////////////////////////////     
+    silverlight_xap_url : '/plupload/js/plupload.silverlight.xap'
+
+    ////////////////////////////////////////////////////    
+    // Specify what files to browse for  
+    ,filters : [
+     // {title : "Image files", extensions : "jpg, jpeg, gif, png, eps, tif, tiff, tga, pdf"}
+     //,{title : "Video files", extensions : "avi, mov, qt, mpg, mpeg, mp4, 3gp, 3g2, asf, wmv, dv, flc, m4v, h264, m2ts, m2v, mkv, mxf"}
+     {title : "Document files", extensions : "doc, docx, rtf, txt, odf, pdf, ppt, pps"}
+     //,{title : "Audio files", extensions : "aac, ac3, ape, mp3, wma, m4a, wav, mid, flac, ogg, aiff, aif"}
+    ]
+    ////////////////////////////////////////////////////    
+
+  });
+
+  uploader.bind('Init', function(up, params) {
+  });
+
+  $('#<%= upload_clicker_id %>').click(function(e) {
+    uploader.start();
+    e.preventDefault();
+  });
+
+  uploader.init();
+
+  uploader.bind('FilesAdded', function(up, files) {
+
+    $('#<%= list_id %>').show();
+    $('#<%= list_id %> #mediafile-basis-row').show();
+
+    $.each(files, function(i, file) {
+     
+      $('#<%= list_id %> #mediafile-basis-row').clone().attr('id', file.id ).insertBefore('#<%= list_id %> #mediafile-basis-row');
+      $('#'+ file.id).find('.mediafile-name').html(file.name);
+      $('#'+ file.id).find('.mediafile-length').html(plupload.formatSize(file.size));
+      
+      uploader.start();
+    });
+    
+    
+    $('#<%= list_id %> #mediafile-basis-row').hide();
+
+
+    //////////////////////////////////////////////////// 
+    // Reposition Flash/Silverlight
+    //////////////////////////////////////////////////// 
+    up.refresh(); 
+
+  });
+
+  uploader.bind('UploadProgress', function(up, file) {
+    if (file.percent=='100') {
+      file.percent = 'PROCESSING';
+    }
+    
+    else {
+      file.percent = file.percent + '%'
+    }
+    
+    $('#'+ file.id).find('.mediafile-percent').html("<i class='icon-spin6 animate-spin' style='font-size: 1.2em;'></i> " + file.percent);
+  });
+
+  uploader.bind('Error', function(up, err) {
+    $('#filelist').append("<div>Error: " + err.code + ", Message: " + err.message + (err.file ? ", File: " + err.file.name : "") + "</div>"
+    );
+
+    up.refresh(); // Reposition Flash/Silverlight
+  });
+
+  uploader.bind('FileUploaded', function(up, file, response) {
+    
+    var data = jQuery.parseJSON(response.response);
+    $('.photo-gallery').append(data[0].photo_gallery_item);
+    activate_menu(data[0].photo_gallery_item_id);
+    $('#'+ file.id).remove();
+
+    //var urls = jQuery.parseJSON(data);
+    //$("#profile-picture").attr("src", urls[0].cropped);
+    //jcrop_api.setImage(urls[0].original); 
+    //$('.original_photo_id').val(picture_id);
+
+
+  });
+
+
+  uploader.bind('UploadComplete', function(up, files) {
+       
+    $.each(files, function(i, file) {
+      $('#'+ file.id).remove();
+    });
+
+    $('#<%= list_id %>').hide();
+  });  
+  
+  ///////////////////////////////////////////
+  // Bind file cancel button
+  ///////////////////////////////////////////
+   $("#<%= list_id %>-cancel").click(function (){
+     $('.mediafile-percent').html("<i class='icon-spin6 animate-spin' style='font-size: 1.2em;'></i> STOPPING");
+     uploader.stop();
+     $('#<%= list_id %>').hide();
+   });
+ 
+});
+</script>
+
+
+      

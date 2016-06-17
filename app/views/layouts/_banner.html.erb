@@ -1,0 +1,31 @@
+
+
+
+<div class="banner-ribbon <% if user_signed_in? %> sidebar-compensation <% end %> ">
+
+  <div class="menu-icon-toggle hide-for-large" data-toggle="off_canvas_menu">
+    <span class="banner-menu-items icon-menu"></span>
+  </div>
+
+  <div class="small-7 small-offset-4 medium-centered medium-10 medium-offset-2 large-offset-1 columns">
+
+    <ul id="banner-menu" class="show-for-large text-right">
+
+      <li><%= link_to "About", about_url, :class => "banner-menu-items" %></li>
+      <li><%= link_to "Portfolio", portfolio_url, :class => "banner-menu-items" %></li>
+      <li><%= link_to "Case studies", case_studies_url, :class => "banner-menu-items" %></li>
+      <li><%= link_to "Contact", contact_url, :class => "banner-menu-items" %></li>
+
+      <% if user_signed_in? %>
+          <li><%= link_to "Dashboard", dashboard_url, :class => "banner-menu-items" %></li>
+          <li><%= link_to "Logout", destroy_user_session_url, :method => :delete,  :class => "banner-menu-items" %></li>
+
+      <% else %>
+
+          <li><%= link_to "Login", new_user_session_url, :class => "banner-menu-items" %></li>
+      <% end %>
+
+    </ul>
+
+  </div>
+</div>

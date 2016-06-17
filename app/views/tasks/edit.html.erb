@@ -1,0 +1,15 @@
+<% #@background_opacity_class = 'transparent' %>
+<% @content_frame = 'wide-with-sidebar' %>
+
+<% content_for :title do %>
+    <title>Edit <%= @task.title + ' for ' + @project.title %> </title>
+<% end %>
+
+<% content_for :head do %>
+    <%= javascript_include_tag "tasks" %> 
+    <%= stylesheet_link_tag "tasks" , :media => 'all' %>
+<% end %>
+
+
+
+<%= render 'form' %>

@@ -1,0 +1,69 @@
+<% @menu_hide = true %>
+
+<% content_for :title do %>
+    <title>Login</title>
+<% end %>
+
+<% content_for :foot do %>
+    <script> var flashFrameAlways = true; </script>
+<% end %>
+
+
+
+<h1 class='orange'>New Member</h1>
+<div class="column no-padding medium-8 large-5 end">
+
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {}) do |f| %>
+
+      <%= devise_error_messages! %>
+
+      <div>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </div>
+
+      <div>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+      </div>
+
+      <div>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+      </div>
+
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+
+      <div><%= f.submit "Sign up", class: "button small secondary" %></div>
+
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+  </div>
+
+
+
+<!--<div class="column no-padding medium-8 large-5 end">
+
+  <h1 class='orange'>Why Join?</h1>
+
+  <p>
+  Finding talent and showcasing your work has never been easier, or more professional. We make it simple for creative
+  folks to portfolio their work in an easily digestible and reusable way.
+  </p>
+
+  <p>Joining our network gives you <b>free</b> access to key services:</p>
+
+  <ul class="square">
+    <li>upload your photos and videos</li>
+    <li>credit other members who contributed to your uploaded work</li>
+    <li>search members by skill/credits <i>(directors, producers, actors...)</i></li>
+    <li>share your contact information</li>
+    <li>member resumes, demo reels, and contact info</li>
+    <li>view our calendar of networking and job-related events</li>
+  </ul>
+
+  <p>So join now; it's completely free and easy to get started!</p>
+
+</div>-->

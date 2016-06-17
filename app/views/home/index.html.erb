@@ -1,0 +1,260 @@
+<% @content_frame = "full" %>
+<% @page_theme = "dark" %>
+<% @menu_hide = true %>
+
+<% content_for :title do %>
+    <title>Home</title>
+<% end %>
+
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "home" , :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+    <%= javascript_include_tag "home" %>
+<% end %>
+
+
+
+<div class="columns medium-8 hero">
+</div>
+
+<div class="columns medium-4 phrase-container background-black">
+  <%= image_tag @background_phrases[0], class: 'background-phrase' %>
+</div>
+
+
+<div class="info">
+
+  <div class="row">
+    <div class="column background-gray-light statement">
+
+      <h1 class="text-white text-center line-height-2">
+        We provide the <b>tools</b>
+        <br>
+        that help tell your <b>story</b>.
+      </h1>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="row">
+
+    <div class="columns medium-4 image-container">
+      <div class="background-image" data-image="1"></div>
+    </div>
+
+    <div class="columns medium-8 pad-all-3x ">
+
+      <h1 class="orange">
+        Photography: Capture the moment.
+      </h1>
+
+      <p class="text-white">
+        When was the last time you were <b>lost in thought</b> over a special photo?
+      </p>
+
+      <p class="text-white">
+        We schedule time, hire a <b>professional</b>, make sure everyone looks their best, all for that photo album that will sit
+        amongst our prized possessions. Knowing our thoughts, our memories, our happiness, are <b>safe</b> and tucked away.
+      </p>
+
+      <p class="text-white">
+        Isn't it important to be working with a photographer that appreciates the importance of these fleeting moments?
+        Isn't it absolutely <b>vital</b> to know you can trust them to hold hands with your memories?
+      </p>
+
+      <%= link_to contact_url do %>
+          <button class="button secondary large">Capture the moment</button>
+      <% end %>
+
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="columns medium-4 image-container" >
+      <div class="background-image" data-image="2"></div>
+    </div>
+
+    <div class="columns medium-8 pad-all-3x ">
+
+      <h1 class="orange">
+        Cinematics: Forge the story.
+      </h1>
+
+      <p class="text-white">
+        The power of motion pictures is <b>rarely</b> described with ease.
+      </p>
+
+      <p class="text-white">
+        We respond, at our core, to the <b>characters</b> on screen. Fictional or real, stoic or slapstick, familiar or alien.
+        Our emotional selves seek out the  <b>emotional</b> in others; we latch onto it and don't let go.
+      </p>
+
+      <p class="text-white">
+        Those moments, those short-lived  <b>relationships</b> between audience and screen, demand a human respect.
+        It requires a  <b>finesse</b>, it requires an understanding, of our deepest flaws and most beautiful truths.
+      </p>
+
+      <p class="text-white">
+        It is a <b>monument</b> that takes a craftsman to forge.
+      </p>
+
+      <%= link_to contact_url do %>
+          <button class="button secondary large">Forge your story</button>
+      <% end %>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="columns medium-4 image-container" >
+      <div class="background-image" data-image="3"></div>
+    </div>
+
+    <div class="columns medium-8 pad-all-3x ">
+
+      <h1 class="orange">
+        Motion Graphics: Paint a new reality.
+      </h1>
+
+      <p class="text-white">
+        Our lives are so pulled by the mundane beauties of the real world.
+      </p>
+
+      <p class="text-white">
+        The demands of work, family, self are a constant reminder of reality.
+        Leaving us constrained by the actualities of physics and psychology.
+      </p>
+
+      <p class="text-white">
+        What amazing things would we do, if our imaginations were freed? What new sights, what new emotions, could we uncover?
+        What new truths about ourselves, about the mundane real world, would we expose?
+      </p>
+
+      <p class="text-white">
+        It takes a <b>painter</b> to know a canvas when they see one.
+      </p>
+
+      <%= link_to contact_url do %>
+          <button class="button secondary large">Paint a new reality</button>
+      <% end %>
+
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="column background-gray-light statement">
+
+      <h1 class="text-white text-center line-height-2">
+        You have so many <span class="font-heavy">options</span>.
+        <br>
+        Let's pick the  <span class="font-heavy">right one</span>.
+      </h1>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <% @studies.each do |study|%>
+
+      <div class="column pad-all-4x background-gray-dark">
+
+        <div class="columns pad-all-4x medium-4">
+          <%= image_tag 'clients/' + study[:id] + '.png' %>
+        </div>
+
+
+        <div class="columns medium-8">
+
+          <h1 class="orange">
+            Need photos of your team?
+            <br>
+            So did <%= study[:id].capitalize %>.
+          </h1>
+
+          <p class="section-details">
+            <%= study[:description] %>
+          </p>
+
+          <%= link_to case_study_url(study[:id]) do %>
+              <button class="button secondary">View Case Study</button>
+          <% end %>
+
+        </div>
+
+      </div>
+
+  <% end %>
+
+
+
+
+
+  <div class="column pad-all-4x background-gray-light ">
+
+    <div class="columns pad-all medium-4">
+      <%= image_tag AWS_CDN_PUBLIC_URL + '/portfolio/eh_01_small.jpg' %>
+    </div>
+
+
+    <div class="columns medium-8">
+
+      <h1 class="orange">
+        Earn yourself a finder's fee!
+      </h1>
+
+      <p class="text-white">
+        Clearbox Studios now offers a client referral plan!
+      </p>
+      <p class="text-white">
+        Any referrals for a photography or video project that result in a booking will earn you a finder's fee:
+        you can earn 5-10% of the booking in cash or 10-20% in credit good towards any future work with us.
+      </p>
+      <p class="text-white">
+        So do you know potential clients that need great photo and video work done?
+      </p>
+
+      <%= link_to contact_url do %>
+          <button class="button secondary large">Contact Us</button>
+      <% end %>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<!--
+
+<div class="columns medium-4 image-container" >
+  <div class="background-image" style="background: url('<%= @background_images[4] %>')"></div>
+</div>
+
+<div class="columns medium-8 image-container" >
+  <div class="background-image" style="background: url('<%= @background_images[5] %>')"></div>
+</div>
+
+-->
+
+
+
+

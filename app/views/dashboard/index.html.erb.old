@@ -1,0 +1,50 @@
+<% #@background_opacity_class = 'transparent' %>
+<% @content_frame = 'wide-with-sidebar' %>
+
+
+<% content_for :title do %>
+    <title>Dashboard</title>
+<% end %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "dashboard" , :media => 'all' %>
+<% end %>
+
+
+<div class='orange'>
+    <h2><i class='icon-checkbox-checked'></i>Is your profile complete?</h2>
+</div>
+<div class='section-details'>
+    <ul>
+      <li><b>Headshots and Photos</b>: <%= link_to("Click here", edit_profile_url(@profile, :anchor => 'photos'), :class=>'underlined-links') %> to get started. </li>
+      <br>
+      <li><b>Demos and Trailers</b>: Video uploads are here! <%= link_to("Click here", edit_profile_url(@profile, :anchor => 'videos'), :class=>'underlined-links') %> to upload a video and link credits to other users.</li>
+      <br>
+      <li><b>Searchable terms</b>: Make sure to include as much information as possible in your <%= link_to("profile description", edit_profile_url(@profile, :anchor => 'about'), :class=>'underlined-links') %> so that other filmmakers can find you in a search.</li>
+    </ul>
+</div>  
+
+
+
+<div class='orange'>
+    <h2><i class='icon-checkbox-checked'></i>Looking for work?</h2>
+</div>
+<div class='section-details'>
+    <ul>
+      <li><b>Job postings</b>: Our Job Postings page will be ready soon so sure to bookmark it and keep on top of new job postings as they come available.</li>
+      <br>
+      <li><b>Networking Events</b>: Networking events are coming soon, so check our events calendar regularly for new opportunities.</li>
+    </ul>
+</div>  
+
+
+<div class='orange'>
+    <h2><i class='icon-checkbox-checked'></i>Looking for talent or crew?</h2>
+</div>
+<div class='section-details'>
+    <ul>
+      <li><b>Member search</b>: Make sure to search under important search terms like "Actor", "Director Of Photography", or "Producer"</li>
+      <br>
+      <li><b>Networking Events</b>: Networking events are coming soon, so check our events calendar regularly for new opportunities.</li>
+    </ul>
+</div>  

@@ -1,0 +1,38 @@
+/******************************************************
+** Import variables
+******************************************************/
+/******************************************************
+** Variables
+******************************************************/
+/******************************************************
+** General styles
+******************************************************/
+/* line 12, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_preview.css.scss.erb */
+#photo_preview_modal,
+#photo_preview_holder {
+  height: 100%;
+}
+
+/* line 17, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_preview.css.scss.erb */
+#photo_preview_holder {
+  text-align: center;
+}
+
+/* line 21, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_preview.css.scss.erb */
+#photo_preview_holder img {
+  height: 85%;
+}
+
+/* line 25, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_preview.css.scss.erb */
+.reveal-modal.dark {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* line 31, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_preview.css.scss.erb */
+.reveal-modal.dark .close-button {
+  padding: 0.05em 0.25em 0.25em 0.25em;
+  background: rgba(0, 0, 0, 0.6);
+  color: #f8981d;
+}

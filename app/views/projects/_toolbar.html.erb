@@ -1,0 +1,28 @@
+
+<div class="toolbar button-group">
+
+
+  <% if @invoice == false %>
+      <%= link_to(raw('<i class="icon-doc-alt"></i>NOT INVOICED'), '#', class: 'button tiny clear disabled', title:  'not yet invoiced') %>
+
+  <% elsif @invoice.nil? %>
+      <%= link_to(raw('<i class="icon-doc-alt"></i>INVOICED'), '#', class: 'button tiny clear disabled', title:  'view invoice') %>
+
+  <% else  %>
+      <%= link_to(raw('<i class="icon-doc-alt"></i>INVOICED'), invoice_url(@project.invoice), class: 'button tiny clear', title:  'view invoice') %>
+  <% end %>
+
+
+  <% if current_user.staff_member? %>
+      <%= link_to raw('<i class="icon-edit"></i>EDIT'), edit_project_url(@project), class: 'button tiny clear', title:  'edit invoice' %>
+      <%= link_to raw('<i class="icon-docs"></i>DUPLICATE'), new_project_url(:original_project_id => @project), class: 'button tiny clear',  title:  'duplicate invoice' %>
+
+      <%= link_to raw('<i class="icon-trash-1"></i>DELETE'),
+                  project_url(@project, account_id: @project.account.id),
+                  confirm:  'Once deleted this project CANNOT be recovered.<br><br> Are you sure you want to remove it permanently?',
+                  method: 'delete',
+                  class: 'button tiny clear hover-red',
+                  id: 'toolbar_delete_' + @project.id.to_s,
+                  title:  'delete project' %>
+  <% end %>
+</div>

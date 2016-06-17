@@ -1,0 +1,110 @@
+<% #@background_opacity_class = 'transparent' %>
+<% @content_frame = 'wide-with-sidebar' %>
+
+
+<% content_for :title do %>
+    <title>Task Details </title>
+<% end %>
+
+
+<% content_for :head do %>
+    <script>
+        $(function() {
+            $( "#tabs" ).tabs();
+        });
+    </script>
+<% end %>
+
+
+
+&larr;<%= link_to 'Back to Task list', tasks_path %>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="left-forms">
+
+  <h1>Task Details: <%= @task.title %></h1>
+
+  &nbsp;&nbsp;&nbsp;
+  <%= link_to 'edit task', edit_project_task_path(@project,@task), :class=> 'underlined-links' %>
+
+  <br>
+  <br>
+
+  <div id="tabs">
+    <ul>
+      <li><a href="#tabs-1">Task information</a></li>
+      <li><a href="#tabs-2">Hours</a></li>
+    </ul>
+
+
+    <div id="tabs-1">
+      <div class='indented orange-text'>
+
+        Project: <span class='list-item-content-details'><%= @project.title %></span>
+        <br>
+
+
+        Assigned to: <span class='list-item-content-details'><%= Profile.find_by_user_id(@task.staff_id).full_name rescue "" %></span>
+        <br>
+
+        Start: <span class='list-item-content-details'><%= @task.start %></span>
+        <br>
+
+
+        End: <span class='list-item-content-details'><%= @task.end %></span>
+        <br>
+
+        Category: <span class='list-item-content-details'><%= @task.category %></span>
+        <br>
+
+
+        Title: <span class='list-item-content-details'><%= @task.title %></span>
+        <br>
+
+
+        Description: <span class='list-item-content-details'><%= @task.description %></span>
+        <br>
+
+
+        Status: <span class='list-item-content-details'><%= @task.status %></span>
+        <br>
+
+      </div>
+    </div>
+
+
+    <div id="tabs-2">
+      <div class='indented orange-text'>
+
+        Bill hours estimate: <span class='list-item-content-details'><%= @task.hours_estimate %></span>
+        <br>
+
+        Bill hours actual: <span class='list-item-content-details'><%= @task.hours_actual %></span>
+        <br>
+
+        Bill rate estimate: <span class='list-item-content-details'><%= @task.rate_estimate %></span>
+        <br>
+
+
+        Bill rate actual: <span class='list-item-content-details'><%= @task.rate_actual %></span>
+        <br>
+
+
+        Staff rate estimate: <span class='list-item-content-details'><%= @task.staff_rate_estimate %></span>
+        <br>
+
+
+        Staff rate actual: <span class='list-item-content-details'><%= @task.staff_rate_actual %></span>
+        <br>
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<%= render '/layouts/form_errors', :model => @account %>
+
+
+
+<%= form_for @account, data: {abide: ''}, :html => {:class => 'space-above'} do |f| %>
+
+<div class='orange'><h1>Account Summary</h1></div>
+
+<div class=''>
+  <br>
+  <div class="field">
+    <%= f.label "Account Name" %>
+    <%= f.text_field :name %>
+  </div>
+
+
+  <br>
+  <div class="field">
+    <%= f.label :permissions %>
+    <%= f.text_field :permissions %>
+  </div>
+
+</div>
+
+
+<div class='orange'><h1>Company Information</h1></div>
+
+<div class=''>
+  <br>
+  <div class="field">
+    <%= f.label "Name" %>
+    <%= f.text_field :company_name %>
+  </div>
+
+
+  <br>
+  <div class="field">
+    <%= f.label "Website" %>
+    <%= f.text_field :company_website %>
+  </div>
+
+  <br>
+  <div class="field">
+    <%= f.label "Phone" %>
+    <%= f.telephone_field :company_phone %>
+  </div>
+
+  <br>
+  <div class="field">
+    <%= f.label "Street" %>
+    <%= f.text_field :company_address_street %>
+  </div>
+
+  <br>
+  <div class="field">
+    <%= f.label "City" %>
+    <%= f.text_field :company_address_city %>
+  </div>
+
+  <br>
+  <span class="field">
+    <%= f.label "State" %>
+    <%= f.select :company_address_state, options_for_select(select_usa_states, @account.company_address_state), {},  :class=> 'us-state' %>
+  </span>
+   
+  <span class="field">
+    <%= f.label "Zip",:style =>'float:none;' %>
+    <%= f.text_field :company_address_zip, :class=> 'zip-code'  %>
+  </span>
+</div>
+
+
+<div class='orange'><h1>Billing Contact Information</h1></div>
+
+<div class=''>
+  <br>
+  <div class="field">
+    <%= f.label "Contact Name" %>
+    <%= f.text_field :billing_name %>
+  </div>
+
+
+  <br>
+  <div class="field">
+    <%= f.label "Email" %>
+    <%= f.text_field :billing_email %>
+  </div>
+
+
+  <br>
+  <div class="field">
+    <%= f.label "Home Phone" %>
+    <%= f.telephone_field :billing_phone_home %>
+  </div>
+
+
+  <br>
+  <div class="field">
+    <%= f.label "Work Phone" %>
+    <%= f.telephone_field :billing_phone_work %>
+  </div>
+
+
+  <br>
+  <div class="field">
+    <%= f.label "Cell Phone" %>
+    <%= f.telephone_field :billing_phone_mobile %>
+  </div>
+
+
+  <br>
+  <div class="field">
+    <%= f.label "Street" %>
+    <%= f.text_field :billing_address_street %>
+  </div>
+
+  <br>
+  <div class="field">
+    <%= f.label "City" %>
+    <%= f.text_field :billing_address_city %>
+  </div>
+
+  <br>
+  <span class="field">
+    <%= f.label "State" %>
+    <%= f.select :billing_address_state, options_for_select(select_usa_states, @account.billing_address_state), {}, :class=> 'us-state' %>
+  </span>
+
+  
+  <span class="field" >
+    <%= f.label "Zip", :style =>'float:none;' %>
+    <%= f.text_field :billing_address_zip, :class=> 'zip-code' %>
+  </span>
+
+
+</div>
+
+
+<div class='row submission'>
+  <%= f.submit  :class => "button white bordered"%>
+</div>
+
+
+<% end %>

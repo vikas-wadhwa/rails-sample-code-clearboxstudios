@@ -1,0 +1,120 @@
+<% @content_frame = "thin" %>
+<% @menu_hide = true %>
+
+
+<% content_for :title do %>
+    <title>Contact Us</title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "contact", :media => "all" %>
+<% end %>
+
+<% content_for :foot do %>
+    <script>
+      var mailer_contact_us_url = "<%= mailer_contact_us_url %>";
+    </script>
+<% end %>
+
+
+<% @breadcrumbs = {current: "Contact Us"} %>
+<%= render "layouts/breadcrumb" %>
+
+
+<h1 class="orange">Contact Us</h1>
+
+
+
+
+<div class="row column space-above-3x">
+
+
+
+    <h4>
+      Shoot us a message and let's see how we can make your story <b>come to life</b>.
+    </h4>
+
+
+    <form>
+
+      <div class="row column space-above-2x">
+
+        <div class="large-4 collapsed columns">
+
+          <div class="column">
+            <input id="client_name" type="text" placeholder="Name">
+          </div>
+
+          <div class="column">
+            <input id="client_phone" type="text" placeholder="Phone">
+            <input id="client_email" type="email" placeholder="Email">
+          </div>
+
+        </div>
+
+
+        <div class="large-8 columns">
+          <textarea id="client_notes" placeholder="What do you have in mind?"></textarea>
+        </div>
+
+      </div>
+
+      <div class="row column">
+        <div class="space-above space-below">
+          <button id="contact_submit" class="large button">Contact us now</button>
+        </div>
+      </div>
+
+    </form>
+
+
+  </div>
+
+
+
+
+
+
+<div class="row space-above-4x">
+
+  <div class="columns medium-5 show-for-medium">
+    <div class="chicago-image show-for-medium-up"></div>
+  </div>
+
+
+
+  <div class="columns medium-6 description-box" >
+
+    <h2 class="orange">Location</h2>
+
+    <%= contact_info_link("Chicago, IL",  link_to("Edgewater", "https://goo.gl/maps/Mp74A", :class => "") ) %>
+
+
+    <h2 class="orange space-above">Phone</h2>
+    <%= contact_info_link("", CORPORATE_PHONE_WORK) %>
+
+
+    <h2 class="orange space-above">Email</h2>
+    <%= contact_info_link("", mail_to(CORPORATE_EMAIL_INFO, CORPORATE_EMAIL_INFO)) %>
+    <br>
+    <%= contact_info_link("", mail_to(CORPORATE_EMAIL_ACCOUNTS, CORPORATE_EMAIL_ACCOUNTS)) %>
+    <br>
+    <%= contact_info_link("", mail_to(CORPORATE_EMAIL_BILLING, CORPORATE_EMAIL_BILLING)) %>
+
+
+    <h2 class="orange space-above">Social</h2>
+
+
+    <div class="row collapse social-bar small-up-2 medium-up-3">
+      <%= render "layouts/social_bar" %>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+
+

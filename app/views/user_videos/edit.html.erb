@@ -1,0 +1,11 @@
+<% content_for :title do %>
+    <title>Edit Video Information</title>
+<% end %>
+
+
+<% @breadcrumbs = {history: [{text: 'Edit Profile', url: edit_profile_url(current_user)}], current: "Edit Video - #{@video.title}"} %>
+<%= render 'layouts/breadcrumb' %>
+
+<%= render 'layouts/video_upload', video: @video, type: "edit" %>
+
+

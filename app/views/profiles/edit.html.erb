@@ -1,0 +1,381 @@
+<% content_for :title do %>
+    <title>Edit Profile Information</title>
+<% end %>
+
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "profiles" , :media => "all" %>
+<% end %>
+
+
+<% content_for :foot do %>
+
+    <%= render "/layouts/plupload_images",
+               pluploader_id: "profile_photo_uploader",
+               image_object: @profile,
+               list_id: "upload_list",
+               upload_container_id: "profile_photo_upload_container",
+               upload_clicker_id: "profile_photo_upload_picker",
+               list: true %>
+
+
+    <!-------------------------------------------------------------------
+    --  profile-edit javascript depends on image-crop.js,
+    --  which is in the _photo_crop layout, so its listed here in the footer.
+    --------------------------------------------------------------------->
+    <%= javascript_include_tag "profile-edit.js" %>
+
+<% end %>
+
+
+<% @breadcrumbs = {history: [{text: "profile", url: profile_url}], current: "Edit Profile"} %>
+<%= render "layouts/breadcrumb" %>
+
+
+<ul id="tabs-list" class="tabs space-below-4x small-up-1 medium-up-4 large-up-4" role="tablist" data-options="deep_linking:true; scroll_to_content: false" data-tabs >
+
+  <li class="column tabs-title is-active">
+    <a href="#contact" aria-selected="true">
+      <h5>Contact Info</h5>
+    </a>
+  </li>
+
+  <li class="column tabs-title">
+    <a href="#about">
+      <h5>About You</h5>
+    </a>
+  </li>
+
+  <li class="column tabs-title">
+    <a href="#photos">
+      <h5>Photos</h5>
+    </a>
+  </li>
+
+  <li class="column tabs-title">
+    <a href="#videos">
+      <h5>Videos</h5>
+    </a>
+  </li>
+
+</ul>
+
+
+
+
+<div class="tabs-content" data-tabs-content="tabs-list">
+
+  <div id="contact" class="tabs-panel content is-active">
+
+    <!-- Profile Contat update form  -->
+    <!--------------------------------------------->
+    <%= form_for @profile, :html => {:method => :put} do |f| %>
+
+        <!-- Profile update section  -->
+        <!--------------------------------------------->
+        <%= render "/layouts/form_errors", :model => @profile %>
+
+        <h2 class="orange">Name and Email</h2>
+        <div class='section-details space-below-2x'>
+          Your full name will be displayed on your profile page as well as in public searches.
+          To mark your email as publicly searchable, highlight the icon to the right of the email textbox and click UPDATE CONTENT INFO
+          at the bottom of this page.
+        </div>
+
+
+        <div class="columns medium-2">
+          <%= f.label "User ID" %>
+          <input disabled id="profile_userid" type="text" value="<%= current_user.id %>">
+        </div>
+
+        <div class="columns medium-10">
+          <%= f.label "Login Email" %>
+          <input disabled id="profile_email" type="text" value="<%= current_user.email %>">
+        </div>
+
+
+        <div class="columns medium-4">
+          <%= f.label "First Name" %>
+          <%= f.text_field :name_first %>
+        </div>
+
+        <div class="columns medium-4">
+          <%= f.label "Middle Name" %>
+          <%= f.text_field :name_middle %>
+        </div>
+
+        <div class="columns medium-4">
+          <%= f.label "Last name" %>
+          <%= f.text_field :name_last %>
+        </div>
+
+        <%= f.label "Contact Email", class: "column" %>
+        <%= input_with_privacy_checkbox(f, :contact_links, "email") %>
+
+
+
+        <div class="column">
+          <h2 class="orange space-above-2x">Address and Phones</h2>
+
+          <div class='section-details space-below-2x'>
+            To mark your address or phones as publicly searchable, highlight the icon to the right
+            of the email textbox and click UPDATE
+            at the bottom of this page.
+          </div>
+
+        </div>
+
+
+
+        <div class="column row collapse">
+          <%= f.label "Street", class: "column" %>
+          <%= input_with_privacy_checkbox(f, :address_street) %>
+        </div>
+
+
+
+        <div class="columns medium-7">
+          <div class="row collapse">
+            <%= f.label "City", class: "column" %>
+            <%= input_with_privacy_checkbox(f, :address_city) %>
+          </div>
+        </div>
+
+
+
+        <div class="columns medium-3">
+
+          <div class="row collapse">
+
+            <%= f.label "State", class: "column" %>
+            <div class="columns small-10 medium-6">
+              <%= f.select(:address_state, options_for_select(select_usa_states, @profile.address_state),{},{:class=> "us-state"}) %>
+            </div>
+
+            <div class="columns small-2 medium-6">
+              <%= privacy_checkbox(f, "address_state") %>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="columns medium-2">
+          <div class="row collapse">
+            <%= f.label "Zip", class: "column" %>
+            <%= input_with_privacy_checkbox(f, :address_zip) %>
+          </div>
+        </div>
+
+        <div class="columns medium-4">
+          <div class="row collapse">
+            <%= f.label "Home Phone" %>
+            <%= input_with_privacy_checkbox(f, :phone_home) %>
+          </div>
+        </div>
+
+        <div class="columns medium-4">
+          <div class="row collapse">
+            <%= f.label "Work Phone" %>
+            <%= input_with_privacy_checkbox(f, :phone_work) %>
+          </div>
+        </div>
+
+        <div class="columns medium-4">
+          <div class="row collapse">
+            <%= f.label "Mobile Phone" %>
+            <%= input_with_privacy_checkbox(f, :phone_mobile) %>
+          </div>
+        </div>
+
+        <div class="column">
+          <h2 class="orange space-above-2x">Social Networks</h2>
+          <div class="section-details space-below-2x">
+            Enter your social network links here. These links will be publicly visible on your profile.
+          </div>
+        </div>
+
+
+        <% CONTACT_LINKS_LIST.reject{ |k,v| k == "email" }.each do |contact| %>
+
+            <div class="row collapse">
+              <div class="columns small-2 medium-1 max-width-3x">
+                <label class="social">
+                  <i class="icon-<%= contact.downcase %>"></i>
+                </label>
+              </div>
+
+              <div class="columns small-10 medium-11 end">
+                <%= f.fields_for :contact_links do |contact_item_field|%>
+                    <%= contact_item_field.url_field contact, :value => @profile.contact_links[contact], :placeholder => contact.capitalize %>
+                <% end %>
+              </div>
+            </div>
+
+        <% end %>
+
+
+        <div class="row submission text-center">
+          <%= f.submit "Update",  :class => "button large"%>
+        </div>
+
+    <% end %>
+  </div>
+
+</div>
+
+
+
+  <div id="about" class="tabs-panel content" >
+
+    <!-- Profile About update form  -->
+    <!--------------------------------------------->
+
+    <%= form_for @profile, :html => {:method => :put } do |f| %>
+
+        <div class="column">
+          <h2 class="orange">Description</h2>
+          <div class='section-details space-below-2x'>
+            Your profile description will be displayed on your profile page as well as in public searches.
+            Please be descriptive and include any terms that you'd like to show up in public searches
+            (i.e. "Director","Actor","Editor", etc.)
+          </div>
+        </div>
+
+
+        <div class="row column collapse">
+          <%= f.label :job_title %>
+          <%= input_with_privacy_checkbox(f, :job_title) %>
+        </div>
+
+        <div class="column">
+          <%= f.label "Description" %>
+          <%= f.text_area :profile_description %>
+        </div>
+
+
+
+        <div class="column">
+          <h2 class="orange space-above-2x">Business Information</h2>
+          <div class='section-details space-below-2x'>
+            Your business information will be displayed on your profile page as well as in public searches.
+            To mark information as publicly searchable, highlight the icon to the right of each textbox and click UPDATE.
+          </div>
+        </div>
+
+
+
+        <div class="row column collapse">
+
+          <div class="columns medium-6">
+            <div class="row column collapse">
+              <%= f.label :company_name %>
+              <%= input_with_privacy_checkbox(f, :company_name) %>
+            </div>
+          </div>
+
+          <div class="columns medium-6">
+            <div class="row column collapse">
+              <%= f.label :company_website %>
+              <%= input_with_privacy_checkbox(f, :company_website) %>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row column collapse">
+          <%= f.label :job_description %>
+
+          <div class="columns small-10 medium-11">
+            <%= f.text_area :job_description %>
+          </div>
+
+          <div class="columns small-2 medium-1">
+            <%= privacy_checkbox(f, "job_description") %>
+          </div>
+
+        </div>
+
+
+        <div class='row submission text-center'>
+          <%= f.submit "Update",  :class => "button large"%>
+        </div>
+
+    <% end %>
+
+  </div>
+
+
+  <div id="photos" class="tabs-panel content" >
+
+    <!-- Current Profile Image  -->
+    <!--------------------------------------------->
+
+    <h2 class="orange inline">Profile Pictures</h2>
+
+    <span id="profile_photo_upload_container" class="">
+        <span id="profile_photo_upload_picker" class="white circle-add circle-small add-button hoverable"></span>
+    </span>
+
+    <div class='section-details'>
+      When you upload your first picture, it is square cropped and set as your profile picture.
+      Click on any image below to view, set as your profile image, alter crop, or delete it from the gallery.
+    </div>
+
+
+
+    <!-- Photo Gallery -->
+    <!--------------------------------------------->
+
+    <div class="row space-above-2x">
+      <div class="columns medium-4">
+        <%= image_tag(@profile.image_url(:medium), :id=>"profile_picture", :class=>"") %>
+      </div>
+
+      <div class="columns medium-8 pad-all">
+
+        <div class="image-gallery-grid small-up-4 medium-up-5">
+          <%= render "layouts/image_gallery", gallery_model: "users", images: current_user.photos, downloadable: true, type: "editable" %>
+        </div>
+
+        <%= render "layouts/photo_crop", photo_to_crop_id: @profile.image_id, fullsize_photo_url: @profile.image_url(:medium) %>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div id="videos" class="tabs-panel content" >
+
+    <!-- Current Profile Image  -->
+    <!--------------------------------------------->
+
+    <h2 class="orange inline">Video Gallery</h2>
+    <%= link_to new_user_video_url do %>
+        <span class="white circle-add circle-small add-button hoverable"></span>
+    <% end %>
+
+    <p class="section-details">
+      Your video gallery is a portfolio of your work and is publicly visible. Click on any video below to view, edit, custom crop, or delete it from the gallery.
+      Any videos that have you listed in their credits will show on your profile page.
+
+    <div class="section-details">
+      NOTE: You must have a demo reel available in order to apply for jobs or show up in job searches.
+    </div>
+
+    </p>
+
+
+    <div class="row collapse video-gallery space-above-2x medium-up-3">
+      <%= render "/layouts/video_gallery", profile: @profile, videos: @user.videos, type: "editable" %>
+    </div>
+
+
+
+  </div>
+
+</div>

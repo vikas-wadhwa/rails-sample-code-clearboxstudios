@@ -1,0 +1,30 @@
+/******************************************************
+** Import variables
+******************************************************/
+/******************************************************
+** Variables
+******************************************************/
+/******************************************************
+** Section containers
+******************************************************/
+/* line 12, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/staff.css.scss */
+.section-details {
+  width: 96%;
+  margin-bottom: 2em;
+  color: #323232;
+  font-size: .8em;
+  clear: both;
+}
+
+/* line 20, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/staff.css.scss */
+.social-section {
+  font-size: 1.1em;
+}
+
+/******************************************************
+** Misc
+******************************************************/
+/* line 27, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/staff.css.scss */
+.profile-image {
+  margin-right: 2em;
+}

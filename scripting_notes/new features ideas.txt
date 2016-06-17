@@ -1,0 +1,23 @@
+Share project with community
+Schedule an event
+Get critiques
+
+Search features
+profile picture aspect ratios
+Chunked uploads
+CDN downloads
+
+
+
+Entypo
+
+
+<%= image_tag('social-media/coffee/' + contact_item + '.png', :style=>'width:2.1em;vertical-align: bottom;') %>\
+
+
+twitter &#x4C;
+facebook &#x46;
+vimeo &#x56;
+youtube &#x58;
+linkedin &#x47;
+google &#x39;

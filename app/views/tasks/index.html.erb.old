@@ -1,0 +1,111 @@
+<% #@background_opacity_class = 'transparent' %>
+<% @content_frame = 'wide-with-sidebar' %>
+
+<% content_for :title do %>
+    <title>Assigned Tasks</title>
+<% end %>
+
+
+<h1 style="text-align:center;width:100%;">
+<% unless params[:project_id].nil? %>
+  Project Tasks
+<% else %>
+  Assigned Tasks
+<% end %>
+
+</h1>
+
+<div class="crud-header">
+  <% unless params[:project_id].nil? %>
+    <%= link_to 'add task', new_project_task_path(params[:project_id]), :class=>"button hoverable" %>
+  <% end %>
+</div>
+
+
+
+
+<% @tasks_by_project.sort.each do |project_id_name, tasks|%>
+
+
+      <!--  Project Header  -->
+      <!--------------------------------------------->
+      <%= link_to project_path(project_id_name.split[0]) do %>
+        <h2>#<%= project_id_name %> </h2>
+      <% end %>
+      <br>
+
+
+      <!--  Task line item  -->
+      <!--------------------------------------------->
+
+    <div class='orange'>
+
+      <div class='floating-container multi-column' style='min-width:0; margin-top: 0em;'>
+        <% if task.staff %>
+          <%= link_to profile_url(task.staff.profile), :style=> 'display:block;', :class=> '' do %>
+            <%= image_tag task.thumbnail_url, :alt => task.title, :class=>'profile-image', :style=>'float:none;' , :title=>"view " + task.staff.profile.name_first.nvl('') + "'s profile" %>
+          <% end %>
+
+        <% else %>
+          <%= image_tag task.thumbnail_url, :alt => task.title, :class=>'profile-image' , :style=>'float:none;'  %>
+        <% end %>
+
+        <div id="<%= 'toolbar_' + task.id.to_s %>" class="toolbar ui-widget-header ui-corner-all">
+          <%= link_to edit_project_task_url(@project,task) do %><button id="<%= 'toolbar_edit_' + task.id.to_s %>">edit task</button><% end %>
+          <%= link_to project_task_url(@project,task,:account_id => params[:account_id]), :confirm => 'Are you sure?', :method => :delete do %><button id="<%= 'toolbar_delete_' + task.id.to_s %>">delete task</button><% end %>
+        </div>
+      
+      </div>
+        
+      <% if current_user.staff_member? %>
+        <%= link_to project_task_url(@project,task), :class=> '' do %>
+          <h2 style='display:inline-block;'><%= task.title %></h2> 
+        <% end %>
+      <% else %>
+          <h2 style='display:inline-block;'><%= task.title %></h2> 
+      <% end %>
+
+      <div class='floating-container multi-column' style='float:none;'>
+        <div class='section-details'>
+          <b>Description: </b> <%= task.description  %>
+          <br>
+        </div>
+      </div>
+        
+      
+      <!--  Task Information  -->
+      <!--------------------------------------------->
+      <span class='floating-container multi-column'>
+        <b>TASK INFORMATION</b>
+        <br>
+        <span class='section-details'>
+          <label>assigned to:</label> <%= task.staff.nil?? 'Unassigned' : link_to(task.staff.profile.full_name, profile_url(task.staff.profile)) %>
+          <br>
+          <label>start date: </label><%= task.start  %>
+          <br>
+          <label>end date: </label><%= task.end  %>
+          <br>          
+        </span>
+      </span>
+
+
+      <!--  Billing Information  -->
+      <!--------------------------------------------->
+      <span class='floating-container multi-column'>
+        <b>BILLING INFORMATION</b>
+        <br>
+        <span class='section-details'>
+          <label>rate: </label><%= number_to_currency(task.rate_actual.to_i) %>
+          <br>
+          <label>hours: </label><%= task.hours_actual.nvl('0.00') %>
+          <br>
+          <label>total: </label><%= number_to_currency(task.rate_actual.to_i * task.hours_actual.to_i) %>
+          
+        </span>
+      </span>
+
+    </div>
+<% end %>
+
+
+

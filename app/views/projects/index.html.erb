@@ -1,0 +1,91 @@
+<% content_for :title do %>
+    <title>Your Projects</title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "projects" , :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+
+<% if @searching %>
+    <% @breadcrumbs = {history: [{text: 'Projects', url: projects_url}], current: 'SEARCH'} %>
+<% else %>
+    <% @breadcrumbs = {current: 'projects'} %>
+<% end %>
+<%= render 'layouts/breadcrumb' %>
+
+
+<h1 class='orange'>Your Projects</h1>
+<div class='section-details'>
+  <h5>Click a project below to view status details.</h5>
+</div>
+
+
+<%= render 'layouts/searchbox', search_url: '/projects/search', placeholder: 'Search for projects' %>
+
+<%= render 'layouts/paginate', pagination_object: @projects %>
+
+
+
+<div class="search-results">
+
+  <% @projects.each do |project|%>
+
+
+      <div class="row column results-item">
+
+        <div class="search-thumbnail">
+          <%= link_to project_url(project) do %>
+              <%= image_tag(project.image_url(:medium), class: '' ) %>
+          <% end %>
+        </div>
+
+        <div class="results-content">
+
+          <%= link_to project_url(project) do %>
+              <h4 class="orange"><%= project.title %></h4>
+          <% end %>
+
+          <p><%= project.description %></p>
+
+
+        </div>
+
+        <div class="results-stats">
+          <span class="results-stat">Account: <%= link_to project.account.name, account_url(project.account) %></span>
+          <span class="results-stat">Invoice ID:
+            <% if project.invoice %>
+                    <%= link_to project.invoice.id, invoice_url(project.invoice) %>
+            <% end %>
+
+          </span>
+          <span class="results-stat"><b><%= project.images.size.to_s %> photos</b></span>
+          <span class="results-stat"><b><%= project.videos.size.to_s %> videos</b></span>
+          <span class="results-stat"><%= project.status %></span>
+          <span class="results-stat"><%= project.updated_at.strftime('%b %d, %Y') %></span>
+
+
+
+
+        </div>
+
+      </div>
+
+
+  <% end %>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

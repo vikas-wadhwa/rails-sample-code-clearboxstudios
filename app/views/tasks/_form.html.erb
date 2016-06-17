@@ -1,0 +1,116 @@
+<% content_for :head do %>
+<% end %>
+
+
+<%= form_for([@project, @task], :html => {:class => 'responsive-form'}) do |f| %>
+
+
+  <%= render '/layouts/form_errors', :model => @task %>
+
+
+  <div class='orange' style='margin: 0;'><h1>Task Details</h1></div>
+  <div class='floating-container column-1'>
+
+
+    <br>
+    <div class="field">
+      <%= f.label "Assigned To" %>
+      <%= collection_select :task, :staff_id, Profile.staff_members.sort_by(&:full_name), :user_id, :full_name, :prompt => "" %>
+    </div>
+
+    <br>
+    <div class="field">
+      <%= f.label :task_type %>
+      <%= f.select(:task_type, Task::TASK_TYPE_ENUM) %>
+    </div>
+
+    <br>
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <br>
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description, :style=>"width:36em;" %>
+    </div>
+
+    <br>
+    <div class="field">
+      <%= f.label :start %>
+      <%= f.text_field :start, :id => 'date-start', :class => "date-picker datepicker" ,:style =>'float:left;' %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= f.label :end, :style=>"width:3em; margin-left:3em;" %>
+      <%= f.text_field :end, :id => 'date-end', :class => "date-picker datepicker add_1m" %>
+    </div>
+
+
+    <br>
+    <div class="field">
+      <%= f.label :category %>
+      <%= f.select(:category, Project::CATEGORY_ENUM,{}, :style =>'float:left;') %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <%= f.label :status, :style=>"width:3em; margin-left:3em;" %>
+      <%= f.select(:status, Project::STATUS_ENUM) %>
+    </div>
+    
+    
+  </div>
+  
+  <div class='orange'><h1>Billing Details</h1></div>
+  <div class='floating-container column-1'>
+
+    <br>
+    <div class="field">
+      <%= f.label 'Bill Rate Estimate' %>
+      <%= f.text_field :rate_estimate, :class=>'integer' %>
+    </div>
+
+
+    <br>
+    <div class="field">
+      <%= f.label :staff_rate_estimate %>
+      <%= f.text_field :staff_rate_estimate, :class=>'integer' %>
+    </div>
+
+
+    <br>
+    <div class="field">
+      <%= f.label :hours_estimate %>
+      <%= f.text_field :hours_estimate, :class=>'integer' %>
+    </div>
+
+  </div>
+  
+  
+  <div class='floating-container column-2'>
+
+    <br>
+    <div class="field">
+      <%= f.label 'Bill Rate actual' %>
+      <%= f.text_field :rate_actual, :class=>'integer' %>
+    </div>
+
+
+    <br>
+    <div class="field">
+      <%= f.label :staff_rate_actual %>
+      <%= f.text_field :staff_rate_actual, :class=>'integer' %>
+    </div>
+
+
+    <br>
+    <div class="field">
+      <%= f.label :hours_actual %>
+      <%= f.text_field :hours_actual, :class=>'integer' %>
+    </div>
+
+  </div>
+
+
+  <div class='row submission'>
+    <%= f.submit  :class => "button white bordered"%>
+  </div>
+  
+<% end %>

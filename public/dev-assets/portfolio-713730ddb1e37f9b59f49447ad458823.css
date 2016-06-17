@@ -1,0 +1,172 @@
+/******************************************************
+** Import variables
+******************************************************/
+/******************************************************
+** Variables
+******************************************************/
+/******************************************************
+** General menu containers
+******************************************************/
+/* line 11, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+ul.tabs {
+  border: none;
+  border-bottom: none;
+  text-align: left;
+}
+
+/* line 18, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.row.no-child-padding .column,
+.row.no-child-padding .columns {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* line 24, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.photos-wrapper,
+.videos-wrapper {
+  background: black;
+}
+
+/* line 30, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.portfolio-image {
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+}
+
+/* line 37, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+a.portfolio-image {
+  display: block;
+}
+
+/* line 41, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.mfp-bottom-bar {
+  top: initial;
+  bottom: 40px;
+  font-size: 13px;
+}
+
+/* line 47, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.mfp-title {
+  padding: 2em;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* line 52, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.mfp-counter {
+  top: initial;
+  bottom: 5px;
+  right: 10px;
+  font-size: 1em;
+}
+
+/* line 59, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.popup-item img {
+  padding: .1em;
+}
+
+/* line 63, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.popup-item:hover {
+  cursor: pointer;
+}
+
+/* line 71, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.image-gallery-title,
+.video-gallery-title {
+  font-weight: 100;
+  color: #f8981d;
+  background: black;
+  line-height: 1.25;
+}
+
+/* line 79, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.height-5x7 {
+  padding: 0.1% !important;
+  margin-top: -0.1% !important;
+}
+
+/* line 84, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+.height-7x5 img {
+  padding: 2.4% !important;
+  margin-top: -1.9% !important;
+}
+
+/******************************************************
+** max-width 640px, mobile-only styles, use when QAing mobile issues
+******************************************************/
+@media only screen and (max-width: 40em) {
+  /* line 95, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .videos-wrapper {
+    font-size: 12px;
+  }
+
+  /* line 99, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .media-description {
+    padding: 2em .25em .25em .25em;
+  }
+
+  /* line 103, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .image-gallery-title,
+  .video-gallery-title {
+    font-size: 35px;
+    padding: 20% 0;
+  }
+}
+/******************************************************
+** min-width 641px, medium screens
+******************************************************/
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  /* line 119, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .videos-wrapper .medium-4 {
+    font-size: 11px;
+  }
+
+  /* line 123, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .videos-wrapper .medium-8 {
+    font-size: 12px;
+  }
+
+  /* line 127, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .media-description {
+    padding: 1em;
+  }
+
+  /* line 131, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .image-gallery-title,
+  .video-gallery-title {
+    font-size: 35px;
+    padding: 16% 0;
+  }
+
+  /* line 137, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .height-7x5 .image-gallery-title {
+    padding: 20% 0;
+  }
+}
+/******************************************************
+** min-width 641px, medium screens
+******************************************************/
+@media only screen and (min-width: 64.063em) {
+  /* line 150, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .videos-wrapper .medium-4 {
+    font-size: 13px;
+  }
+
+  /* line 154, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .videos-wrapper .medium-8 {
+    font-size: 15px;
+  }
+
+  /* line 161, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .image-gallery-title,
+  .video-gallery-title {
+    font-size: 50px;
+    padding: 16% 0;
+  }
+
+  /* line 167, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/portfolio.css.scss.erb */
+  .height-7x5 .image-gallery-title {
+    padding: 25% 0;
+  }
+}

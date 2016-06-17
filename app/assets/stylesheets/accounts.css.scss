@@ -1,0 +1,52 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "global/variables";
+
+/******************************************************
+** General styles
+******************************************************/
+
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="url"], select, textarea {
+  width: 30em;
+}
+
+.floating-container {
+  min-height: 0;
+}
+
+.multi-column {
+  padding-top: 0;
+  margin-right: 1em;
+}
+
+.multi-column .section-details {
+  color: $gray-50;
+}
+
+.section-details label {
+  vertical-align: inherit;
+}
+
+.multi-column label {
+  display: inline-block;
+  width: 7.5em;
+}
+
+.multi-column label.column-1 {
+  line-height: 150%;
+}
+
+.multi-column label.column-2 {
+}
+
+.multi-column label.column-3 {
+}
+
+.dropdown-menu-container {
+  float: none;
+}
+
+#file-upload-form {
+  clear: both;
+}

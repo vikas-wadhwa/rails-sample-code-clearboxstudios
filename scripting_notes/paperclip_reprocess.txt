@@ -1,0 +1,6 @@
+rake paperclip:refresh:thumbnails CLASS=UserPhoto
+rake paperclip:refresh:thumbnails CLASS=UserVideo
+
+
+
+

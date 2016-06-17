@@ -1,0 +1,42 @@
+#!/bin/sh
+
+##############################################################
+##  
+##  
+##  
+##  
+##############################################################
+
+
+echo "Changing directory to /opt/webapps/clearboxstudios"
+cd /opt/webapps/clearboxstudios
+echo ""
+
+echo "entering console"
+rails c
+echo ""
+
+echo "deleting current search records"
+PgSearch::Document.delete_all(searchable_type: "Account")
+PgSearch::Document.delete_all(searchable_type: "AccountUser")
+PgSearch::Document.delete_all(searchable_type: "Invoice")
+PgSearch::Document.delete_all(searchable_type: "Project")
+PgSearch::Document.delete_all(searchable_type: "Task")
+
+
+echo ""
+echo "reindexing new records"
+
+PgSearch::Multisearch.rebuild(Account)
+PgSearch::Multisearch.rebuild(AccountUser)
+PgSearch::Multisearch.rebuild(Invoice)
+PgSearch::Multisearch.rebuild(Project)
+PgSearch::Multisearch.rebuild(Task)
+
+Profile.find_each { |record| record.update_pg_search_document }
+Profile.find_each { |record| record.update_attributes(record.attributes.except('id', 'user_id', 'staff_member', 'created_at', 'updated_at'))}
+
+
+echo ""
+PgSearch::Document.delete_all(searchable_type: "Profile")
+rake pg_search:multisearch:rebuild[profile]

@@ -1,0 +1,25 @@
+<% #@background_opacity_class = 'transparent' %>
+<% @content_frame = 'wide-with-sidebar' %>
+
+
+<% content_for :title do %>
+    <title>Edit Billing Account Information</title>
+<% end %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "accounts" , :media => 'all' %>
+<% end %>
+
+
+<!--  Page Header and CRUD  -->
+<!--------------------------------------------->
+
+<div class="breadcrumb">
+  <b><%= link_to 'Accounts', accounts_url %> / <%= @account.name %></b>
+</div>
+
+
+
+<!--  Editing Form  -->
+<!--------------------------------------------->
+<%= render 'form' %>

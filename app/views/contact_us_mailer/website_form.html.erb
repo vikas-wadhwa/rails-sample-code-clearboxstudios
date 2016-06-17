@@ -1,0 +1,8 @@
+<%= email_heading("Someone wants to know more about us.") %>
+<%= email_subheading("Please reach out to this person ASAP.") %>
+
+<% @details.each do |key, value| %>
+    <%= email_text("<b>" + key.capitalize + ": </b> <span>" + value.capitalize + "</span>") unless value.blank? %>
+<% end %>
+
+<%= render 'layouts/email_footer_webadmin' %>

@@ -1,0 +1,73 @@
+**********************************
+  binary
+  boolean
+  date
+  datetime
+  decimal
+  float
+  integer
+  primary_key
+  string
+  text
+  time
+  timestamp
+*************************************
+
+
+
+rails generate model Account user:references name:string phone_home:string phone_work:string phone_mobile:string address_street:text address_city:string address_state:string address_zip:string company_name:string company_website:text 
+rails generate model Profile user:references name_first:string name_middle:string name_last:string phone_home:string phone_work:string phone_mobile:string address_street:text address_city:string address_state:string address_zip:string company_name:string company_website:text job_title:string job_description:text profile_description:text
+rails generate model Invoice account:references category:string title:string description:text status:integer bill_date:date payment_date:date
+rails generate model Project account:references invoice:references category:string title:string description:text status start:date end:date
+rails generate model Task project:references staff_id:integer category:string title:string description:text status:string bill_hours_estimate:decimal bill_rate_estimate:decimal bill_rate_actual:decimal staff_rate_estimate:decimal staff_rate_actual:decimal start:date end:date
+
+
+
+
+rails generate scaffold Account user:references name:string phone_home:string phone_work:string phone_mobile:string address_street:text address_city:string address_state:string address_zip:string company_name:string company_website:text --migration=false --skip
+rails generate scaffold Profile user:references name_first:string name_middle:string name_last:string phone_home:string phone_work:string phone_mobile:string address_street:text address_city:string address_state:string address_zip:string company_name:string company_website:text job_title:string job_description:text profile_description:text --migration=false --skip
+rails generate scaffold Invoice account:references category:string title:string description:text status:integer bill_date:date payment_date:date --migration=false --skip
+rails generate scaffold Project account:references invoice:references category:string title:string description:text status start:date end:date --migration=false --skip
+rails generate scaffold Task project:references staff_id:integer category:string title:string description:text status:string bill_hours_estimate:decimal bill_rate_estimate:decimal bill_rate_actual:decimal staff_rate_estimate:decimal staff_rate_actual:decimal start:date end:date --migration=false --skip
+
+
+
+
+rails generate scaffold Account user:references name:string phone_home:string phone_work:string phone_mobile:string address_street:text address_city:string address_state:string address_zip:string company_name:string company_website:text  --skip
+rails generate scaffold Profile user:references name_first:string name_middle:string name_last:string phone_home:string phone_work:string phone_mobile:string address_street:text address_city:string address_state:string address_zip:string company_name:string company_website:text job_title:string job_description:text profile_description:text  --skip
+rails generate scaffold Invoice account:references category:string title:string description:text status:integer bill_date:date payment_date:date  --skip
+rails generate scaffold Project account:references invoice:references category:string title:string description:text status start:date end:date  --skip
+rails generate scaffold Task project:references staff_id:integer category:string title:string description:text status:string bill_hours_estimate:decimal bill_rate_estimate:decimal bill_rate_actual:decimal staff_rate_estimate:decimal staff_rate_actual:decimal start:date end:date  --skip
+
+
+rails generate scaffold AccountUser account:references user:references permissions:text --skip
+
+
+
+rails generate model UserPhotos user:references
+rails generate model UserVideos user:references
+rails generate model UserDocuments user:references
+
+
+rails generate paperclip UserPhotos photo
+rails generate paperclip UserVideos video
+rails generate paperclip UserDocuments document
+
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE user_documents TO railsapp_user;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE user_photos TO railsapp_user;
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE user_videos TO railsapp_user;
+
+
+GRANT ALL ON TABLE user_documents_id_seq TO railsapp_user;
+GRANT ALL ON TABLE user_photos_id_seq TO railsapp_user;
+GRANT ALL ON TABLE user_videos_id_seq TO railsapp_user;
+
+
+rails generate model ProjectPhotos Project:references
+rails generate model ProjectVideos Project:references
+rails generate model ProjectDocuments Project:references
+
+
+rails generate paperclip ProjectPhotos photo
+rails generate paperclip ProjectVideos video
+rails generate paperclip ProjectDocuments document

@@ -1,0 +1,53 @@
+<% #@background_opacity_class = 'transparent' %>
+<% if user_signed_in? %>
+  <% @content_frame = 'wide-with-sidebar' %>
+<% else  %>
+
+<% end %>
+
+<% content_for :title do %>
+    <title>Events Calendar</title>
+<% end %>
+
+<% content_for :head do %>
+<% end %>
+
+
+<% content_for :foot do %>
+  <script>
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        // ClearBox Studios events calendar
+        events: 'http://www.google.com/calendar/feeds/clearboxstudios.com_ilpdfv71dhg0oc5u0ldfn0otn8%40group.calendar.google.com/public/basic',
+        eventClick: function(event) {
+          // opens events in a popup window
+          window.open(event.url, 'gcalevent', 'width=800,height=600');
+          return false;
+        },
+        loading: function(bool) {
+          if (bool) {
+            $('#loading').show();
+          }else{
+            $('#loading').hide();
+          }
+        }
+      });
+    });
+
+  </script>
+<% end %>
+
+
+
+<div class='orange'>
+  <h1>Upcoming Events</h1>
+</div>
+
+<div id='loading' style='display:none'>loading...</div>
+
+<div id='calendar' style='padding: 3em 3em 3em 0;'></div>

@@ -1,0 +1,106 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "variables";
+
+
+/******************************************************
+** Tag defaults
+******************************************************/
+
+@media print {
+  .print-remove {
+    display: none
+  }
+}
+
+p {
+  display: block;
+  margin-bottom: 1em;
+}
+
+a {
+  color: $gray-50;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+
+  &:hover,
+  &:focus,
+  & label:hover,
+  & label:focus {
+    color: $orange;
+    pointer: cursor;
+  }
+
+}
+
+a.orange {
+  font-weight: inherit;
+
+  &:hover,
+  &:focus,
+  & label:hover,
+  & label:focus {
+    color: $gray-150;
+    pointer: cursor;
+  }
+
+}
+
+a img {
+  border: none; /*remove IE image link borders*/
+}
+
+.underlined-links,
+.underlined-hoverlinks:hover {
+  text-decoration: underline;
+}
+
+
+b {
+  font-weight: 600 !important;
+}
+
+
+label {
+  color: $gray-150;
+  vertical-align: middle;
+}
+
+input.button-size {
+  height: 2.5em;
+}
+
+
+ul {
+  margin: 0 !important;
+}
+
+li {
+  list-style: none;
+  padding-left: 0 !important;
+}
+
+ul.square li {
+  list-style: square;
+  margin-left: 1.1rem !important;
+}
+
+ol li {
+  list-style: inherit;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 200;
+
+  &.inline {
+    display: inline;
+    margin-right: 1em;
+  }
+}
+
+textarea {
+  min-height: 9.25em;
+}

@@ -1,0 +1,46 @@
+
+<div id="off_canvas_menu" class="off-canvas position-left <%= 'reveal-for-large' unless @menu_hide %> " data-off-canvas>
+
+    <div id="sidebar">
+
+        <% if user_signed_in? %>
+
+            <li><%= link_to raw('Home'), home_link_url %></li>
+
+            <ul class="space-above">Settings
+              <li><%= link_to raw('Dashboard'), dashboard_url %></li>
+              <li><%= link_to raw('Change password'), edit_user_registration_url %></li>
+              <li><%= link_to raw('Edit profile'), edit_profile_url(current_user.profile) %></li>
+              <li><%= link_to raw('Logout'), destroy_user_session_url, :method => :delete %></li>
+            </ul>
+
+            <ul class="space-above">Creative Portfolio
+              <!--<li><%= link_to raw('Public profile'), profile_url(current_user.profile) %></li>-->
+              <li><%= link_to raw('Photos'), edit_profile_url(current_user.profile, anchor: 'photos') %></li>
+              <li><%= link_to raw('Videos'), edit_profile_url(current_user.profile, anchor: 'videos') %></li>
+            </ul>
+
+
+            <ul class="space-above">Client Account
+              <!--<li><%= link_to raw('Billing'), accounts_url %></li>-->
+              <li><%= link_to raw('Projects'), projects_url %></li>
+              <li><%= link_to raw('Invoices'), invoices_url %></li>
+            </ul>
+
+
+        <% else %>
+
+            <ul>
+              <li><%= link_to raw('About'), about_url %></li>
+              <li><%= link_to raw('Portfolio'), portfolio_url %></li>
+              <li><%= link_to raw('Case Studies'), case_studies_url %></li>
+              <li><%= link_to raw('Contact'), contact_url %></li>
+              <li><%= link_to raw('Login'), new_user_session_url %></li>
+            </ul>
+        <% end %>
+
+
+    </div>
+
+  </div>
+

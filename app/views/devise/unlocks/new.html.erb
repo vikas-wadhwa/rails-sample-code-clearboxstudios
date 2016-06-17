@@ -1,0 +1,25 @@
+<% #@background_opacity_class = 'transparent' %>
+<% @content_frame = 'single-small' %>
+
+<% content_for :title do %>
+    <title>Unlock Account</title>
+<% end %>
+
+
+<div class='orange '><h1>Resend unlock instructions</h1></div>
+
+<%= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post ,:class => 'responsive-form' }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <div><%= f.submit "Resend unlock instructions", :class => "button hoverable" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>

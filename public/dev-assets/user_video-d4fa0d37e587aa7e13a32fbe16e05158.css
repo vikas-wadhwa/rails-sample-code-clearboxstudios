@@ -1,0 +1,56 @@
+/******************************************************
+** Import variables
+******************************************************/
+/******************************************************
+** Variables
+******************************************************/
+/* line 8, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/user_video.css.scss.erb */
+.screencredit-line input {
+  margin: 0;
+  height: 50px;
+  padding: 0 10px;
+  font-size: 18px;
+}
+
+/* line 15, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/user_video.css.scss.erb */
+.icon-cancel {
+  line-height: 1.8em;
+}
+
+/* line 19, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/user_video.css.scss.erb */
+.autocomplete-image,
+.autocomplete-text {
+  vertical-align: middle;
+}
+
+/* line 24, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/user_video.css.scss.erb */
+.autocomplete-image {
+  width: 40px;
+  margin-right: .5em;
+}
+
+/* line 30, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/user_video.css.scss.erb */
+.autocomplete-credits, .autocomplete-users {
+  float: left;
+  margin-right: 1em;
+}
+
+/* line 35, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/user_video.css.scss.erb */
+label.autocomplete-credits {
+  width: 16em;
+}
+
+/* line 39, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/user_video.css.scss.erb */
+input.autocomplete-credits {
+  width: 15em;
+}
+
+/* line 43, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/user_video.css.scss.erb */
+label.autocomplete-users {
+  width: 19em;
+}
+
+/* line 47, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/user_video.css.scss.erb */
+input.autocomplete-users {
+  width: 18em;
+}

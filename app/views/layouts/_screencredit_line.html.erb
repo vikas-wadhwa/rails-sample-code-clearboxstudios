@@ -1,0 +1,76 @@
+
+
+<div class="row column screencredit-line">
+  <div class="columns medium-5">
+    <% if form_object %>
+        <%= form_object.hidden_field :credit_id %>
+        <%= form_object.autocomplete_field :title,
+                                           autocomplete_credit_title_user_videos_path,
+                                           :name => SecureRandom.urlsafe_base64,
+                                           :id_element => '#user_video_user_credits_attributes_'+ form_object.index.to_s + '_credit_id',
+                                           :update_elements => {id: '#user_video_user_credits_attributes_'+ form_object.index.to_s + '_credit_id'} %>
+    <% else %>
+        <input id="user_video_user_credits_attributes_randomize_credit_id" name="user_video[user_credits_attributes][randomize][credit_id]" type="hidden" value="" />
+        <input data-autocomplete="/user/videos/autocomplete_credit_title"
+               data-id-element="#user_video_user_credits_attributes_randomize_credit_id"
+               data-update-elements='{"id":"#user_video_user_credits_attributes_randomize_credit_id"}'
+               id="user_video_user_credits_attributes_randomize_title"
+               name="credits_attributes_randomize_title"
+               size="0" type="text" value="" />
+    <% end %>
+
+  </div>
+
+  <div class="columns medium-6">
+    <% if form_object %>
+        <%= form_object.hidden_field :user_id %>
+    <% else %>
+        <input id="user_video_user_credits_attributes_randomize_user_id" name="user_video[user_credits_attributes][randomize][user_id]" type="hidden" />
+    <% end %>
+
+    <div class="row collapse">
+
+      <div class="medium-10 columns">
+
+        <% if form_object %>
+            <%= form_object.autocomplete_field :user_full_name,
+                                                autocomplete_profile_name_first_user_videos_path,
+                                                :name => SecureRandom.urlsafe_base64,
+                                                'data-id-column' => 'user_id' ,
+                                                :id_element => '#user_video_user_credits_attributes_'+ form_object.index.to_s + '_user_id',
+                                                :update_elements => {user_id: '#user_video_user_credits_attributes_'+ form_object.index.to_s + '_user_id'} %>
+        <% else %>
+            <input data-autocomplete="/user/videos/autocomplete_profile_name_first"
+                   data-id-element="#user_video_user_credits_attributes_randomize_user_id"
+                   data-update-elements='{"user_id":"#user_video_user_credits_attributes_randomize_user_id"}'
+                   data-id-column="user_id" id="user_video_user_credits_attributes_randomize_user_full_name"
+                   name="credits_attributes_randomize_user_full_name"
+                   size="0" type="text" />
+        <% end %>
+
+      </div>
+
+      <div class="medium-2 columns">
+          <span class="postfix">
+
+            <% if form_object %>
+              <%= image_tag Profile.find_image_by_user_id(form_object.object.user_id, :tiny), class: "profile-image tiny" %>
+            <% else %>
+              <%= image_tag Profile::PLACEHOLDER_IMAGE_URL, class: "profile-image tiny" %>
+            <% end %>
+
+            </span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="columns medium-1">
+    <input id="user_video_user_credits_attributes_randomize__destroy" name="user_video[user_credits_attributes][randomize][_destroy]" type="hidden" value="false" />
+    <a class='screencredit-line-remove'>
+      <i class="icon-cancel red"></i>
+    </a>
+  </div>
+
+</div>

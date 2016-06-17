@@ -1,0 +1,17 @@
+
+<!-- We need to include utf-8 encoding for wicked_pdf to work! -->
+<% content_for :head do %>
+    <meta charset="utf-8" />
+<% end %>
+
+<!-- We need to use the wicked_pdf helper for these to render -->
+<!-------------------------------------------------------------------------------------------->
+<!-- Application CSS  -->
+<!-------------------------------------------------------------------------------------------->
+<link  rel="stylesheet" type="text/css" href="<%=  AWS_CDN_PUBLIC_URL + "/css/foundation.2016.01.08.min.css" %>">
+<%= wicked_pdf_stylesheet_link_tag "application", :media => "all" %>
+<%= wicked_pdf_stylesheet_link_tag "invoices" , :media => "all" %>
+<link  rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300">
+
+<!--We need to specify the extension of the partial for wicked_pdf to work! -->
+<%= render 'printable.html.erb' %>

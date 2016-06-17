@@ -1,0 +1,23 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "variables";
+
+
+/******************************************************
+** Rails classes
+******************************************************/
+
+#error_explanation {
+
+}
+
+#error_explanation li {
+  list-style-type: square;
+  margin-left: 1.25em;
+  color: rgb(195, 30, 30);
+}
+
+#flash_modal_explanation ul {
+  margin-left: 1em !important;
+}

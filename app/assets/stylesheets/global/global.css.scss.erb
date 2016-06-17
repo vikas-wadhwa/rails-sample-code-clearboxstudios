@@ -1,0 +1,1040 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "variables";
+@import "colors";
+@import "foundation_and_overrides";
+@import "drawings";
+@import "tags";
+@import "utilities";
+@import "rails";
+
+
+/******************************************************
+** Icon fonts
+******************************************************/
+[class^="icon-"], [class*=" icon-"] {
+  font-size: 1.5em;
+  line-height: 2em;
+  color: $gray-75;
+}
+
+[class^="icon-"].large, [class*=" icon-"].large {
+  font-size: 4em;
+}
+
+.icon-imdb:after {
+  content: 'IMDb';
+  font-family: sans-serif;
+  font-size: .75em;
+  font-weight: bold;
+  //padding: 1em 1em;
+  //border: 1px solid rgb(225, 225, 225);
+}
+
+.icon-email {
+  font-size: 1.4em;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.stat-icon {
+  width: 4.5em;
+}
+
+
+/******************************************************
+** Forms
+******************************************************/
+.submission {
+  border-top: 1px solid $gray-225;
+  padding-top: 1em !important;
+  text-align: right;
+  margin-top: 1em;
+}
+
+
+/******************************************************
+** Clickable buttons and images
+******************************************************/
+
+.button.text-left {
+  padding-left: 0;
+}
+
+.icon-button {
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid $gray-175;
+  color: white;
+  position: absolute;
+  text-align: center;
+  width: 2rem;
+  height: 2rem;
+  line-height: 0.5;
+  font-size: 1rem;
+  z-index: 4;
+  margin: 0.5em;
+  padding: .75em;
+}
+
+
+.icon-button:hover {
+  background: white;
+  color: rgb(50, 50, 50);
+  border: 1px solid black;
+}
+
+.image-button {
+  width: 300px;
+  height: 300px;
+  line-height: 1em;
+  color: rgb(0, 38, 50);
+  position: relative;
+  display: inline-block;
+  margin: 1em 1em 0 0;
+  //background: $gray-25;
+  background: repeating-linear-gradient( -55deg, $gray-25, rgb(45,45,45) 4px);
+}
+
+.image-button.hd-video{
+  height: 265px;
+}
+
+.image-button .details-header,
+.image-button .details-footer {
+  position: absolute;
+  color: white;
+  width: 100%;
+  padding: .75em;  //this is not em because the box has different size fonts within, making their paddings unequal
+}
+
+.image-button.hd-video .details-header,
+.image-button.hd-video .details-footer {
+  position: relative;
+}
+
+.image-button * {
+  font-weight: 400;
+  -moz-transition: all .5s;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  width: 100%;
+}
+
+.image-button:hover,
+.image-button.hover {
+
+  img {
+    opacity: 0.2;
+  }
+
+  [class*='details-'] {
+    opacity: 1;
+  }
+
+}
+
+.image-button .details-header {
+}
+
+.image-button .details-header .details-title {
+  position: relative;
+  line-height: 1.2;
+  color: $orange;
+}
+
+.image-button .details-subheader {
+  position:relative;
+  display: block;
+  line-height: 1.3;
+}
+
+.image-button.hd-video .details-subheader {
+  position: absolute;
+  padding: 1em;
+  color: white;
+  opacity: 0;
+}
+
+.image-button.hd-video:hover .details-subheader {
+  opacity: 1;
+}
+
+
+.image-button .details-footer {
+  bottom: 0;
+  height: 2em;
+}
+
+.image-button .details-footer .details-bottom-left,
+.image-button .details-footer .details-bottom-right {
+  position: absolute;
+  right: 0;
+  left: 0;
+  padding: 0 .75em;
+}
+
+
+.image-button .animate-spin.processing {
+  display: none;
+  position: absolute;
+  text-align: center;
+  color: $orange;
+  font-size: 4em;
+  top: 35%;
+  z-index: 1;
+  left: 37%;
+}
+
+
+.image-icon-button {
+  position: relative;
+  border: 1px solid transparent;
+  color: $gray-75;
+  border-radius: 1em;
+  text-align: center;
+  padding: 1em;
+  -moz-transition: all .75s;
+  -webkit-transition: all .75s;
+  transition: all .75s;
+}
+
+
+.image-icon-button:hover {
+  color: $orange;
+}
+
+
+.image-icon-button i {
+  font-size: 2.25em;
+}
+
+.image-icon-button .details-bottom {
+  font-size: 1.1em;
+  margin-top: .5em;
+}
+
+img.hoverable {
+  border: 1px solid black;
+}
+
+img.hoverable:hover {
+  border: 1px solid $orange;
+}
+
+.thumbnail.hoverable {
+  border: 1px solid black;
+}
+
+.thumbnail.hoverable:hover {
+  border: 1px solid $orange;
+  z-index: 99;
+}
+
+.thumbnail.hoverable .info-overlay {
+  opacity: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  font-size: 1.3em;
+  font-weight: 200;
+  color: rgb(255, 165, 0);
+  background: rgba(0, 0, 0, 0.75);
+  height: 100%;
+  padding-top: 20%;
+  pointer: cursor;
+  -moz-transition: all .5s;
+  -webkit-transition: all .5s;
+  transition: all .55s;
+}
+
+
+.thumbnail.hoverable:hover .info-overlay {
+  opacity: 1;
+}
+
+/******************************************************
+** Custom checkboxes/radioboxes
+******************************************************/
+.radiobox,
+.checkbox {
+  width: 100%;
+  margin: 0;
+}
+
+.radiobox .overlay ,
+.checkbox .overlay {
+  display: none;
+}
+
+.radiobox .overlay.on,
+.checkbox .overlay.on {
+  display: initial;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  padding: 0.5em 0;
+  text-align: center;
+  font-size: 5em;
+  color: $orange;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.checkbox[class^="icon-"],
+.checkbox[class*=" icon-"],
+.radiobox[class^="icon-"],
+.radiobox[class*=" icon-"] {
+
+  &:before{
+    display: inline;
+    visibility: hidden;
+    margin-right: 0.5em;
+    font-size: 1.25em;
+  }
+
+  &.success:before {
+    visibility: visible;
+  }
+}
+
+.checkbox.button.icon-check,
+.radiobox.button.icon-check {
+  padding-left: 1.25rem;
+  color: $gray-50;
+  border: none;
+
+  &.success {
+    color: white;
+    background: $green;
+    font-weight: bold;
+  }
+
+  &.disabled {
+    // override foundation.css setting opacity to < 1
+    opacity: 1;
+  }
+
+}
+
+/******************************************************
+** Image galleries
+******************************************************/
+.image-gallery-context-menu,
+[id$=_image_container] {
+  position: relative;
+}
+
+
+.image-gallery-grid .animate-spin.processing {
+  position: absolute;
+  text-align: center;
+  color: rgb(248, 152, 29);
+  width: 100%;
+  font-size: 2em;
+  padding: 25% 0;
+}
+
+
+.image-gallery i {
+  font-size: 1em;
+}
+
+.image-gallery-grid {
+  margin-left: -.9375rem !important;
+}
+
+/******************************************************
+** jquery-context-menu
+******************************************************/
+.context-menu-item {
+  padding: 0 .5em !important;
+  font-size: 0.75em;
+
+  span {
+    margin-left: 0.5em;
+    vertical-align: text-bottom;
+  }
+}
+
+.context-menu-list {
+  width: 8em !important;
+}
+
+.context-menu-item.context-menu-hover {
+  background-color: $orange !important;
+}
+
+
+/******************************************************
+** Main Section
+******************************************************/
+.main-section {
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
+
+  &.dark {
+    background-color: $gray-25;
+  }
+
+}
+
+.modal-action {
+  position: absolute;
+  bottom: 0;
+  right: 1em;
+}
+
+
+
+/******************************************************
+** Navigation menu
+******************************************************/
+a[class*="menu-icon"] {
+  width: 2.5em;
+  height: 2.5em;
+  display: inline;
+  z-index: 1;
+  position: absolute;
+}
+
+.menu-icon {
+  bottom: 2.5em;
+  left: 1.5em;
+}
+
+
+/******************************************************
+** Banner settings
+******************************************************/
+.banner-ribbon {
+  position: fixed;
+  background: $gray-50;
+  font-family: "Open Sans";
+  width: 100%;
+  z-index: 99;
+}
+
+#banner-menu {
+  margin: 2em 0 0 7em !important;
+}
+
+#banner-menu li {
+  display: inline;
+  list-style-type: none;
+  padding: 2em;
+}
+
+.banner-menu-items {
+  font-size: 1em;
+  color: $orange;
+}
+
+/*#banner-menu-items li a:link {color: $orange;}       unvisited link*/
+/*#banner-menu-items li a:visited  {color: $orange;}   visited link*/
+.banner-menu-items:hover {
+  color: #FFFFFF;
+}
+
+/* mouse over link*/
+/*#banner-menu-items li a:active  {color: $orange;}   selected link*/
+
+.menu-icon-toggle {
+  position: absolute;
+  text-align: center;
+  background: rgb(25,25,25);
+  border-right: 1px solid rgb(0, 0, 0);
+
+  -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.6);
+
+  color: $orange;
+  z-index: 999;
+
+  margin-top: 0;
+  width: 4em;
+  padding: 1em 0;
+}
+
+.banner-menu-items.icon-menu {
+  font-size: 1.5em;
+  line-height: 1.25em;
+  color: $gray-200;
+  -moz-transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  -ms-animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -moz-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+
+}
+
+.banner-logo {
+  position: fixed;
+  z-index: 100;
+  margin: 1em 0 0 6em;
+}
+
+
+
+/******************************************************
+** Footer settings
+******************************************************/
+
+
+.lt-ie9 footer {
+  background: none;
+  -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,endColorstr=#CC000000);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,endColorstr=#CC000000);
+  zoom: 1;
+  padding: 1em;
+}
+
+footer {
+
+  background-color: black;
+  color: $gray-200;
+  font-size: 14px;
+
+  a {
+    color: $gray-200;
+  }
+
+  img {
+    width: 25px;
+    height: 25px;
+    margin-right: .5em;
+  }
+
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $orange;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .social-bar .column {
+    font-size: 12px;
+    color: $gray-200;
+  }
+
+  .sitemap {
+    display: block;
+    line-height: 2;
+  }
+
+  .copyright {
+    margin-top: 10em;
+  }
+
+}
+
+/******************************************************
+** Social icon bars
+******************************************************/
+.social-bar .column {
+  max-width: 14em;
+}
+
+
+.social-bar {
+
+  [class^="icon-"], [class*=" icon-"] {
+    margin-right: 0.5em;
+  }
+
+  .stat-icon {
+    width: 2.5em;
+  }
+}
+
+/******************************************************
+** Sidebar
+******************************************************/
+#sidebar {
+  padding: 8em 1em;
+}
+
+#sidebar ul {
+  color: $orange;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.75;
+}
+
+#sidebar ul li {
+  color: $gray-50;
+  font-weight: normal;
+  margin-left: 0.75em;
+}
+
+#sidebar li a {
+  font-weight: 200;
+  border: none;
+  /*padding: .5em;*/
+}
+
+
+/******************************************************
+** Breadcrumb settings
+******************************************************/
+
+.breadcrumb, .breadcrumb a {
+  width: 93%;
+  margin: 1em 0;
+  color: $gray-100;
+}
+
+.breadcrumb a:hover {
+  color: $orange;
+}
+
+.breadcrumb .fontello-links {
+  position: relative;
+  float: right;
+  padding: .25em;
+  margin: 0;
+  color: $orange;
+  vertical-align: bottom;
+  width: auto;
+}
+
+.breadcrumb .fontello-links:hover {
+  color: $orange;
+}
+
+
+
+/******************************************************
+** Searchbox settings
+******************************************************/
+#search-string::-webkit-input-placeholder {
+  color: #9c9c9c;
+  font-style: italic;
+}
+
+#search-string:-moz-placeholder {
+  color: #9c9c9c;
+  font-style: italic;
+}
+
+#search-string:-ms-placeholder {
+  color: #9c9c9c;
+  font-style: italic;
+}
+
+
+.search-results {
+
+  .search-thumbnail {
+    float: left;
+    //min-width: 14em;
+    //height: 7.875rem;
+    margin: 0 1em 0 0;
+  }
+
+  .search-thumbnail img {
+    height: 7.875rem;
+  }
+
+  .search-summary {
+    float: right;
+    margin: .5em 1em 0 0;
+    font-size: 1.2em;
+    padding: 0.5em;
+  }
+
+  .results-item {
+    position: relative;
+    padding: 4em 0 3em 0;
+    border-bottom: 1px dotted $gray-200;
+  }
+
+  .results-content {
+    padding: 0 1em;
+  }
+
+  .results-stats {
+    position: absolute;
+    bottom: .25em;
+    left: 0;
+    font-size: .75em;
+    width: 100%;
+  }
+
+  .results-stat {
+    float: left;
+    padding: 0 6em 0 0;
+    color: $gray-75;
+  }
+
+  .results-stat.end {
+    padding: 0;
+  }
+
+  .results-stat.fixed {
+    min-width: 20em;
+  }
+
+}
+
+/******************************************************
+** Main Content settings
+******************************************************/
+
+// DO NOT include overflow:hidden...this causes the Reveal Modal from foundation to jump scroll up on open
+.content-frame {
+  position: relative;
+  margin-top: 8em;
+  //overflow: hidden;
+  margin-bottom: 5em;
+}
+
+.content-frame.full {
+  margin-top: 5em;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+
+.content-frame.wide {
+  min-height: 60em;
+  padding: 1em;
+}
+
+.content-frame.email {
+  margin: 1em auto;
+  min-height: 60em;
+  padding: 1em;
+  width: 25em;
+  padding: 1em 2em 3em 2em;
+}
+
+[class*="up-"].no-padding >li {
+  padding: 0;
+}
+
+[class*="up-"].no-padding {
+  margin: 0;
+}
+
+.section-details {
+  color: $gray-50;
+  font-size: .9em;
+}
+
+
+
+/******************************************************
+** General style settings
+******************************************************/
+
+.social-thumbnail,
+.social-thumbnail .social-bar {
+  /*position: absolute;*/
+}
+
+.social-thumbnail a,
+.social-thumbnail a img {
+  width: 100%;
+}
+
+.social-thumbnail .social-bar {
+  bottom: 0;
+  background: $orange;
+  width: 100%;
+}
+
+.social-thumbnail .social-bar a {
+  padding: 0;
+  color: white;
+  font-size: 14px;
+}
+
+.social-thumbnail .social-bar a:hover {
+  color: $gray-225;
+}
+
+.thumbnail-bordered {
+  border: 1px solid $gray-225;
+}
+
+
+.toolbar {
+  position: absolute;
+  font-size: 0.75em;
+  right: 0;
+}
+
+
+.item-stat {
+  float: left;
+  padding-right: 2em;
+}
+
+
+/******************************************************
+** Info stats
+******************************************************/
+.model-stat, .model-value {
+  font-size: .8em;
+}
+
+
+.model-stat {
+  padding: 0.75em;
+  background: $gray-100;
+  color: white;
+}
+
+.model-value {
+  border: 1px solid $gray-100;
+  padding: 0.65em 1em;
+  margin-right: 2em;
+}
+
+.model-details {
+  padding: 0.5em 0;
+  border-top: 1px dotted $gray-200;
+  border-bottom: 1px dotted $gray-200;
+}
+
+.model-stats {
+  float: left;
+  padding: 0 4rem .85rem 0;
+}
+
+.model-stats .content * {
+  color: $gray-75;
+  font-weight: 700;
+  margin: 0;
+}
+
+.model-stats .title {
+  margin: 0.5em 0 .25em 0;
+  font-weight: 200;
+}
+
+.model-stats .title * {
+  color: black;
+  font-weight: 200 !important;
+  margin: 0;
+  line-height: 1;
+}
+
+/*****************************************************
+** Kaminari clearbox
+*****************************************************/
+
+.pagination .disabled {
+}
+
+.pagination .button {
+  background: none;
+}
+
+.pagination a:hover, .pagination button:hover {
+  background: $gray-50;
+  color: white;
+}
+
+.pagination .current a, .pagination .current button {
+  color: white;
+}
+
+
+/******************************************************
+** Media
+******************************************************/
+.profile-image {
+  border: 1px solid transparent;
+}
+
+
+.profile-image.tiny{
+  max-width: 50px;
+}
+
+#upload_list {
+  width: 100%;
+}
+
+[class^="thumbnail-src"],
+[id^="video_data"] {
+  display: none;
+}
+
+.video-player-container {
+  width: 100%;
+}
+
+.image-caption-text {
+  width: 320px;
+  font-size: 75%;
+}
+
+.jcrop-opener {
+  float: right;
+}
+
+img.align-left {
+  margin: 0 0 2px 7px;
+  display: inline;
+}
+
+img.align-right {
+  margin: 0 7px 2px 0;
+  display: inline;
+}
+
+.plupload-container {
+  position: relative;
+  display: inline-block;
+  line-height: 3em;
+}
+
+
+.progress-bar {
+  display: inline-block;
+  width: 20em;
+  height: 1em;
+  border: 1px solid $gray-200;
+}
+
+.transfer-status {
+  display: inline-block;
+}
+
+.transfer-filename {
+  display: inline-block;
+}
+
+#progress-template {
+  display: none;
+}
+
+/* support: IE7 */
+*+html .toolbar {
+  display: inline;
+}
+
+
+/******************************************************
+** Video Descriptions
+******************************************************/
+
+#video_preview_modal .social-thumbnail.profile-image {
+  width: 300px;
+}
+
+.video-gallery [id$="video_container"] {
+  float: left;
+}
+
+
+
+.media-description-container {
+  position: relative;
+}
+
+.media-description {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 3;
+  line-height: 1.25em;
+  font-size: 1em;
+  background: $red-alpha;
+  color: white;
+  padding: 4em 0.5em;
+}
+
+
+/******************************************************
+** Callout boxes
+******************************************************/
+
+.callout-container {
+  height: 100%;
+}
+
+.callout-details {
+  background: $gray-150;
+  color: white;
+  height: 100%;
+  padding-bottom: 4em !important;
+}
+
+
+.callout-details h2 {
+  font-size: 2em;
+  font-weight: 200;
+  padding-top: 1em;
+  margin: 0;
+}
+
+.callout-number {
+  text-align: center;
+  padding-right: .5em !important;
+  //border-right: 1px solid $gray-225;
+}
+
+.callout-details h3 {
+  color: $gray-50;
+  font-weight: 200;
+  padding: 0.5em 0 0.1em 0;
+  margin: 0;
+  line-height: 1;
+}
+
+
+.callout-description {
+  text-align: center;
+  line-height: 1.1;
+  font-weight: 700;
+
+}
+
+
+.description-box h5 {
+  line-height: 1.8;
+  margin: 0;
+}
+
+/******************************************************
+** Other
+******************************************************/
+span.gc-cs-link {
+  color: inherit !important;
+}
+
+
+/******************************************************
+** Breakpoint differences
+******************************************************/
+@import "global_small";
+@import "global_medium";
+@import "global_large";
+
+
+
+
+
+
+
+
+
+
+
+
+

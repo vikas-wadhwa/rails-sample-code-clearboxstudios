@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  area: MyString
+  department: MyString
+  credit: MyString
+  description: MyText
+
+two:
+  area: MyString
+  department: MyString
+  credit: MyString
+  description: MyText

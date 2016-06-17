@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  account: 
+  type: 
+  title: MyText
+  description: MyText
+  status: 1
+  bill_date: 2012-11-29
+  payment_date: 2012-11-29
+
+two:
+  account: 
+  type: 
+  title: MyText
+  description: MyText
+  status: 1
+  bill_date: 2012-11-29
+  payment_date: 2012-11-29

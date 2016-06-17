@@ -1,0 +1,147 @@
+@import 'motion-ui/motion-ui';
+
+/******************************************************
+** Home background image settings
+******************************************************/
+.section-details {
+  color: white;
+}
+
+.hero,
+.image-container,
+.phrase-container {
+  position: relative;
+  padding: 0;
+}
+
+.hero,
+.background-image {
+  height: 100%;
+  background-position-x: 50% !important;
+  background-position-y: 50% !important;
+  background-repeat-x: no-repeat !important;
+  background-repeat-y: no-repeat !important;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+
+}
+
+
+.background-phrase {
+  position: absolute;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero {
+  background: url('<%= PORTFOLIO_PHOTOS[:amy_forest][:src] %>');
+}
+
+
+.hero,
+.background-image,
+.background-phrase,
+.phrase-container,
+.info {
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+
+.phrase-container {
+  @include mui-animation(fade, slide($direction: right));
+  animation-delay: 0s;
+  animation-duration: 2s;
+}
+
+
+.hero {
+  @include mui-animation(fade, slide($direction: left));
+  animation-delay: .75s;
+  animation-duration: 2s;
+}
+
+.background-image {
+  opacity: 0;
+}
+
+.background-phrase {
+  @include mui-animation(fade);
+  animation-delay: 1s;
+  animation-duration: 4s;
+}
+
+
+.info {
+  @include mui-animation(fade);
+  animation-delay: 2.5s;
+  animation-duration: 2s;
+}
+
+.in-view.background-image {
+  @include mui-animation(fade, slide($direction: right));
+  animation-delay: 0s;
+  animation-duration: 2.5s;
+}
+
+
+.in-view.fade-in-view {
+
+}
+
+
+.background-image[data-image="1"] {
+  background: url('<%= PORTFOLIO_PHOTOS[:amy_boomer_sitting][:src] %>');
+}
+
+.background-image[data-image="2"] {
+  background: url('<%= PORTFOLIO_PHOTOS[:fortune][:src] %>');
+
+}
+
+.background-image[data-image="3"] {
+  background: url('<%= PORTFOLIO_PHOTOS[:df_mobile_geotargeting][:src] %>');
+
+}
+
+
+
+
+/******************************************************
+** max-width 640px, mobile-only styles, use when QAing mobile issues
+******************************************************/
+@media only screen and (max-width: 40em) {
+
+  .image-container,
+  .phrase-container,
+  .hero {
+    height: 12em;
+  }
+
+  .pad-all-4x,
+  .pad-all-3x {
+    padding: 1.5em !important;
+  }
+
+  .statement {
+    padding: 4em .5em !important;
+  }
+
+}
+
+@media only screen and (min-width: 40.063em) {
+
+  .image-container,
+  .phrase-container,
+  .hero {
+    height: 25em;
+  }
+
+  .statement {
+    padding: 6em 4em !important;
+  }
+
+}
+

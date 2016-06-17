@@ -1,0 +1,18 @@
+
+<% content_for :head do %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+
+<video id="video_player_container" class='video-player-container' controls="controls" poster="<%= video.image.url(:large) %>" width="" height="">
+  <source src="<%= video.url(:mp4) %>" type="video/mp4">
+  <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-5.5.2.swf" width="" height="">
+    <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-5.5.2.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="wmode" value="transparent" />
+    <param name="flashVars" value="config={'playlist':['<%= video.image.url(:large) %>',{'url':'%3C%25%3D+video.url%28%3Amp4%29+%25%3E','autoPlay':false}]}" />
+    <img alt="<%= video.title %>" src="<%= video.image.url(:large) %>" width="" height="" title="Your current browser cannot play our videos.">
+  </object>
+</video>

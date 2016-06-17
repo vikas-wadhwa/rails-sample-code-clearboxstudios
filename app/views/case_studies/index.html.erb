@@ -1,0 +1,63 @@
+<% @content_frame = "thin" %>
+<% @menu_hide = true %>
+
+<% content_for :title do %>
+    <title>Case Studies</title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "case_studies", :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+<% @breadcrumbs = {current: 'Case Studies'} %>
+<%= render 'layouts/breadcrumb' %>
+
+
+
+  <h1 class='orange'>Case Studies</h1>
+  <p class="section-details">
+    Skill, passion, and know-how are great tools for any creative professional, but they can only get you so far.
+    The ability to problem-solve, work efficiently, and continue to learn from even the best of wins is the difference
+    that makes the good turn into true masters of their craft. Below you will find just a few case studies, showcases of the kind of great work we love to do.
+  </p>
+  <p class="section-details">
+    Do you have a special project that needs a great set of problem solvers to make it great?
+    <%= link_to 'Contact us now', contact_url, class:'underlined-links' %> and let's get moving.
+  </p>
+
+
+<% @studies.each do |study|%>
+
+    <div class="row space-above-3x">
+
+      <div class="columns no-padding medium-3">
+        <img src="<%= study[:image_url]%>">
+      </div>
+
+
+      <div class="columns medium-9 case-study-container">
+
+        <h1 class="orange"><%= study[:title]%></h1>
+
+        <p class="section-details">
+          <%= study[:description] %>
+        </p>
+
+        <%= link_to case_study_url(study[:id]) do %>
+            <button class="button secondary">View Case Study</button>
+        <% end %>
+
+      </div>
+
+    </div>
+
+<% end %>
+
+
+
+
+
+

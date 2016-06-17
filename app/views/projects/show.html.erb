@@ -1,0 +1,76 @@
+
+
+<% content_for :title do %>
+    <title><%= @project.title %></title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "projects" , :media => 'all' %>
+<% end %>
+
+
+<% @breadcrumbs = {history: [{text: 'Projects', url: projects_url}], current: @project.title} %>
+<%= render 'layouts/breadcrumb' %>
+
+<%= render 'toolbar' %>
+
+<h1 class='orange space-above'><%= @project.title %></h1>
+
+<div class="row column model-details">
+    <span class="model-stats">
+      <div class="title"><p>Account</p></div>
+      <div class="content"><h5><%=  @project.account.name %></h5></div>
+    </span>
+
+
+    <span class="model-stats">
+      <div class="title"><p>Start</p></div>
+      <div class="content"><h5><%=  @project.start %></h5></div>
+    </span>
+
+
+    <span class="model-stats">
+      <div class="title"><p>End</p></div>
+      <div class="content"><h5><%=  @project.end %></h5></div>
+    </span>
+
+    <span class="model-stats">
+      <div class="title"><p>Status</p></div>
+      <div class="content"><h5><%=  @project.status %></h5></div>
+    </span>
+</div>
+
+<h3 class='orange space-above'>Description</h3>
+<p><%= @project.description %></p>
+
+
+<% if @project.images.any? %>
+
+    <h3 class='orange space-above-2x'>Photos</h3>
+
+    <div class="row column">
+      <ul class="image-gallery-grid small-up-3 medium-up-5">
+        <%= render 'layouts/image_gallery', gallery_model: 'projects', images: @project.images, downloadable: true, type: 'viewable' %>
+      </ul>
+    </div>
+
+    <a id="download_all" class="button medium clear float-right"><i class="icon-download-cloud"></i> Download All Photos</a>
+<% end %>
+
+
+<% if @project.videos.any? %>
+
+    <h3 class='orange space-above-2x'>
+      Videos
+    </h3>
+
+    <div class="video-gallery">
+      <%= render 'layouts/video_gallery', profile: Profile.first, videos: @project.videos, type: @video_player_type %>
+    </div>
+
+<% end %>
+
+
+<% if  @user_editable and (@project.images.any? or @project.videos.any?) %>
+    <%= render 'layouts/photo_crop', photo_to_crop_id: '', fullsize_photo_url: '' %>
+<% end %>

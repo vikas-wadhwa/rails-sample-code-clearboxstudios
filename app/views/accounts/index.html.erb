@@ -1,0 +1,126 @@
+
+<% content_for :title do %>
+    <title>Accounts and Billing</title>
+<% end %>
+
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "accounts" , :media => 'all' %>
+<% end %>
+
+
+<!--  Page Header and CRUD  -->
+<!--------------------------------------------->
+
+<div class="breadcrumb">
+</div>
+
+
+
+<!--  Account Loop  -->
+<!--------------------------------------------->
+
+<% @accounts.each do |account| %>
+
+    <!--  Account container  -->
+    <!--------------------------------------------->
+      <div class='orange'>
+      
+          
+          <h2 class='list-header'><%= account.name %></h2>
+          
+
+          <!-- toolbar  -->
+          <!--------------------------------------------->
+          <div id="<%= 'toolbar_' + account.id.to_s %>" class="toolbar">
+            <%= link_to raw('<i class="icon-pencil-neg"></i>'), edit_account_url(account) , :id=>'toolbar_edit_' + account.id.to_s, :title=>'edit account' %>
+            <%= link_to(raw('<i class="icon-videocam-alt"></i>'), projects_url(:account_id => account.id) , :id=>'toolbar_project_' + account.id.to_s, :title=>'view projects') unless account.projects.nil?  %>
+            <%= link_to(raw('<i class="icon-doc-alt"></i>'), invoices_url(:account_id => account.id) , :id=>'toolbar_invoice_' + account.id.to_s, :title=>'view invoices') unless account.invoices.nil?  %>
+            <%= link_to raw('<i class="icon-cancel"></i>'), account_url(account), :confirm => 'Once deleted this account CANNOT be recovered.<br><br> Are you sure you want to remove it permanently?', :method => :delete , :id=>'toolbar_delete_' + account.id.to_s, :title=>'delete account' %>
+          </div>
+
+      </div>
+    
+    
+      <div class='floating-container multi-column'>
+        <%= link_to account.projects.first, :style=> 'display:block;', :title=>'latest project' do %>
+          <%= image_tag account.thumbnail_url, :alt => account.name, :class=>'profile-image search-results' , :style=>'float:none;' %>
+        <% end %>
+      </div>
+
+
+
+      <div class='floating-container multi-column' style='width: 40em;'>
+      
+          <!--  Account Information  -->
+          <!--------------------------------------------->
+          <span class='floating-container multi-column' style='clear:left; width: 20em;'>
+            <b>BILLING CONTACT</b>
+            <div class='section-details'>
+              <%= account.billing_name %>
+              <br>
+              <%= account.billing_phone_work %> <label><i> (work)</i></label>
+              <br>
+              <%= account.billing_phone_mobile %> <label><i> (cell)</i></label> 
+              <br>
+              <%= account.billing_email %>
+            </div>
+          </span>
+
+
+          <!--  Billing Information  -->
+          <!--------------------------------------------->
+          <span class='floating-container multi-column' style='width: 20em;'>
+            <b>BILLING ADDRESS</b>
+            <div class='section-details'>
+              <%= account.company_name %>
+              <br>
+              <%= account.billing_address_street %>
+              <br>
+              <%= account.billing_address_city %>, 
+              <%= account.billing_address_state %> 
+              <%= account.billing_address_zip %> 
+            </div>
+          </span>
+
+          <span class='floating-container spacer'></span>
+          
+ 
+          <!--  Task Information  -->
+          <!--------------------------------------------->
+          <span class='floating-container multi-column' style='width: 20em;'>
+            <b>PROJECTS</b>
+              <div class='section-details'>
+
+                <!--  Project Information  -->
+                <!--------------------------------------------->
+                <%= link_to projects_url(:account_id => account.id), title: 'view projects', rel: 'tooltip', :class=>"crud-sidebar-links" do %>
+                  <i class="icon-videocam-alt"></i>
+                  projects:
+                <% end %>
+                <i><%= account.projects.count %> total</i> / <i><%= account.projects.where(:status => 'Active').count %> active</i>
+              </div>
+          </span>
+
+
+          <span class='floating-container multi-column' style='width: 20em;'>
+            <b>INVOICES</b>
+              <div class='section-details'>
+                <!--  Invoice Information  -->
+                <!--------------------------------------------->
+                  <%= link_to invoices_url(:account_id => account.id), title: 'view invoices', rel: 'tooltip', :class=>"crud-sidebar-links" do %>
+                    <i class="icon-doc-alt"></i>
+                    invoices:
+                  <% end %>
+                <i><%= account.invoices.count %> total</i> / <i><%= account.invoices.where(:status => 'Paid').count %> paid</i>
+              </div>
+          </span>
+
+      </div>
+
+<% end %>
+
+
+
+
+

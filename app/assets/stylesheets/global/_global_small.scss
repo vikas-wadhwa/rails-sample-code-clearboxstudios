@@ -1,0 +1,45 @@
+/******************************************************
+** max-width 640px, mobile-only styles
+******************************************************/
+@media only screen and (max-width: 40em) {
+
+  html {
+    font-size: 1em !important;
+  }
+
+  footer {
+    height: 50em;
+    font-size: 14px;
+    padding: 1em;
+  }
+
+  footer h5 {
+    margin-top: 3em;
+  }
+
+  .banner-ribbon,
+  .menu-icon-toggle {
+    height: 4em;
+  }
+
+  #sidebar li a {
+    font-size: 1.25em;
+  }
+
+  .callout-details h2 {
+    font-size: 1.5em;
+  }
+
+  .callout-details h3 {
+    font-size: 2.25em;
+  }
+
+  .callout-description {
+    font-size: 1em;
+  }
+
+  .banner-logo img {
+    max-height: 2em;
+  }
+
+}

@@ -1,0 +1,57 @@
+/******************************************************
+** Import variables
+******************************************************/
+/******************************************************
+** Variables
+******************************************************/
+/******************************************************
+** General styles
+******************************************************/
+/* line 12, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_crop.css.scss.erb */
+#jcrop_preview_container {
+  overflow: hidden;
+}
+
+/* line 17, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_crop.css.scss.erb */
+.jcrop-holder img,
+#jcrop_preview_container {
+  width: 400px;
+}
+
+/* line 22, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_crop.css.scss.erb */
+#jcrop_preview_container.aspect-1 {
+  height: 400px;
+}
+
+/* line 26, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_crop.css.scss.erb */
+#jcrop_preview_container.aspect-16-9 {
+  height: 225px;
+}
+
+/* line 31, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_crop.css.scss.erb */
+#jcrop_preview {
+  max-width: initial;
+}
+
+/* line 35, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_crop.css.scss.erb */
+#jcrop_processing {
+  display: none;
+  text-align: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  color: orange;
+  font-size: 3em;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 25%;
+}
+
+/* line 52, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/photo_crop.css.scss.erb */
+#jcrop_processing .animate-spin {
+  margin-top: -75px;
+}

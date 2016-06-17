@@ -1,0 +1,5 @@
+<% CORPORATE_SOCIAL.each_pair do |site| %>
+    <div class="column">
+      <%= link_to raw('<i class="icon-' + site[0].to_s + '"></i> '+ site[0].to_s.sub('plus','+').capitalize!), site[1][:url], title: site[0].to_s.capitalize %>
+    </div>
+<% end %>

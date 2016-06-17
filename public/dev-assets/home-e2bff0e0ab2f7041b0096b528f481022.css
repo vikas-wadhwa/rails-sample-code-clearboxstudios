@@ -1,0 +1,183 @@
+/******************************************************
+** Home background image settings
+******************************************************/
+/* line 6, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.section-details {
+  color: white;
+}
+
+/* line 10, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.hero,
+.image-container,
+.phrase-container {
+  position: relative;
+  padding: 0;
+}
+
+/* line 17, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.hero,
+.background-image {
+  height: 100%;
+  background-position-x: 50% !important;
+  background-position-y: 50% !important;
+  background-repeat-x: no-repeat !important;
+  background-repeat-y: no-repeat !important;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+}
+
+/* line 32, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.background-phrase {
+  position: absolute;
+  height: 100%;
+  z-index: 1;
+}
+
+/* line 38, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.hero {
+  background: url("http://cdn-public.clearboxstudios.com/portfolio/photos/DSC_0249.jpg");
+}
+
+/* line 43, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.hero,
+.background-image,
+.background-phrase,
+.phrase-container,
+.info {
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+/* line 53, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.phrase-container {
+  animation-name: custom-1;
+  animation-delay: 0s;
+  animation-duration: 2s;
+}
+@keyframes custom-1 {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* line 60, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.hero {
+  animation-name: custom-3;
+  animation-delay: .75s;
+  animation-duration: 2s;
+}
+@keyframes custom-3 {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* line 66, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.background-image {
+  opacity: 0;
+}
+
+/* line 70, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.background-phrase {
+  animation-name: fade-0-to-1;
+  animation-delay: 1s;
+  animation-duration: 4s;
+}
+@keyframes fade-0-to-1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* line 77, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.info {
+  animation-name: fade-0-to-1;
+  animation-delay: 2.5s;
+  animation-duration: 2s;
+}
+@keyframes fade-0-to-1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* line 83, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.in-view.background-image {
+  animation-name: custom-5;
+  animation-delay: 0s;
+  animation-duration: 2.5s;
+}
+@keyframes custom-5 {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* line 95, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.background-image[data-image="1"] {
+  background: url("http://cdn-public.clearboxstudios.com/portfolio/photos/DSC_0004.jpg");
+}
+
+/* line 99, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.background-image[data-image="2"] {
+  background: url("http://cdn-public.clearboxstudios.com/portfolio/photos/DSC_0318.jpg");
+}
+
+/* line 104, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+.background-image[data-image="3"] {
+  background: url("http://cdn-public.clearboxstudios.com/portfolio/photos/df_mobile_geotargeting.jpg");
+}
+
+/******************************************************
+** max-width 640px, mobile-only styles, use when QAing mobile issues
+******************************************************/
+@media only screen and (max-width: 40em) {
+  /* line 117, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+  .image-container,
+  .phrase-container,
+  .hero {
+    height: 12em;
+  }
+
+  /* line 123, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+  .pad-all-4x,
+  .pad-all-3x {
+    padding: 1.5em !important;
+  }
+
+  /* line 128, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+  .statement {
+    padding: 4em .5em !important;
+  }
+}
+@media only screen and (min-width: 40.063em) {
+  /* line 136, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+  .image-container,
+  .phrase-container,
+  .hero {
+    height: 25em;
+  }
+
+  /* line 142, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/home.css.scss.erb */
+  .statement {
+    padding: 6em 4em !important;
+  }
+}

@@ -1,0 +1,20 @@
+/******************************************************
+** Import variables
+******************************************************/
+/******************************************************
+** Variables
+******************************************************/
+/* line 8, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/case_studies.css.scss */
+.case-study-container {
+  padding: 0 2em !important;
+}
+
+/* line 12, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/case_studies.css.scss */
+.case-study-container.right {
+  padding: 0;
+}
+
+/* line 16, /Volumes/Storage/Dropbox/Repositories/bit--wadhwa-media/clearboxstudios.com/app/assets/stylesheets/case_studies.css.scss */
+.study-description {
+  padding-right: 2em;
+}

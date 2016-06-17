@@ -1,0 +1,121 @@
+<% #@background_opacity_class = 'transparent' %>
+<% @content_frame = 'wide-with-sidebar' %>
+
+<% content_for :title do %>
+    <title>Projects</title>
+<% end %>
+
+<% content_for :head do %>
+  <%= javascript_include_tag "image-gallery" %>
+  <%= stylesheet_link_tag "projects" , :media => 'all' %>  
+<% end %>
+
+
+  <!--  Breadcrumbs  -->
+  <!--------------------------------------------->
+  <div class="breadcrumb">
+    <% if params[:account_id] %>
+      <%= link_to(@account.name + ' account', accounts_url) + ' / ' %> 
+    <% end %>
+  </div>
+  
+
+  <!--  Searchbar  -->
+  <!--------------------------------------------->
+  <%= form_tag '/projects/search', :method => :post do %>
+    <%= text_field_tag 'search-string', nil, :placeholder => 'Search for projects' %>
+    <%= submit_tag nil, :class => 'button hoverable', :id=>'search-submit' %>
+  <% end %>  
+
+
+
+
+  <% @projects.each do |project| %>
+
+
+    <!--  Project container  -->
+    <!--------------------------------------------->
+      <div class='orange'>
+      
+          <%= link_to project do %>
+            <h2 class='list-header'><%= project.title %></h2>
+          <% end %>    
+
+          <!-- toolbar  -->
+          <!--------------------------------------------->
+          <div id="<%= 'toolbar_' + project.id.to_s %>" class="toolbar">
+            <%= link_to raw('<i class="icon-folder-open-empty"></i>'), project_url(project), :id=>'toolbar_project_' + project.id.to_s, :title=>'project details' %>
+            <%= link_to raw('<i class="icon-pencil-neg"></i>'), edit_project_url(project) , :id=>'toolbar_edit_' + project.id.to_s, :title=>'edit project' %>
+            <%= link_to raw('<i class="icon-docs"></i>'), new_project_url(:account_id => params[:account_id], :original_project_id => project.id) , :id=>'toolbar_duplicate_' + project.id.to_s, :title=>'duplicate project and tasks' %>
+            <%= link_to(raw('<i class="icon-doc-alt"></i>'), invoice_url(project.invoice) , :id=>'toolbar_invoice_' + project.id.to_s, :title=>'view invoice') unless project.invoice.nil?  %>
+            <%= link_to raw('<i class="icon-cancel"></i>'), project_url(project,:account_id => params[:account_id]), :confirm => 'Once deleted this project CANNOT be recovered.<br><br> Are you sure you want to remove it permanently?', :method => :delete , :id=>'toolbar_delete_' + project.id.to_s, :title=>'delete project' %>
+          </div>
+
+      </div>
+    
+    
+      <div class='floating-container multi-column'>
+        <%= link_to project, :style=> 'display:block;', :title=>'project details' do %>
+          <%= image_tag project.image_url(:medium), :alt => project.title, :class=>'search-results' , :style=>'float:none;' %>
+        <% end %>
+      </div>
+      
+      <div class='floating-container multi-column' style='max-width:42em;'>
+      
+          <div class='floating-container multi-column' style='min-height: 3em; margin-top:0; max-width:90%;' >
+
+              <b>DESCRIPTION:</b> 
+              <span class='section-details'>
+                <%= project.description.first(225)  %>
+              </span>
+          </div>
+
+
+          <!--  Project Information  -->
+          <!--------------------------------------------->
+          <span class='floating-container multi-column' style='clear:left;max-width: 15em;'>
+            <b>PROJECT INFORMATION</b>
+            <br>
+            <span class='section-details'>
+              <label>category: </label><%= project.category  %>
+              <br>
+              <label>start date: </label><%= project.start  %>
+              <br>
+              <label>end date: </label><%= project.end  %>
+              <br>          
+            </span>
+          </span>
+
+
+
+          <!--  Billing Information  -->
+          <!--------------------------------------------->
+          <span class='floating-container multi-column' style='max-width: 15em;'>
+            <b>BILLING INFORMATION</b>
+            <br>
+            <span class='section-details'>
+              <label>billed to: </label><%= project.account.name %>
+              <br>
+              <label>invoice #: </label><%=  project.invoice.nil?? '' : project.invoice.id %>
+              <br>
+              <label>status: </label><%= project.status  %>
+            </span>
+          </span>
+
+
+          <!--  Task Information  -->
+          <!--------------------------------------------->
+          <span class='floating-container multi-column' style='max-width: 15em;'>
+            <b>TASK INFORMATION</b>
+            <br>
+            <span class='section-details'>
+              <% Task::CATEGORY_ENUM.each do |category| %>
+                <label><%= category.downcase %>: </label><%= project.tasks.where(:category => category).count  %>
+                <br>
+              <% end %>
+                <label>total: </label><%= project.tasks.count  %>
+            </span>
+          </span>
+
+      </div>
+  <% end %>

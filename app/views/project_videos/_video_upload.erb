@@ -1,0 +1,347 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag "user_video", :media => 'all' %>
+    <%= stylesheet_link_tag "/plugins/jquery-ui-1.11.4.custom/jquery-ui.min.css", :media => 'all' %>
+<% end %>
+
+<% content_for :foot do %>
+    <script>
+        var completion_url = '<%= dashboard_url %>',
+                photo_to_refresh = $('#video_thumbnail_image');
+
+    </script>
+
+    <%= render 'layouts/plupload_images',
+               pluploader_id: 'video_photo_uploader',
+               image_object: video,
+               list_id: 'video_file_upload_list',
+               upload_clicker_id: 'video_photo_upload_clicker',
+               upload_container_id: 'video_photo_upload_container',
+               upload_starter_id: 'video_photo_upload_starter',
+               single_select: true,
+               post_params: {'video_id'=> 'video_id'},
+               hide_progress: true;  %>
+
+    <%= render 'layouts/plupload_videos',
+               pluploader_id: 'video_file_uploader',
+               video: video,
+               list_id: 'video_file_upload_list',
+               upload_clicker_id: 'video_file_upload_clicker',
+               upload_container_id: 'video_file_upload_container',
+               upload_starter_id: 'video_file_upload_starter',
+               single_select: true %>
+
+    <%= javascript_include_tag "/plugins/jquery-ui-1.11.4.custom/jquery-ui.min.js" %>
+    <%= javascript_include_tag "/plugins/placeholders/js/placeholders.min.js" %>
+    <%= javascript_include_tag "/plugins/autocomplete/js/autocomplete-rails.js" %>
+    <%= javascript_include_tag "video-upload.js" %>
+<% end %>
+
+
+<span id='video_photo_upload_starter' style='display:none;'></span>
+<span id='video_file_upload_starter' style='display:none;'></span>
+
+
+<%= render 'layouts/form_errors_modal', :model => video %>
+
+<%= form_for video, html: {id: 'video_form', autocomplete:'none'} do |f| %>
+
+    <h2 class="orange">Video Details</h2>
+    <p class="section-details">
+      The details of your video entered here will be visibly publicly, so make sure to be accurate and engaging!
+      The title and description will be shown any time this video is played,
+      as well as your person social contact links.
+    </p>
+
+    <!-- Error section   -->
+    <!--------------------------------------------->
+    <div id="upload_error_modal" class="reveal" data-reveal aria-labelledby="Error in upload" aria-hidden="true" role="dialog">
+
+      <h2 class="orange">Error in upload</h2>
+
+      <div id="error_explanation" class="section-details space-above">
+        <h2>Please fix the following errors:</h2>
+        <ul></ul>
+      </div>
+
+      <div class="row submission">
+        <button class="close-button button secondary" data-close aria-label="Close reveal" type="button">Close</button>
+      </div>
+
+    </div>
+
+
+
+    <div class="row no-child-padding">
+
+      <div class="columns medium-5">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+
+
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+
+        <div class="row no-child-padding">
+          <div class="columns mediu">
+            <%= f.label :duration %>
+            <%= f.hidden_field :duration, id: "video_duration" %>
+
+
+
+            <div class="columns no-padding medium-4">
+              <div class="row collapse">
+                <div class="small-6 columns">
+                  <input id="video_hours" type="text" placeholder="hours" required>
+                </div>
+                <div class="small-6 columns">
+                  <span class="postfix">hours</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="columns medium-4">
+              <div class="row collapse">
+                <div class="small-6 columns">
+                  <input id="video_minutes" type="text" placeholder="minutes" required>
+                </div>
+                <div class="small-6 columns">
+                  <span class="postfix">mins</span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="columns medium-4">
+              <div class="row collapse">
+                <div class="small-6 columns">
+                  <input id="video_seconds" type="text" placeholder="seconds" required>
+                </div>
+                <div class="small-6 columns">
+                  <span class="postfix">secs</span>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <div class="columns medium-6">
+        <%= f.label :type %>
+
+        <ul class="small-up-2">
+          <% UserVideo::ENUMERATIONS[:video_type].each do |item| %>
+              <li><%= radio_box f, 'video_type', item  %></li>
+          <% end %>
+        </ul>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="row no-child-padding space-above-3x">
+
+
+      <h2 class="orange inline">Add Credits</h2>
+      <span id="screencredit-line-add" class="white circle-add circle-small add-button hoverable"></span>
+      <p class="section-details">
+        If other Clearbox users contributed to this video, you can credit them here. Any credits you list for these videos will allow this video to show up on that person's profile as well.
+
+      </p>
+
+      <p class="section-details">
+        Simply start typing a credit name (Producer, Director, Actor, etc) and a set of options will become available.
+        Then search for the user by their full name and a set of users will become available as well.
+        Click the add button above to add more rows.
+      </p>
+
+
+      <div class="columns no-padding medium-10 screencredits-box space-above">
+
+        <div id="screencredit-line-basis" style="display: none;">
+
+          <div class="row no-child-padding screencredit-line">
+            <div class="columns medium-5">
+              <input id="project_video_project_credits_attributes_randomize_credit_id" name="project_video[project_credits_attributes][randomize][credit_id]" type="hidden" value="" />
+              <input autocomplete="none"
+                     data-autocomplete="/videos/autocomplete_credit_title"
+                     data-id-element="#project_video_project_credits_attributes_randomize_credit_id"
+                     data-update-elements='{"id":"#project_video_project_credits_attributes_randomize_credit_id"}'
+                     id="project_video_project_credits_attributes_randomize_title"
+                     name="credits_attributes_randomize_title"
+                     size="0" type="text" value="" />
+            </div>
+
+            <div class="columns medium-6">
+              <input id="project_video_project_credits_attributes_randomize_user_id" name="project_video[project_credits_attributes][randomize][user_id]" type="hidden" />
+
+              <div class="row collapse">
+
+                <div class="medium-10 columns">
+                  <input autocomplete="none"
+                         data-autocomplete="/videos/autocomplete_profile_name_first"
+                         data-id-element="#project_video_project_credits_attributes_randomize_user_id"
+                         data-update-elements='{"user_id":"#project_video_project_credits_attributes_randomize_user_id"}'
+                         data-id-column="user_id" id="project_video_project_credits_attributes_randomize_user_full_name"
+                         name="credits_attributes_randomize_user_full_name"
+                         size="0" type="text" />
+                </div>
+
+                <div class="medium-2 columns">
+                  <span class="postfix"> <%= image_tag AWS_CDN_PUBLIC_URL + '/placeholder/placeholder-profile.jpg'%></span>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="columns medium-1">
+              <input id="project_video_project_credits_attributes_randomize__destroy" name="project_video[project_credits_attributes][randomize][_destroy]" type="hidden" value="false" />
+              <a class='screencredit-line-remove'>
+                <i class="icon-cancel red"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+
+        <%= f.fields_for(:project_credits) do |credits_form| %>
+
+            <% credit_user = User.find_by_id(credits_form.object.user_id)  %>
+
+            <% if credit_user.nil? %>
+                <% credit_user = User.new %>
+                <% credit_user.profile = Profile.new %>
+            <% end %>
+
+
+
+            <div class="row no-child-padding screencredit-line">
+
+              <div class="columns medium-5">
+                <%= credits_form.hidden_field :credit_id %>
+                <%= credits_form.autocomplete_field :title,
+                                                    autocomplete_credit_title_project_videos_path,
+                                                    :name => SecureRandom.urlsafe_base64,
+                                                    :id_element => '#project_video_project_credits_attributes_'+ credits_form.index.to_s + '_credit_id',
+                                                    :update_elements => {id: '#project_video_project_credits_attributes_'+ credits_form.index.to_s + '_credit_id'} %>
+              </div>
+
+
+              <div class="columns medium-6">
+                <%= credits_form.hidden_field :user_id %>
+
+                <div class="row collapse">
+
+                  <div class="medium-10 columns">
+                    <%= credits_form.autocomplete_field :user_full_name,
+                                                        autocomplete_profile_name_first_project_videos_path,
+                                                        :name => SecureRandom.urlsafe_base64,
+                                                        'data-id-column' => 'user_id' ,
+                                                        :id_element => '#project_video_project_credits_attributes_'+ credits_form.index.to_s + '_user_id',
+                                                        :update_elements => {user_id: '#project_video_project_credits_attributes_'+ credits_form.index.to_s + '_user_id'} %>
+                  </div>
+
+                  <div class="medium-2 columns">
+                    <span class="postfix">
+                      <%= image_tag credit_user.profile.image_url(:tiny) %></span>
+                  </div>
+
+
+
+                </div>
+
+
+              </div>
+
+              <div class="columns medium-1">
+                <%= credits_form.hidden_field(:_destroy) %>
+                <a class='screencredit-line-remove'>
+                  <i class="icon-cancel red"></i>
+                </a>
+              </div>
+
+            </div>
+
+        <% end %>
+
+
+
+      </div>
+
+    </div>
+
+
+
+
+    <div class="row never-child-padding space-above-3x">
+
+      <h2 class="orange">Select Files</h2>
+
+      <div class="section-details space-below-3x">
+        Select thumbnail and video files below. The upload does not begin until you click the SAVE button at the bottom of this page.
+      </div>
+
+      <div class="columns medium-6">
+        <div class="columns medium-10">
+          <p class="section-details">
+            The maximum filesize is 25Mb and should be in JPEG or PNG format.
+            Images will be defaultly cropped to 16x9, which can be altered in the VIDEOS section of your EDIT PROFILE page.
+          </p>
+
+          <div id="video_photo_upload_container" class='plupload-container'>
+            <div id="video_photo_upload_clicker" class="button small secondary">
+              Select Thumbnail image
+            </div>
+          </div>
+
+          <br>
+
+          <%= image_tag(video.image.url(:medium), id: 'video_thumbnail_image', class: 'thumbnail-image') %>
+          <div id="video_photo_thumbnail_new_url" class='section-details'>new filename:  <i></i></div>
+
+        </div>
+      </div>
+
+
+
+      <div class="columns medium-6">
+
+        <div class="columns medium-10">
+          <p class='section-details'>
+            Videos may be up to 200Mb. Videos <u>will not be converted</u>, so please upload only .mp4, .ogv, or .webm
+            files.
+          </p>
+
+
+          <div id="video_file_upload_container" class='plupload-container'>
+            <div id="video_file_upload_clicker" class="button small secondary">
+              Select Video file
+            </div>
+          </div>
+
+          <%= render 'layouts/video_player', video: video, :sizing => 1 %>
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class='row submission'>
+      <a id="video_upload_clicker" class="button white bordered">
+        SAVE ALL CHANGES
+      </a>
+    </div>
+
+
+<% end %>
+

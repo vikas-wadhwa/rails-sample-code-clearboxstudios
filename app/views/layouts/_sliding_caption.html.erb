@@ -1,0 +1,13 @@
+<%= link_to @link, :class=> 'boxgrid caption' do %>
+  <%= image_tag @image, :alt => @image-alt, :class=>'profile-image' %>
+    <span class="cover boxcaption">
+      <span class="orange-text"><b><%= @caption_header %></b></span>
+      <br>
+      <br>
+      <% if @caption_details.length > 200 %>
+        <%= @caption_details.first(200) + ' ...' %>
+      <% else %>
+        <%= @caption_details %>
+      <% end %>
+    </span>
+<% end %>

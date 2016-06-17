@@ -1,0 +1,131 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "variables";
+
+
+
+
+
+
+a:hover .circle-arrow-left,
+a:hover .circle-arrow-top,
+a:hover .circle-arrow-bottom,
+a:hover .circle-arrow-right{
+  border-width: 2px;
+}
+
+a:hover .circle-arrow-left:after,
+a:hover .circle-arrow-top:after,
+a:hover .circle-arrow-bottom:after,
+a:hover .circle-arrow-right:after {
+  border-width: 2px;
+}
+
+
+span[class*="circle-"] {
+  display: inline-block;
+  width: 5em;
+  height: 5em;
+  border: 2px solid $gray-100;
+  background: white;
+  border-radius: 50%;
+  vertical-align: super;
+}
+
+span[class*="circle-"].hoverable:hover {
+  background: white;
+  border-color: $orange;
+}
+
+span[class*="circle-"].hoverable:hover:after {
+  color: $orange;
+}
+
+span[class^="circle-"] {
+  background: white;
+}
+
+
+span[class^="circle-arrow-"]:after {
+  display: inline-block;
+  content: '';
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+
+.circle-arrow-left:after {
+  margin-top: 1.00em;
+  margin-left: 1.2em;
+  -moz-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+
+.circle-arrow-top:after {
+  margin-top: 1.4em;
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+
+
+.circle-arrow-bottom:after {
+  margin-top: 1.2rem;
+  -moz-transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+
+.circle-arrow-right:after {
+  margin-top: 1rem;
+  margin-left: .7em;
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+.circle-menu:after {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 0;
+  top: 1.5rem;
+  left: 1.4rem;
+  box-shadow: 0 0 0 2px $gray-100, 0 9px 0 2px $gray-100, 0 18px 0 2px $gray-100;
+  width: 1.2rem;
+  z-index: 1;
+}
+
+
+.circle-add:after {
+  content: "+";
+  font-size: 3em;
+  color: $gray-100;
+}
+
+.circle-cancel:after {
+  content: "x";
+  font-size: 3em;
+  color: $gray-100;
+}
+
+
+.circle-save:before {
+  content: "\2713";
+  font-size: 3em;
+  color: $gray-100;
+}
+
+.circle-small {
+  font-size: .5em;
+  text-align: center;
+  line-height: 4.5em;
+}

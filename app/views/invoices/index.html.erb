@@ -1,0 +1,71 @@
+<% content_for :title do %>
+    <title>Your Invoices</title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "invoices" , :media => 'all' %>
+<% end %>
+
+
+<% if @searching %>
+    <% @breadcrumbs = {history: [{text: 'Invoices', url: invoices_url}], current: 'SEARCH'} %>
+<% else %>
+    <% @breadcrumbs = {current: 'invoices'} %>
+<% end %>
+<%= render 'layouts/breadcrumb' %>
+
+
+<h1 class='orange'>Your Invoices</h1>
+<div class='section-details'>
+  <h5>Click a invoice name below to view.</h5>
+</div>
+
+
+
+
+<%= render 'layouts/searchbox', search_url: '/invoices/search', placeholder: 'Search for invoices' %>
+
+<%= render 'layouts/paginate', pagination_object: @invoices %>
+
+
+
+<div class="search-results">
+
+  <% @invoices.each do |invoice|%>
+      <% status_css = invoice.status.downcase=='paid' ? 'success' : 'alert' %>
+
+      <div class="row column results-item">
+
+
+        <%= link_to number_to_currency(invoice.amount_due, :precision => (invoice.amount_due.round == invoice.amount_due) ? 0 : 2), invoice_url(invoice), class: 'button search-summary hollow ' + status_css %>
+
+        <div>
+          <%= link_to invoice_url(invoice) do %>
+              <h4 class="orange">Invoice #<%= invoice.id.to_s %></h4>
+          <% end %>
+
+          <p><%= invoice.description %></p>
+        </div>
+
+        <div class="results-stats">
+          <span class="results-stat">Project IDs:
+            <% @project_links = [] %>
+
+            <% invoice.projects.each do |project| %>
+                <%  @project_links.push(link_to project.id, project_url(project)) %>
+            <% end %>
+            <%= @project_links.join(', ').html_safe %>
+
+
+          </span>
+          <span class="results-stat"><b><%= invoice.status %></b></span>
+          <span class="results-stat"><%= invoice.updated_at.strftime('%b %d, %Y') %></span>
+        </div>
+
+      </div>
+
+
+  <% end %>
+
+</div>
+

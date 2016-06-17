@@ -1,0 +1,54 @@
+
+
+<% content_for :title do %>
+    <title>Admin Dashboard</title>
+<% end %>
+
+<% content_for :head do %>
+<% end %>
+
+<% content_for :foot do %>
+<% end %>
+
+
+
+<h1 class='orange'>Create Batch Users</h1>
+<div class='section-details'>
+  <h5 class="subheader">Enter delimited information below to create users in batch (they will NOT be send confirmation emails.)</h5>
+</div>
+
+
+
+<h1 class='orange'>Email Users</h1>
+<div class='section-details'>
+  <h5 class="subheader">Enter delimited information below to notify users that their gallery is available.</h5>
+</div>
+
+
+
+<!--  Notify Users  -->
+<!--------------------------------------------->
+<%= form_tag '/admin/dashboard', :method => :post, data: {abide: ''} do %>
+    <input type="hidden" name="type" value="notify_users" />
+
+    <div class="columns no-padding medium-2 large-1">
+     <label class="inline">Subject: </label>
+    </div>
+    <div class="columns no-padding medium-9">
+      <%= text_field_tag 'email_subject', 'Your headshots are now available.', placeholder:'Enter email subject',  required: '' %>
+    </div>
+
+    <div class="columns no-padding medium-11 pull-1">
+      <%= text_area_tag 'user_emails', nil, placeholder:'Enter user emails', required: '' %>
+      <%= submit_tag nil, class: 'button small info right' %>
+    </div>
+
+
+<% end %>
+
+
+
+
+
+
+

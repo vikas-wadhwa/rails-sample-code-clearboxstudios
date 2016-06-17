@@ -1,0 +1,53 @@
+/******************************************************
+** Import variables
+******************************************************/
+@import "global/variables";
+
+
+/******************************************************
+** General styles
+******************************************************/
+
+#jcrop_preview_container {
+    overflow: hidden;
+}
+
+
+.jcrop-holder img,
+#jcrop_preview_container {
+    width: 400px;
+}
+
+#jcrop_preview_container.aspect-1 {
+    height: 400px;
+}
+
+#jcrop_preview_container.aspect-16-9 {
+    height: 225px;
+}
+
+
+#jcrop_preview {
+    max-width: initial;
+}
+
+#jcrop_processing {
+    display: none;
+    text-align: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    color: rgb(255, 165, 0);
+    font-size: 3em;
+    background: rgba(255,255,255,0.5);
+    padding: 25%;
+}
+
+#jcrop_processing .animate-spin {
+    margin-top: -75px;
+}

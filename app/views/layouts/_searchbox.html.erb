@@ -1,0 +1,15 @@
+
+<!--  Searchbox  -->
+<!-------------------->
+<div class="row column space-above-2x">
+  <%= form_tag search_url, method: :post, data: {abide: ''} do %>
+
+      <div class="columns no-padding small-9 medium-4">
+        <%= text_field_tag 'search-string', nil, class: 'button-size', placeholder: placeholder, required: '' %>
+      </div>
+      <%= submit_tag 'search', class: 'button info', id: 'search-submit' %>
+
+  <% end %>
+</div>
+
+

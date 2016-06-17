@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  account: 
+  invoice: 
+  type: 
+  title: MyText
+  description: MyText
+  status: MyString
+  start: 2012-11-29
+  end: 2012-11-29
+
+two:
+  account: 
+  invoice: 
+  type: 
+  title: MyText
+  description: MyText
+  status: MyString
+  start: 2012-11-29
+  end: 2012-11-29

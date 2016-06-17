@@ -1,0 +1,380 @@
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<!-- <script type="text/javascript" src="/plupload/js/plupload.full.js"></script> -->
+<!-- <script type="text/javascript" src="/plupload-v2/js/plupload.full.min.js"></script> -->
+
+<!-- Photo Upload Progress  -->
+<!--------------------------------------------->
+<%= render '/layouts/upload_progress_list', list_id: 'video_upload_list', header: true, modal_id: 'upload_progress_modal' unless defined?(hide_progress) %>
+
+
+<script type="text/javascript" src="/plugins/plupload/js/plupload.full.min.js"></script>
+<script type="text/javascript">
+
+    var <%= pluploader_id %>_global_err,
+            <%= pluploader_id %>,
+    video_upload_progress_modal = $('#upload_progress_modal');
+
+    var plupload_forms = ( typeof plupload_forms != 'undefined' && plupload_forms instanceof Object ) ? plupload_forms : {}
+
+
+    $(function() {
+
+        ////////////////////////////////////////////////////
+        //RoR - capture authenticity token
+        ////////////////////////////////////////////////////
+        var atoken = $("input[name=authenticity_token]").val(),
+                params_data = {};
+
+        <%= pluploader_id %> = new plupload.Uploader({
+            url : '<%= video.aws_post_url %> ',
+            runtimes : 'html5,silverlight,flash,html4',
+            browse_button : '<%= upload_clicker_id %>',
+            container : '<%= upload_container_id %>',
+            max_file_size : '500mb',
+            //chunk_size : '1mb',
+            unique_names : true,
+
+            <% if defined?(single_select) && single_select %>
+            multi_selection:false,
+            <% end %>
+
+            ////////////////////////////////////////////////////
+            //RoR - make sure form is multipart
+            ////////////////////////////////////////////////////
+
+            multipart: true,
+
+            //////////////////////////////////////////////////////
+            //RoR - make sure to send authenticity token
+            //and any other parameters that on the plain html form
+            //////////////////////////////////////////////////////
+
+            multipart_params : {},
+
+            ////////////////////////////////////////////////////
+            // Flash settings
+            ////////////////////////////////////////////////////
+
+            flash_swf_url: '/public/plupload/js/plupload.Moxie.swf',
+
+            ////////////////////////////////////////////////////
+            // Silverlight settings
+            ////////////////////////////////////////////////////
+            silverlight_xap_url: '/public/plupload/js/plupload.Moxie.xap'
+
+            ////////////////////////////////////////////////////
+            // Specify what files to browse for
+            ,filters : [
+                // {title : "Image files", extensions : "jpg, jpeg, gif, png, eps, tif, tiff, tga, pdf"}
+                {title : "Video files", extensions : "mp4, ogv, webm"}
+                //{title : "Video files", extensions : "mp4, avi, mov, qt, mpg, mpeg, mp4, 3gp, 3g2, asf, wmv, dv, flc, m4v, h264, m2ts, m2v, mkv, mxf"}
+                //,{title : "Document files", extensions : "doc, docx, rtf, txt, odf, pdf, ppt, pps"}
+                //,{title : "Audio files", extensions : "aac, ac3, ape, mp3, wma, m4a, wav, mid, flac, ogg, aiff, aif"}
+            ]
+            ////////////////////////////////////////////////////
+
+        });
+
+
+
+        //////////////////////////////////////////////////////////////////////
+        //  Initialize the form and start
+        ///////////////////////////////////////////////////////////////////////
+        <%= pluploader_id %>.init();
+        plupload_forms['<%= pluploader_id %>']= <%= pluploader_id %>;
+
+        //////////////////////////////////////////////////////////////////////
+        //  Don't start on click if there are no files to upload
+        ///////////////////////////////////////////////////////////////////////
+        <% if defined?(upload_starter_id) %>
+        $('#<%= upload_starter_id %>').click(function(e) {
+
+           if (<%= pluploader_id %>.files.length > 0) {
+               <%= pluploader_id %>.start();
+               video_upload_progress_modal.foundation('open');
+               e.preventDefault();
+           }
+        });
+        <% end %>
+
+
+        //////////////////////////////////////////////////////////////////////
+        //  File Added
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('FilesAdded', function(up, files) {
+
+            video_upload_complete = false;
+            $('#mediafile-basis-row').hide();
+
+
+            <% unless defined?(upload_starter_id) %>
+                video_upload_progress_modal.foundation('open');
+            <% end %>
+
+            <% if defined?(single_select) && single_select %>
+
+
+            plupload.each(files, function(file) {
+
+                if (up.files.length > 1) {
+
+                    up.removeFile(up.files[0]);
+
+                    $('#mediafile-basis-row').clone().attr('id', 'video_uploadrow_' + file.id ).insertBefore('#mediafile-basis-row');
+                    $('#video_uploadrow_'+ file.id).find('.mediafile-name').html(file.name);
+                    $('#video_uploadrow_'+ file.id).find('.mediafile-length').html(plupload.formatSize(file.size));
+                    $('#video_uploadrow_'+ file.id).show();
+
+                    <% unless defined?(upload_starter_id) %>
+                    <%= pluploader_id %>.start();
+                    <% end %>
+
+                }
+
+                else {
+                    $.each(files, function(i, file) {
+
+                        $('#mediafile-basis-row').clone().attr('id', 'video_uploadrow_' + file.id ).insertBefore('#mediafile-basis-row');
+                        $('#video_uploadrow_'+ file.id).find('.mediafile-name').html(file.name);
+                        $('#video_uploadrow_'+ file.id).find('.mediafile-length').html(plupload.formatSize(file.size));
+                        $('#video_uploadrow_'+ file.id).show();
+
+                        <% unless defined?(upload_starter_id) %>
+                        <%= pluploader_id %>.start();
+                        <% end %>
+
+                    });
+
+                }
+
+
+                ////////////////////////////////////////////////////
+                // Reposition flash/silverlight
+                ////////////////////////////////////////////////////
+                up.refresh();
+
+            });
+
+            <% else %>
+
+            $.each(files, function(i, file) {
+
+                $('#mediafile-basis-row').clone().attr('id', 'video_uploadrow_' + file.id ).insertBefore('#mediafile-basis-row');
+                $('#video_uploadrow_'+ file.id).find('.mediafile-name').html(file.name);
+                $('#video_uploadrow_'+ file.id).find('.mediafile-length').html(plupload.formatSize(file.size));
+                $('#video_uploadrow_'+ file.id).show();
+
+                <% unless defined?(upload_starter_id) %>
+                <%= pluploader_id %>.start();
+                <% end %>
+
+            });
+
+            ////////////////////////////////////////////////////
+            // Reposition Flash/Silverlight
+            ////////////////////////////////////////////////////
+            up.refresh();
+
+            <% end %>
+
+        });
+
+
+
+        //////////////////////////////////////////////////////////////////////
+        //  File Removed
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('FilesRemoved', function(up, files) {
+            $.each(files, function(i, file) {
+                $('#video_uploadrow_'+ file.id).remove();
+            });
+        });
+
+        ///////////////////////////////////////////////////////////////////////
+        //  Before Upload File
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('BeforeUpload', function(up, file) {
+
+            var extension = file.name.split('.').pop().toLowerCase(),
+                    random_key = generateUUID() + '.' + extension;
+
+            file.name = generateUUID() + '.' + extension;
+
+
+            $.ajax({
+                url: '<%= @aws_signature_url%>',
+                type: 'GET',
+                async: false,
+                data: {doc: {filename: file.name , bucket:'<%= video.class.media_bucket %>', directory: aws_videos_path}},
+
+                success: function (data) {
+                    params_data[file.name] = data;
+                    up.settings.multipart_params = {
+                        key: params_data[file.name].key,
+                        filename: file.name,
+                        AWSAccessKeyId: '<%= AWS_S3_ACCESSKEY_ID %>',
+                        acl: 'public-read',
+                        success_action_status: '201',
+                        policy: params_data[file.name].policy,
+                        signature:  params_data[file.name].signature,
+                        'Content-Type': file.type || ''  // plupload.mimeTypes[extension] || 'application/octet-stream'
+                    };
+
+                    <% if defined?(post_params) %>
+                        <% post_params.each do |key, javascript_variable| %>
+                        up.settings.multipart_params['<%= key %>'] = <%= javascript_variable %>;
+                    <% end %>
+                    <% end %>
+                },
+
+                error: function (request, status, error) {
+                    $('#error_explanation ul li').remove();
+                    $('#error_explanation ul').append('<li>AWS issue: ' + request.responseText + ' </li>');
+                    form_error_modal.foundation('open');
+                }
+            });
+
+
+
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////
+        //  Upload Progress
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('UploadProgress', function(up, file) {
+            if (file.percent=='100') {
+                file.percent = 'PROCESSING';
+            }
+
+            else {
+                file.percent = file.percent + '%'
+            }
+
+            $('#video_uploadrow_'+ file.id).find('.mediafile-percent').html("<span class='red'>" + file.percent + "</span>");
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////
+        //  Error Handling
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('Error', function (up, err) {
+
+            <%= pluploader_id %>_global_err = err;
+
+            if (err.file) {
+
+                if ($('#photo_uploadrow_' + err.file.id).length == 0) {
+                    $('#error_explanation ul li').remove();
+                    $('#error_explanation ul').append('<li> File corrupt, please select another file. </li>');
+                    form_error_modal.foundation('open');
+                }
+
+                else {
+                    $('#photo_uploadrow_' + err.file.id).find('.mediafile-percent').html("<span class='red'> " + err.message + " </span>");
+                    $('#<%= list_id %>').show();
+                    $('#mediafile-basis-row').hide();
+                }
+            }
+            up.refresh(); // Reposition Flash/Silverlight
+            //upload_failure('photo');
+
+        });
+
+
+
+        ///////////////////////////////////////////////////////////////////////
+        //  File Uploaded
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('FileUploaded', function(up, file, response) {
+
+
+            var extension = file.name,
+                    updated_at = new Date();
+
+            $.ajax({
+                url: '<%= video.class::CRUD_ROUTING_PATHS[:attach_video] %>',
+                type: 'POST',
+                dataType: 'json',
+                async: false,
+                data: {video_id: video_id, file: {name: file.name, content_type: file.type || '' , size: file.size}},
+
+                success: function (data) {
+                    //$('.video-gallery').append(data[0].video_gallery_item);
+                    $('#video_uploadrow_'+ file.id).remove();
+                    $('#video_player_container').attr('poster', data[0].video_player_url);
+                    reload_flowplayer(data[0].video_player_url);
+
+                },
+
+                error: function (request, status, error) {
+                    $('#error_explanation ul li').remove();
+                    $('#error_explanation ul').append('<li>Attachment issue: ' + request.responseText + ' </li>');
+                    form_error_modal.foundation('open');
+                }
+            });
+
+
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////
+        //  Queue Complete
+        ///////////////////////////////////////////////////////////////////////
+
+        <%= pluploader_id %>.bind('UploadComplete', function(up, files) {
+
+            if (<%= pluploader_id %>_global_err == null) {
+
+                $.each(files, function(i, file) {
+
+                    $('#video_uploadrow_'+ file.id).remove();
+                });
+
+
+                ///////////////////////////////////////////////////////////////////////
+                //  Only close the queue if this was an automatic load,
+                //  If a start clicker was used, wait until the upload is fully complete
+                // to close
+                ///////////////////////////////////////////////////////////////////////
+                <% if defined?(upload_starter_id) %>
+                    delete plupload_forms['<%= pluploader_id %>']
+
+                <% else %>
+                     video_upload_progress_modal.foundation('close');
+
+                <% end %>
+
+                upload_completion(<%= pluploader_id %>);
+
+            }
+
+
+        });
+
+        ///////////////////////////////////////////
+        // Bind file cancel button
+        ///////////////////////////////////////////
+        $("#<%= list_id %>_cancel").click(function (){
+
+            $('<%= list_id %> .mediafile-percent').html("<span class='red'>STOPPING</span>");
+            <%= pluploader_id %>.stop();
+
+            $.each(<%= pluploader_id %>.files, function(i, file) {
+                $('#video_uploadrow_'+ file.id).remove();
+            });
+
+            video_upload_progress_modal.foundation('close');
+        });
+
+    });
+
+
+
+</script>

@@ -1,0 +1,31 @@
+
+<% content_for :title do %>
+    <title>New Acount</title>
+<% end %>
+
+<% content_for :head do %>
+    <%= stylesheet_link_tag "accounts" , :media => 'all' %>
+<% end %>
+
+
+<% content_for :foot do %>
+
+<% end %>
+
+
+<nav class="breadcrumbs hide-for-small-only space-below-3x">
+
+  <%= link_to('Dashboard', dashboard_url, class: '') %>
+  <%= link_to('Accounts', accounts_url, class: '' ) %>
+  <a class="current" href="#">New Account</a>
+</nav>
+
+
+
+<h1 class='orange space-below-2x'>New Account</h1>
+
+
+
+<!--  Editing Form  -->
+<!--------------------------------------------->
+<%= render 'form' %>

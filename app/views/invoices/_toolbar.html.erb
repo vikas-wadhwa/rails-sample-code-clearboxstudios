@@ -1,0 +1,27 @@
+<div class="toolbar button-group">
+
+
+    <%= link_to(raw('<i class="icon-print"></i>PRINT'), '#', class: 'clicker-print button tiny clear', title:  '')  %>
+    <%= link_to(raw('<i class="icon-print"></i>PDF'), invoice_url(@invoice) + '.pdf', class: 'clicker-pdf button tiny clear', title:  '')  %>
+    <%= link_to(raw('<i class="icon-print"></i>EMAIL'),  '#', class: 'clicker-email button tiny clear', title:  '')  %>
+
+
+
+  <% unless @invoice.paid? %>
+
+      <% if current_user.staff_member? %>
+          <%= link_to raw('<i class="icon-edit"></i>EDIT'), edit_invoice_url(@invoice), class: 'button tiny clear', title:  'edit invoice' %>
+      <% end %>
+
+
+        <%= link_to raw('<i class="icon-trash-1"></i>DELETE'),
+                      invoice_url(@invoice, account_id: @invoice.account.id),
+                      confirm:  'Once deleted this invoice CANNOT be recovered.<br><br> Are you sure you want to remove it permanently?',
+                      method: 'delete',
+                      class: 'button tiny clear hover-red',
+                      id: 'toolbar_delete_' + @invoice.id.to_s,
+                      title:  'delete invoice' %>
+
+  <% end %>
+
+</div>

@@ -1,0 +1,135 @@
+<% content_for :foot do %>
+    <script>
+        $(function () {
+
+
+            $('.project-list li').click(function () {
+                $(this).prev("input").click();
+                $(this).toggleClass("project-list-checked");
+                $(this).find(".overlay").toggleClass("on");
+            });
+
+
+        });
+
+
+    </script>
+
+<% end %>
+
+
+
+<%= render '/layouts/form_errors', :model => @invoice %>
+
+
+
+<div class="row collapse">
+
+  <%= form_for @invoice, data: {abide: ''}, :html => {:class => 'space-above'} do |f| %>
+
+      <div class="row collapse space-above space-below">
+        <div class="columns medium-11">
+          <%= f.label :status %>
+          <ul class="small-up-2 medium-up-5">
+            <% Invoice::ENUMERATIONS[:status].each do |item| %>
+                <li><%= radio_box f, 'status', item %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row collapse space-above-2x">
+
+        <div class="columns medium-4">
+          <%= f.label :title %>
+          <%= f.text_field :title, required: '' %>
+        </div>
+
+
+        <div class="columns medium-4 pull-1">
+          <%= f.label :account %>
+          <%= text_field_tag 'invoice_account_name', @invoice.account.name, disabled: true %>
+        </div>
+
+      </div>
+
+      <div class="row collapse space-above">
+        <div class="columns medium-11 left">
+          <%= f.label :description %>
+          <%= f.text_area :description, required: '' %>
+        </div>
+
+      </div>
+
+
+      <div class="row collapse space-above">
+
+
+        <div class="columns medium-4">
+          <%= f.label :bill_date %>
+          <div class="row date collapse postfix-radius fdatepicker" data-date-format="mm-dd-yyyy">
+            <div class="small-10 columns">
+              <%= f.text_field :bill_date, :id => 'date-bill_date', :value => @invoice.bill_date.nvl(Date.today).strftime("%m-%d-%Y") %>
+            </div>
+            <div class="small-2 columns">
+              <span class="postfix icon-calendar-31"></span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="columns medium-4 pull-2">
+          <%= f.label :payment_date %>
+          <div class="row date collapse postfix-radius fdatepicker" data-date-format="mm-dd-yyyy">
+            <div class="small-10 columns">
+              <%= f.text_field :payment_date, :id => 'date-payment_date', :value => @invoice.payment_date.nvl(Date.today).strftime("%m-%d-%Y") %>
+            </div>
+            <div class="small-2 columns">
+              <span class="postfix icon-calendar-31"></span>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div class="row collapse space-above">
+
+        <div class="columns">
+          <fieldset>
+            <legend>Currently Unbilled Projects</legend>
+
+            <ul class="small-up-2 medium-up-3 large-up-4 project-list ">
+
+              <% @projects.each do |project| %>
+
+                  <input id="project_id_<%= project.id %>" name="project_ids[]" type="checkbox" value="<%= project.id %>" <%= 'checked' unless project.invoice_id.blank? %> >
+                  <li <%= 'class = project-list-checked' unless project.invoice_id.blank? %> >
+
+                    <%= image_checkbox(
+                                      project.image_url(:medium),
+                                      project.title,
+                                      project.description,
+                                      project.images.count.to_s + ' items',
+                                      project.updated_at.strftime('%b %d, %Y'),
+                                      !project.invoice_id.blank?
+                        ) %>
+
+                  </li>
+
+
+              <% end %>
+
+            </ul>
+          </fieldset>
+        </div>
+      </div>
+
+
+      <div class="row submission">
+        <%= f.submit :class => "button white bordered" %>
+      </div>
+  <% end %>
+
+</div>

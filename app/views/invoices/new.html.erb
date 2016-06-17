@@ -1,0 +1,39 @@
+
+<% content_for :title do %>
+    <title>New Invoice</title>
+<% end %>
+
+<% content_for :head do %>
+
+    <%= stylesheet_link_tag "invoices" , :media => 'all' %>
+    <link media="all" rel="stylesheet" type="text/css" href="/plugins/foundation-datepicker-master/stylesheets/foundation-datepicker.css" />
+<% end %>
+
+
+<% content_for :foot do %>
+    <%= javascript_include_tag "/plugins/foundation-datepicker-master/js/foundation-datepicker.js" %>
+    <script type="text/javascript" >
+        $(document).ready(function () {
+            $('.fdatepicker').fdatepicker();
+        });
+    </script>
+
+    <%= javascript_include_tag "invoices" %>
+<% end %>
+
+
+<nav class="breadcrumbs hide-for-small-only space-below-3x">
+
+  <%= link_to('Dashboard', dashboard_url, class: '') %>
+  <%= link_to('Invoices', invoices_url, class: '' ) %>
+  <%= link_to('New Invoice', '#',  class: 'current' ) %>
+</nav>
+
+
+
+<h1 class='orange'>New Invoice</h1>
+
+
+<!--  Editing Form  -->
+<!--------------------------------------------->
+<%= render 'form' %>

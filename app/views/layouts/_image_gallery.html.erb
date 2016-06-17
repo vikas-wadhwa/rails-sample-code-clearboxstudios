@@ -1,0 +1,40 @@
+<% content_for :head do %>
+    <link href="/plugins/magnific-popup-1.0.0/mp-lightbox.css" media="all" rel="stylesheet">
+    <%= stylesheet_link_tag "custom-magnific" , :media => 'all' %>
+<% end %>
+
+
+<% content_for :foot do %>
+    <script src="/plugins/multi-download/jquery.multiDownload.js"></script>
+    <script src="/plugins/magnific-popup-1.0.0/mp-lightbox.js"></script>
+
+    <script>
+        <% if defined?(downloadable) %>
+        var magnific_downloadable = true;
+        <% else %>
+        var magnific_downloadable = false;
+        <% end %>
+    </script>
+
+    <%= javascript_include_tag "image-gallery" %>
+
+<% end %>
+
+
+<% if type == 'editable' %>
+
+    <% content_for :head do %>
+        <link media="all" rel="stylesheet" type="text/css" href="/plugins/jquery-context-menu/dist/jquery.contextMenu.css" />
+    <% end %>
+
+    <% content_for :foot do %>
+        <script type="text/javascript" src="/plugins/jquery-context-menu/dist/jquery.contextMenu.js"></script>
+        <%= javascript_include_tag "photo-editable-context-menu.js" %>
+    <% end %>
+
+<% end %>
+
+
+<% images.each do |image| %>
+    <%= image_gallery_item(image, type) %>
+<% end %>

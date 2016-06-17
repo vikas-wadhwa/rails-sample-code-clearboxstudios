@@ -1,0 +1,26 @@
+<% if videos.any? %>
+
+    <%= render 'layouts/video_player_modal', profile: profile, video: videos.first %>
+
+    <% videos.each do |video| %>
+        <%= video_gallery_item(video, type) %>
+    <% end %>
+
+<% end %>
+
+
+
+
+
+<% if type == 'editable' %>
+
+    <% content_for :head do %>
+        <link media="all" rel="stylesheet" type="text/css" href="/plugins/jquery-context-menu/dist/jquery.contextMenu.css" />
+    <% end %>
+
+    <% content_for :foot do %>
+        <script type="text/javascript" src="/plugins/jquery-context-menu/dist/jquery.contextMenu.js"></script>
+        <%= javascript_include_tag "video-editable-context-menu.js" %>
+    <% end %>
+
+<% end %>
